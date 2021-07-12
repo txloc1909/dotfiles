@@ -78,4 +78,9 @@ URxvt*imLocale: en_US.UTF-8
 URxvt.keysym.Control-0x2b:  font-size:increase
 URxvt.keysym.Control-0x2d:  font-size:decrease
 
+! Perl extension:
+URxvt*perl-lib: $HOME/dotfiles/perl
+URxvt*perl-ext: fullscreen 
 
+! Toggle fullscreen 
+URxvt.keysym.F11:   perl:fullscreen:switch
