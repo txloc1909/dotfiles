@@ -3,4 +3,5 @@
 ## Programs
 * Qtile WM 
 * Vim 
-* Ranger file manager
+* Rofi 
+* URxvt

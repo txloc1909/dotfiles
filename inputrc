@@ -1,0 +1,3 @@
+# enable vim mode in any tool that uses GNU Readline 
+set editing-mode vi
+
