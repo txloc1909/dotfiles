@@ -87,14 +87,14 @@ set t_Co=256
 let g:airline_theme='powerlineish'
 
 " python with virtualenv support
-py3 << EOF 
-import os 
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-    env_base_dir = os.environ['VIRTUAL_ENV']
-    activate_this = os.path.join(env_base_dir, 'bin/activate_this.py')
-    exec(open(activate_this).read(), dict(__file__=activate_this))
-EOF
+"py3 << EOF 
+"import os 
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+"    env_base_dir = os.environ['VIRTUAL_ENV']
+"    activate_this = os.path.join(env_base_dir, 'bin/activate_this.py')
+"    exec(open(activate_this).read(), dict(__file__=activate_this))
+"EOF
 
 
 
