@@ -11,3 +11,9 @@ xrdb -merge ~/.Xresources &
 
 # set wallpaper
 nitrogen --restore &
+
+# start the picom compositor 
+picom &
+
+# start ibus daemon
+#ibus-daemon &
