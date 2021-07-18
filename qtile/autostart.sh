@@ -16,4 +16,4 @@ nitrogen --restore &
 picom &
 
 # start ibus daemon
-#ibus-daemon &
+ibus-daemon &

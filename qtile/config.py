@@ -32,9 +32,39 @@ from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 
+
+##################################################################
+#                             VARIABLES                          #
+##################################################################
+
 mod = "mod4"
+alt = "mod1"
 terminal = "urxvt" 
 run_launcher = "rofi -show run"
+web_browser = "firefox"
+
+# Color scheme
+monokai = {
+    "background": "272822",             # black/grey-ish
+    "foreground": "f8f8f2",             # white & yellow-ish
+    "comment": "75715e",                # grey & yellow-ish
+    "red": "f92672",
+    "orange": "fd971f",
+    "light orange": "e69f66",
+    "yellow": "e6db74",
+    "green": "a6e22e",
+    "blue": "66d9ef",
+    "purple": "ae81ff",
+}
+
+colors = {
+    "white": "ffffff",
+    "black": "000000",
+}
+
+##################################################################
+#                           KEYBINDINGS                          #
+##################################################################
 
 keys = [
     # Switch between windows
@@ -42,8 +72,14 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(),
+    Key([alt], "Tab", lazy.layout.next(),
         desc="Move window focus to other window"),
+
+    # Arrow keys do the same 
+    Key([mod], "Left", lazy.layout.left(), desc="Move focus to left"),
+    Key([mod], "Right", lazy.layout.right(), desc="Move focus to right"),
+    Key([mod], "Down", lazy.layout.down(), desc="Move focus down"),
+    Key([mod], "Up", lazy.layout.up(), desc="Move focus up"),
 
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
@@ -54,6 +90,15 @@ keys = [
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(),
         desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+    # Arrow keys do the same
+    Key([mod, "shift"], "Left", lazy.layout.shuffle_left(),
+        desc="Move window to the left"),
+    Key([mod, "shift"], "Right", lazy.layout.shuffle_right(),
+        desc="Move window to the right"),
+    Key([mod, "shift"], "Down", lazy.layout.shuffle_down(),
+        desc="Move window down"),
+    Key([mod, "shift"], "Up", lazy.layout.shuffle_up(), desc="Move window up"),
+
 
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
@@ -66,26 +111,49 @@ keys = [
     Key([mod, "control"], "k", lazy.layout.grow_up(), 
         desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([mod], "m", lazy.layout.maximize(), desc="Toggle maximum size"),
 
+    Key([mod, "control"], "Left", lazy.layout.grow_left(),
+        desc="Grow window to the left"),
+    Key([mod, "control"], "Right", lazy.layout.grow_right(),
+        desc="Grow window to the right"),
+    Key([mod, "control"], "Down", lazy.layout.grow_down(),
+        desc="Grow window down"),
+    Key([mod, "control"], "Up", lazy.layout.grow_up(), 
+        desc="Grow window up"),
+ 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack"),
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    # Kill focused windows
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
 
     Key([mod, "shift"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawn(run_launcher),
-        desc="Spawn the run launcher"),
+
+    # Spawn programs 
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "r", lazy.spawn(run_launcher), desc="Spawn the run launcher"),
+    Key([mod], "b", lazy.spawn(web_browser), desc="Spawn the web browser"),
+
+    # Brightness control
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%"),
+            desc="Increase brightness"),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-"),
+            desc="Decrease brightness"),
 ]
 
-groups = [Group(i, layout="monadtall") for i in "123456789"]
+##################################################################
+#                            GROUPS                              #
+##################################################################
+
+groups = [Group(i, layout="monadtall") for i in "12345"]
 
 for i in groups:
     keys.extend([
@@ -96,18 +164,26 @@ for i in groups:
         # mod1 + shift + letter of group = switch to & move focused window to group
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
             desc="Switch to & move focused window to group {}".format(i.name)),
-        # Or, use below if you prefer not to switch to that group.
-        # # mod1 + shift + letter of group = move focused window to group
-        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-        #     desc="move focused window to group {}".format(i.name)),
-    ])
+        ])
+
+##################################################################
+#                           LAYOUTS                              #
+##################################################################
+
+# Default theme for layouts
+layout_theme = {
+    "border_width": 2,
+    "margin": 4,
+    "border_focus": monokai["purple"],
+    "border_normal": monokai["comment"],
+}
 
 layouts = [
-    layout.MonadTall(),
+    layout.MonadTall(**layout_theme),
     # layout.Columns(border_focus_stack='#d75f5f'),
-    layout.Max(),
+    layout.Max(**layout_theme),
     # Try more layouts by unleashing below layouts.
-    layout.Stack(num_stacks=2),
+    layout.Stack(num_stacks=2, **layout_theme),
     # layout.Bsp(),
     # layout.Matrix(),
     # layout.MonadWide(),
@@ -116,48 +192,65 @@ layouts = [
     # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
-    layout.Floating(),
+    layout.Floating(**layout_theme),
 ]
 
+##################################################################
+#                              BARS                              #
+##################################################################
+
+# Default theme for widgets & extensions
 widget_defaults = dict(
-    font='Ubuntu',
+    font='Ubuntu Mono',
     fontsize=14,
     padding=3,
+    background=monokai["background"],
 )
 extension_defaults = widget_defaults.copy()
 
+def init_primary_bar():
+    return bar.Bar(
+        widgets=[
+            widget.GroupBox(),
+            widget.Prompt(),
+            widget.CurrentLayoutIcon(),
+            widget.CurrentLayout(),
+            widget.Chord(
+                chords_colors={
+                    'launch': ("#ff0000", "#ffffff"),
+                },
+                name_transform=lambda name: name.upper(),
+            ),
+            widget.Spacer(),
+            widget.Clock(format='%a %d/%m/%Y %I:%M %p'),
+            widget.Spacer(),
+            widget.CPU(format="CPU {load_percent:2}%"),
+            widget.Memory(format="{MemUsed:5}M/{MemTotal:5}M"),
+            widget.Net(
+                interface="wlp0s20f3",
+                format="{down:6.6} ↓↑ {up:6.6}",
+                ),
+            widget.KeyboardLayout(),
+            widget.Volume(),
+            widget.Sep(),
+            widget.BatteryIcon(),
+            widget.Battery(format="{percent:2.0%}"),
+            widget.Sep(),
+            widget.Systray(),
+        ],
+        size=25,
+)
+
+def init_secondary_bar():
+    pass
+
+##################################################################
+#                           SCREENS                              #
+##################################################################
+
 screens = [
     Screen(
-        top=bar.Bar(
-            widgets=[
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.CurrentLayoutIcon(),
-                widget.CurrentLayout(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        'launch': ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.Systray(),
-                widget.Memory(),
-                widget.Net(
-                    interface="wlp0s20f3",
-                    format="{down} ↓↑ {up}",
-                    ),
-                widget.KeyboardLayout(),
-                widget.Volume(),
-                widget.Sep(),
-                widget.BatteryIcon(),
-                widget.Battery(),
-                widget.Sep(),
-                widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
-                widget.QuickExit(),
-            ],
-            size=25,
-        ),
+        top=init_primary_bar(),    
     ),
 ]
 
@@ -173,7 +266,7 @@ mouse = [
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
 main = None  # WARNING: this is deprecated and will be removed soon
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
@@ -205,4 +298,5 @@ def start_once():
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "LG3D"
+#wmname = "LG3D"
+wmname = "Qtile"
