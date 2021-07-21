@@ -6,6 +6,9 @@ setxkbmap -option caps:escape &
 # network manager applet 
 nm-applet & 
 
+# volume applet
+volumeicon &
+
 # load configs from ~/.Xresources
 xrdb -merge ~/.Xresources &
 
@@ -16,4 +19,7 @@ nitrogen --restore &
 picom &
 
 # start ibus daemon
-ibus-daemon &
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+ibus-daemon -drxR &
