@@ -29,6 +29,9 @@ URxvt*colorIT:          #4682B4
 URxvt*colorBD:          #F9F9F9
 URxvt*colorUL:          #87AFD7
 
+URxvt*iso14755:         False
+URxvt*iso14755_52:      False
+
 ! Colorscheme 
 *.foreground:           #F9F9F9
 *.background:           [95]#222222
