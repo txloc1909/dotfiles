@@ -1,5 +1,12 @@
+# get from standard repo
 rofi
 nitrogen 
-URxvt 
+rxvt-unicode 
 firefox
-brave-browser
+ttf-ubuntu-font-family
+brightnessctl
+pamixer
+bluez bluez-utils blueman
+
+# get from AUR
+nerd-fonts-ubuntu-mono

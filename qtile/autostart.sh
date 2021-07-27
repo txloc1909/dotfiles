@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# start the session manager
+lxsession &
+
 # make CaspLock an additional Escape
 setxkbmap -option caps:escape &
 
@@ -9,6 +12,9 @@ nm-applet &
 # volume applet
 volumeicon &
 
+# bluetooth applet
+blueman-applet &
+
 # load configs from ~/.Xresources
 xrdb -merge ~/.Xresources &
 
@@ -17,6 +23,9 @@ nitrogen --restore &
 
 # start the picom compositor 
 picom &
+
+# start urxvt daemon
+urxvtd -q -o -f &
 
 # start ibus daemon
 export GTK_IM_MODULE=ibus

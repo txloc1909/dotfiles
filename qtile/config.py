@@ -29,7 +29,7 @@ import subprocess
 from typing import List  # noqa: F401
 
 from libqtile import bar, layout, widget, hook
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 
 
@@ -39,9 +39,10 @@ from libqtile.lazy import lazy
 
 mod = "mod4"
 alt = "mod1"
-terminal = "urxvt" 
+terminal = "urxvtc"     # use urxvt client
 run_launcher = "rofi -show run"
 web_browser = "firefox"
+file_manager = "pcmanfm"
 
 # Color scheme
 monokai = {
@@ -60,6 +61,10 @@ monokai = {
 colors = {
     "white": "ffffff",
     "black": "000000",
+    "blue": "4f76c7",
+    "violet": "74438f",
+    "red": "ff5555",
+    "green": "55ff55",
 }
 
 ##################################################################
@@ -72,8 +77,11 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
+    # Old habit from Windows and Ubuntu
     Key([alt], "Tab", lazy.layout.next(),
-        desc="Move window focus to other window"),
+        desc="Move window focus to next window"),
+    Key([alt, "shift"], "Tab", lazy.layout.previous(),
+        desc="Move window focus to previous window"),
 
     # Arrow keys do the same 
     Key([mod], "Left", lazy.layout.left(), desc="Move focus to left"),
@@ -83,45 +91,67 @@ keys = [
 
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(),
+    Key([mod, "shift"], "h", 
+        lazy.layout.shuffle_left(),     # in COLUMNS layout
+        lazy.layout.swap_left(),        # in MONADTALL layout
         desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(),
+    Key([mod, "shift"], "l", 
+        lazy.layout.shuffle_right(),
+        lazy.layout.swap_right(),
         desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(),
         desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Arrow keys do the same
-    Key([mod, "shift"], "Left", lazy.layout.shuffle_left(),
+    Key([mod, "shift"], "Left", 
+        lazy.layout.shuffle_left(),
+        lazy.layout.swap_left(),
         desc="Move window to the left"),
-    Key([mod, "shift"], "Right", lazy.layout.shuffle_right(),
+    Key([mod, "shift"], "Right", 
+        lazy.layout.shuffle_right(),
+        lazy.layout.swap_right(),
         desc="Move window to the right"),
     Key([mod, "shift"], "Down", lazy.layout.shuffle_down(),
         desc="Move window down"),
     Key([mod, "shift"], "Up", lazy.layout.shuffle_up(), desc="Move window up"),
 
-
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
-    Key([mod, "control"], "h", lazy.layout.grow_left(),
+    Key([mod, "control"], "h", 
+        lazy.layout.grow_left(),        # in COLUMNS layout
+        lazy.layout.shrink(),           # in MONADTALL layout
         desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(),
+    Key([mod, "control"], "l", 
+        lazy.layout.grow_right(),
+        lazy.layout.grow(),
         desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(),
         desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), 
         desc="Grow window up"),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-    Key([mod], "m", lazy.layout.maximize(), desc="Toggle maximum size"),
 
-    Key([mod, "control"], "Left", lazy.layout.grow_left(),
+    Key([mod, "control"], "Left", 
+        lazy.layout.grow_left(),
+        lazy.layout.shrink(),
         desc="Grow window to the left"),
-    Key([mod, "control"], "Right", lazy.layout.grow_right(),
+    Key([mod, "control"], "Right", 
+        lazy.layout.grow_right(),
+        lazy.layout.grow(),
         desc="Grow window to the right"),
     Key([mod, "control"], "Down", lazy.layout.grow_down(),
         desc="Grow window down"),
     Key([mod, "control"], "Up", lazy.layout.grow_up(), 
         desc="Grow window up"),
  
+    Key([mod], "n", 
+        lazy.layout.normalize(),        # in COLUMNS layout
+        lazy.layout.reset(),            # in MONADTALL layout
+        desc="Reset all window sizes"),
+    Key([mod], "m", lazy.layout.maximize(), desc="Toggle maximum size"),
+
+    Key([mod, "shift"], "m", lazy.window.toggle_fullscreen(),
+        desc="Make window fullscreen"),
+
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -130,30 +160,47 @@ keys = [
         desc="Toggle between split and unsplit sides of stack"),
 
     # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "Tab", lazy.next_layout(), 
+        desc="Switch to next layout"),
+    Key([mod, "shift"], "Tab", lazy.prev_layout(),
+        desc="Switch to previous layout"),
+
     # Kill focused windows
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
 
     Key([mod, "shift"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 
+    # Multi monitors operation
+    Key([mod], "p", lazy.next_screen(), desc="Move focus to next monitor"),
+
     # Spawn programs 
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "r", lazy.spawn(run_launcher), desc="Spawn the run launcher"),
     Key([mod], "b", lazy.spawn(web_browser), desc="Spawn the web browser"),
+    Key([mod], "f", lazy.spawn(file_manager), desc="Spawn the file manager"),
 
     # Brightness control
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%"),
             desc="Increase brightness"),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-"),
             desc="Decrease brightness"),
+
+    # Sound control 
+    Key([], "XF86AudioMute", lazy.spawn("pamixer --toggle-mute"),
+            desc="Mute audio"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer --decrease 5"),
+            desc="Decrease volume"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer --increase 5"),
+            desc="Increase volume"),
+    
 ]
 
 ##################################################################
 #                            GROUPS                              #
 ##################################################################
 
-groups = [Group(i, layout="monadtall") for i in "12345"]
+groups = [Group(i, layout="columns") for i in "12345"]
 
 for i in groups:
     keys.extend([
@@ -172,18 +219,22 @@ for i in groups:
 
 # Default theme for layouts
 layout_theme = {
-    "border_width": 2,
+    "border_width": 4,
     "margin": 4,
-    "border_focus": monokai["purple"],
-    "border_normal": monokai["comment"],
+    "border_focus": colors["green"],
+    "border_normal": colors["black"],
 }
 
 layouts = [
+    layout.Columns(
+        border_focus_stack=monokai["green"],
+        border_normal_stack=monokai["background"],
+        insert_position=1,
+        **layout_theme
+    ),
     layout.MonadTall(**layout_theme),
-    # layout.Columns(border_focus_stack='#d75f5f'),
     layout.Max(**layout_theme),
-    # Try more layouts by unleashing below layouts.
-    layout.Stack(num_stacks=2, **layout_theme),
+    # layout.Stack(num_stacks=2, **layout_theme),
     # layout.Bsp(),
     # layout.Matrix(),
     # layout.MonadWide(),
@@ -202,57 +253,362 @@ layouts = [
 # Default theme for widgets & extensions
 widget_defaults = dict(
     font='Ubuntu Mono',
-    fontsize=14,
+    fontsize=16,
     padding=3,
     background=monokai["background"],
 )
 extension_defaults = widget_defaults.copy()
 
-def init_primary_bar():
-    return bar.Bar(
-        widgets=[
-            widget.GroupBox(),
-            widget.Prompt(),
-            widget.CurrentLayoutIcon(),
-            widget.CurrentLayout(),
-            widget.Chord(
-                chords_colors={
-                    'launch': ("#ff0000", "#ffffff"),
-                },
-                name_transform=lambda name: name.upper(),
-            ),
-            widget.Spacer(),
-            widget.Clock(format='%a %d/%m/%Y %I:%M %p'),
-            widget.Spacer(),
-            widget.CPU(format="CPU {load_percent:2}%"),
-            widget.Memory(format="{MemUsed:5}M/{MemTotal:5}M"),
-            widget.Net(
-                interface="wlp0s20f3",
-                format="{down:6.6} ↓↑ {up:6.6}",
-                ),
-            widget.KeyboardLayout(),
-            widget.Volume(),
-            widget.Sep(),
-            widget.BatteryIcon(),
-            widget.Battery(format="{percent:2.0%}"),
-            widget.Sep(),
-            widget.Systray(),
-        ],
-        size=25,
-)
+def init_primary_widget_list():
+    return [
+        #widget.Image(
+        #    filename="~/.config/qtile/python-white.png",
+        #    scale=True,
+        #    margin=3,
+        #),
+        widget.TextBox(
+            text="  ",
+            fontsize=24,
+            padding=0,
+            foreground=colors["white"],
+            background=colors["black"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=colors["black"],
+            background=colors["blue"],
+        ),
+        widget.Sep(
+            background=colors["blue"],
+            linewidth=0,
+            padding=10,
+        ),
+        widget.GroupBox(
+            active="ffffff",
+            inactive="ecbbfb",
+            highlight_method="line",
+            highlight_color=colors["violet"],
+            this_current_screen_border="e1acff",
+            this_screen_border="74438f",
+            other_current_screen_border="e1acff",
+            other_screen_border="74438f",
+            margin_x=0,
+            margin_y=3,
+            padding_y=5,
+            padding_x=3,
+            border_width=3,
+            disable_drag=True,
+            background=colors["blue"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=colors["blue"],
+            background=colors["violet"],
+        ),
+        widget.CurrentLayoutIcon(
+            scale=0.75,
+            background=colors["violet"],
+        ),
+        widget.CurrentLayout(
+            background=colors["violet"],
+            foreground=colors["white"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=colors["violet"],
+        ),
+        #widget.Chord(
+        #    chords_colors={
+        #        'launch': ("#ff0000", "#ffffff"),
+        #    },
+        #    name_transform=lambda name: name.upper(),
+        #),
+        widget.WindowName(
+            max_chars=20,
+            padding=10,
+            #for_current_screen=True,
+        ),
+        #widget.Spacer(length=bar.STRETCH),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            foreground=colors["blue"],
+            padding=0,
+        ),
+        widget.Clock(
+            format=' %A %d/%m/%Y %I:%M %p',
+            background=colors["blue"],
+            foreground=colors["white"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            foreground=colors["blue"],
+            padding=0,
+        ),
+        widget.Spacer(length=bar.STRETCH),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=monokai["light orange"],
+        ),
+        widget.Systray(
+            background=monokai["light orange"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=monokai["red"],
+            background=monokai["light orange"],
+        ),
+        widget.CPU(
+            format="  {load_percent:2}% ",
+            background=monokai["red"],
+            foreground=colors["black"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=monokai["blue"],
+            background=monokai["red"],
+        ),
+        widget.Memory(
+            format="{MemUsed:5.0f}M/{MemTotal:5.0f}M ",
+            background=monokai["blue"],
+            foreground=colors["black"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=monokai["purple"],
+            background=monokai["blue"],
+        ),
+        widget.Net(
+            interface="wlp0s20f3",
+            format=" {down} ↓↑ {up} ",
+            background=monokai["purple"],
+            foreground=colors["black"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=monokai["orange"],
+            background=monokai["purple"],
+        ),
+        widget.Backlight(
+            backlight_name="intel_backlight",
+            brightness_file="brightness",
+            max_brightness_file="max_brightness",
+            format="☼ {percent:2.0%} ",
+            foreground=colors["black"],
+            background=monokai["orange"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=monokai["green"],
+            background=monokai["orange"],),
+        #widget.BatteryIcon(),
+        widget.Battery(
+            format="  {percent:2.0%} ",
+            background=monokai["green"],
+            foreground=colors["black"],
+        ),
+]
 
-def init_secondary_bar():
-    pass
+def init_secondary_widget_list():
+    return [
+        widget.Sep(
+            background=colors["blue"],
+            linewidth=0,
+            padding=10,
+        ),
+        widget.GroupBox(
+            active="ffffff",
+            inactive="ecbbfb",
+            highlight_method="line",
+            highlight_color=colors["violet"],
+            this_current_screen_border="e1acff",
+            this_screen_border="74438f",
+            other_current_screen_border="e1acff",
+            other_screen_border="74438f",
+            margin_x=0,
+            margin_y=3,
+            padding_y=5,
+            padding_x=3,
+            border_width=3,
+            disable_drag=True,
+            background=colors["blue"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=colors["blue"],
+            background=colors["violet"],
+        ),
+        widget.CurrentLayoutIcon(
+            scale=0.75,
+            background=colors["violet"],
+        ),
+        widget.CurrentLayout(
+            background=colors["violet"],
+            foreground=colors["white"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=colors["violet"],
+        ),
+        #widget.Chord(
+        #    chords_colors={
+        #        'launch': ("#ff0000", "#ffffff"),
+        #    },
+        #    name_transform=lambda name: name.upper(),
+        #),
+        widget.WindowName(
+            max_chars=20,
+            padding=10,
+            #for_current_screen=True,
+        ),
+        #widget.Spacer(),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            foreground=colors["blue"],
+            padding=0,
+        ),
+        widget.Clock(
+            format=' %A %d/%m/%Y %I:%M %p',
+            background=colors["blue"],
+            foreground=colors["white"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            foreground=colors["blue"],
+            padding=0,
+        ),
+        widget.Spacer(),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=monokai["red"],
+        ),
+        widget.CPU(
+            format="  {load_percent:2}% ",
+            background=monokai["red"],
+            foreground=colors["black"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=monokai["blue"],
+            background=monokai["red"],
+        ),
+        widget.Memory(
+            format="{MemUsed:5.0f}M/{MemTotal:5.0f}M ",
+            background=monokai["blue"],
+            foreground=colors["black"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=monokai["purple"],
+            background=monokai["blue"],
+        ),
+        widget.Net(
+            interface="wlp0s20f3",
+            format=" {down} ↓↑ {up} ",
+            background=monokai["purple"],
+            foreground=colors["black"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=monokai["orange"],
+            background=monokai["purple"],
+        ),
+        widget.Backlight(
+            backlight_name="intel_backlight",
+            brightness_file="brightness",
+            max_brightness_file="max_brightness",
+            format="☼ {percent:2.0%} ",
+            foreground=colors["black"],
+            background=monokai["orange"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=monokai["green"],
+            background=monokai["orange"],),
+        #widget.BatteryIcon(),
+        widget.Battery(
+            format="  {percent:2.0%} ",
+            background=monokai["green"],
+            foreground=colors["black"],
+        ),
+]
 
 ##################################################################
 #                           SCREENS                              #
 ##################################################################
+from Xlib import display as xdisplay
+
+def get_n_monitors():
+    n_monitors = 0
+    try:
+        display = xdisplay.Display()
+        screen = display.screen()
+        resources = screen.root.xrandr_get_screen_resources()
+
+        for output in resources.outputs:
+            monitor = display.xrandr_get_output_info(output,
+                                                     resources.config_timestamp)
+            preferred = False
+            if hasattr(monitor, "preferred"):
+                preferred = monitor.preferred
+            elif hasattr(monitor, "num_preferred"):
+                preferred = monitor.num_preferred
+
+            if preferred:
+                n_monitors += 1
+    except Exception as e:
+        # always setup at least one monitor
+        return 1
+    else:
+        return n_monitors
+
+
+n_monitors = get_n_monitors()
 
 screens = [
-    Screen(
-        top=init_primary_bar(),    
-    ),
+    Screen(top=bar.Bar(widgets=init_primary_widget_list(), size=25)),
 ]
+
+for _ in range(n_monitors-1):
+    screens.append(
+        Screen(top=bar.Bar(widgets=init_secondary_widget_list(), size=25))
+    )
+
 
 # Drag floating layouts.
 mouse = [
