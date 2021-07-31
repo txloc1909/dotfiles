@@ -1,4 +1,9 @@
-# enable vim mode in any tool that uses GNU Readline 
+$include /etc/inputrc
+
+# case-insensitive tab completion
+set completion-ignore-case on
+
+# enable vim mode in any tool that uses GNU Readline
 set editing-mode vi
 
 # bind keys
