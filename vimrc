@@ -1,15 +1,15 @@
 " Plugins to add
-" Nerdtree 
+" Nerdtree
 " vim-fugitive
 " YouCompleteMe
 " ctrlp
 " themes:
 "   sonokai
 "
-" vim-airline 
+" vim-airline
 " vim-airline-themes
-" indentpython 
-" 
+" indentpython
+"
 
 call plug#begin('~/.vim/plugged')
 
@@ -28,10 +28,10 @@ Plug 'tpope/vim-fugitive'
 " Directory tree
 Plug 'scrooloose/nerdtree'
 
-" Fuzzy search 
+" Fuzzy search
 Plug 'kien/ctrlp.vim'
 
-" status bar 
+" status bar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -41,29 +41,29 @@ call plug#end()
 " General settings
 
     set nocp                " set no Vi compatible
-    set number              " show line number 
-    syntax enable           " enable syntax highlighting 
+    set number              " show line number
+    syntax enable           " enable syntax highlighting
     set showcmd             " show command in bottom bar
     "set cursorline          " highlight current line
-    filetype indent on      " load filetype-specific indent file  
-    filetype plugin on      " load filetype-specific plugin, if exists 
-    set lazyredraw          " redraw only when need to 
-    set showmatch           " highlight matching brackets 
+    filetype indent on      " load filetype-specific indent file
+    filetype plugin on      " load filetype-specific plugin, if exists
+    set lazyredraw          " redraw only when need to
+    set showmatch           " highlight matching brackets
     set wildmenu            " visual autocomplete for command menu
 
-    set tabstop=4           " number of visual spaces per tab 
+    set tabstop=4           " number of visual spaces per tab
     set softtabstop=4       " number of space in tab when editing
     set smartindent
     set smarttab            " insert/delete n spaces for tab
-    set autoindent 
+    set autoindent
     set expandtab           " tabs are spaces
 
-    set relativenumber
+    set relativenumber      " relative number line
     set nu
 
     set incsearch           " search as characters are entered
-    set nohlsearch          " not highlight matches in search   
-    set noerrorbells 
+    set nohlsearch          " not highlight matches in search
+    set noerrorbells
 
     set nowrap
     set scrolloff=8
@@ -83,12 +83,12 @@ call plug#end()
 set laststatus=2
 set t_Co=256
 
-" set theme for status line 
+" set theme for status line
 let g:airline_theme='powerlineish'
 
 " python with virtualenv support
-"py3 << EOF 
-"import os 
+"py3 << EOF
+"import os
 "import sys
 "if 'VIRTUAL_ENV' in os.environ:
 "    env_base_dir = os.environ['VIRTUAL_ENV']
@@ -102,5 +102,16 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Enable autocompletion
+set wildmode=longest,list,full
 
+" Access system clipboard, Ctrl+Alt+C and Ctrl+Alt+V to copy and paste
+set clipboard+=unnamedplus
+vnoremap <C-M-c> "+y
+map <C-M-v> "+P
 
+" Automatically deletes all trailing whitespaces and newlines at end of file
+" on save
+autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * %s/\n\+\%$//e
+autocmd BufWritePre *.[ch] %s/\%$/\r/e
