@@ -1,7 +1,9 @@
 # LocTX's Dotfiles
 
 ## Programs
-* Qtile WM 
-* Vim 
-* Rofi 
-* URxvt
+* Qtile (window manager)
+* Vim (text editor)
+* Rofi (run launcher)
+* URxvt (terminal emulator)
+* Picom (compositor)
+* Zathura (document viewer)
