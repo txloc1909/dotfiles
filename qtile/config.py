@@ -24,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os 
+import os
 import subprocess
 from typing import List  # noqa: F401
 
@@ -83,7 +83,7 @@ keys = [
     Key([alt, "shift"], "Tab", lazy.layout.previous(),
         desc="Move window focus to previous window"),
 
-    # Arrow keys do the same 
+    # Arrow keys do the same
     Key([mod], "Left", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "Right", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "Down", lazy.layout.down(), desc="Move focus down"),
@@ -91,11 +91,11 @@ keys = [
 
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", 
+    Key([mod, "shift"], "h",
         lazy.layout.shuffle_left(),     # in COLUMNS layout
         lazy.layout.swap_left(),        # in MONADTALL layout
         desc="Move window to the left"),
-    Key([mod, "shift"], "l", 
+    Key([mod, "shift"], "l",
         lazy.layout.shuffle_right(),
         lazy.layout.swap_right(),
         desc="Move window to the right"),
@@ -103,11 +103,11 @@ keys = [
         desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Arrow keys do the same
-    Key([mod, "shift"], "Left", 
+    Key([mod, "shift"], "Left",
         lazy.layout.shuffle_left(),
         lazy.layout.swap_left(),
         desc="Move window to the left"),
-    Key([mod, "shift"], "Right", 
+    Key([mod, "shift"], "Right",
         lazy.layout.shuffle_right(),
         lazy.layout.swap_right(),
         desc="Move window to the right"),
@@ -117,33 +117,33 @@ keys = [
 
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
-    Key([mod, "control"], "h", 
+    Key([mod, "control"], "h",
         lazy.layout.grow_left(),        # in COLUMNS layout
         lazy.layout.shrink(),           # in MONADTALL layout
         desc="Grow window to the left"),
-    Key([mod, "control"], "l", 
+    Key([mod, "control"], "l",
         lazy.layout.grow_right(),
         lazy.layout.grow(),
         desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(),
         desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), 
+    Key([mod, "control"], "k", lazy.layout.grow_up(),
         desc="Grow window up"),
 
-    Key([mod, "control"], "Left", 
+    Key([mod, "control"], "Left",
         lazy.layout.grow_left(),
         lazy.layout.shrink(),
         desc="Grow window to the left"),
-    Key([mod, "control"], "Right", 
+    Key([mod, "control"], "Right",
         lazy.layout.grow_right(),
         lazy.layout.grow(),
         desc="Grow window to the right"),
     Key([mod, "control"], "Down", lazy.layout.grow_down(),
         desc="Grow window down"),
-    Key([mod, "control"], "Up", lazy.layout.grow_up(), 
+    Key([mod, "control"], "Up", lazy.layout.grow_up(),
         desc="Grow window up"),
- 
-    Key([mod], "n", 
+
+    Key([mod], "n",
         lazy.layout.normalize(),        # in COLUMNS layout
         lazy.layout.reset(),            # in MONADTALL layout
         desc="Reset all window sizes"),
@@ -160,7 +160,7 @@ keys = [
         desc="Toggle between split and unsplit sides of stack"),
 
     # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), 
+    Key([mod], "Tab", lazy.next_layout(),
         desc="Switch to next layout"),
     Key([mod, "shift"], "Tab", lazy.prev_layout(),
         desc="Switch to previous layout"),
@@ -171,10 +171,13 @@ keys = [
     Key([mod, "shift"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 
+    Key([mod, "control"], "l", lazy.spawn("light-locker-command -l"),
+        desc="Lock the screen"),
+
     # Multi monitors operation
     Key([mod], "p", lazy.next_screen(), desc="Move focus to next monitor"),
 
-    # Spawn programs 
+    # Spawn programs
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "r", lazy.spawn(run_launcher), desc="Spawn the run launcher"),
     Key([mod], "b", lazy.spawn(web_browser), desc="Spawn the web browser"),
@@ -342,7 +345,7 @@ def init_primary_widget_list():
             padding=0,
         ),
         widget.Clock(
-            format=' %A %d/%m/%Y %I:%M %p',
+            format=' %a %d/%m/%Y %H:%M',
             background=colors["blue"],
             foreground=colors["white"],
         ),
@@ -492,7 +495,7 @@ def init_secondary_widget_list():
             padding=0,
         ),
         widget.Clock(
-            format=' %A %d/%m/%Y %I:%M %p',
+            format=' %a %d/%m/%Y %H:%M',
             background=colors["blue"],
             foreground=colors["white"],
         ),
@@ -641,7 +644,7 @@ focus_on_window_activation = "smart"
 # Execute autostart script once login
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser("~") 
+    home = os.path.expanduser("~")
     startup_script = home + '/.config/qtile/autostart.sh'
     subprocess.call([startup_script])
 
