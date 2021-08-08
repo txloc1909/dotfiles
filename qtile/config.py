@@ -189,14 +189,14 @@ keys = [
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-"),
             desc="Decrease brightness"),
 
-    # Sound control 
+    # Sound control
     Key([], "XF86AudioMute", lazy.spawn("pamixer --toggle-mute"),
             desc="Mute audio"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer --decrease 5"),
             desc="Decrease volume"),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer --increase 5"),
             desc="Increase volume"),
-    
+
 ]
 
 ##################################################################

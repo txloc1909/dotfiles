@@ -35,6 +35,12 @@ Plug 'kien/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Code auto-comment
+Plug 'preservim/nerdcommenter'
+
+" Python syntax highlighting
+Plug 'vim-python/python-syntax'
+
 call plug#end()
 
 
@@ -42,14 +48,15 @@ call plug#end()
 
     set nocp                " set no Vi compatible
     set number              " show line number
+    set relativenumber      " relative number line
     syntax enable           " enable syntax highlighting
     set showcmd             " show command in bottom bar
     "set cursorline          " highlight current line
+    "set cursorcolumn        " highlight current column
     filetype indent on      " load filetype-specific indent file
     filetype plugin on      " load filetype-specific plugin, if exists
     set lazyredraw          " redraw only when need to
     set showmatch           " highlight matching brackets
-    set wildmenu            " visual autocomplete for command menu
 
     set tabstop=4           " number of visual spaces per tab
     set softtabstop=4       " number of space in tab when editing
@@ -57,9 +64,6 @@ call plug#end()
     set smarttab            " insert/delete n spaces for tab
     set autoindent
     set expandtab           " tabs are spaces
-
-    set relativenumber      " relative number line
-    set nu
 
     set incsearch           " search as characters are entered
     set nohlsearch          " not highlight matches in search
@@ -103,7 +107,9 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " Enable autocompletion
+set wildmenu
 set wildmode=longest,list,full
+set completeopt=menuone,longest
 
 " Access system clipboard, Ctrl+Alt+C and Ctrl+Alt+V to copy and paste
 set clipboard+=unnamedplus
@@ -115,3 +121,6 @@ map <C-M-v> "+P
 autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * %s/\n\+\%$//e
 autocmd BufWritePre *.[ch] %s/\%$/\r/e
+
+" Python-syntax plugin
+let g:python_highlight_all = 1
