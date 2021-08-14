@@ -220,7 +220,7 @@ group_icons = ['', '', '', '', '', '', '', '', '阮']
 groups = [
     Group(
         name=str(i)+":"+icon,
-        layout="columns",
+        layout="monadtall",
     )
     for i, icon in enumerate(group_icons, start=1)
 ]
@@ -251,13 +251,13 @@ layout_theme = {
 }
 
 layouts = [
+    layout.MonadTall(**layout_theme),
     layout.Columns(
         border_focus_stack=monokai["green"],
         border_normal_stack=monokai["background"],
         insert_position=1,
         **layout_theme
     ),
-    layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
     # layout.Stack(num_stacks=2, **layout_theme),
     # layout.Bsp(),
