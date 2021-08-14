@@ -32,17 +32,20 @@ from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 
+import arcobattery                      # battery widget from ArcoLinux
+
 
 ##################################################################
 #                             VARIABLES                          #
 ##################################################################
 
-mod = "mod4"
-alt = "mod1"
-terminal = "urxvtc"     # use urxvt client
+mod = "mod4"                            # Super/Window key
+alt = "mod1"                            # Alt key
+terminal = "urxvtc"                     # use urxvt client
 run_launcher = "rofi -show run"
 web_browser = "firefox"
 file_manager = "pcmanfm"
+home = os.path.expanduser("~")          # home directory
 
 # Color scheme
 monokai = {
@@ -171,7 +174,7 @@ keys = [
     Key([mod, "shift"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 
-    Key([mod, "control"], "l", lazy.spawn("light-locker-command -l"),
+    Key([mod, "shift"], "e", lazy.spawn("light-locker-command -l"),
         desc="Lock the screen"),
 
     # Multi monitors operation
@@ -189,30 +192,49 @@ keys = [
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-"),
             desc="Decrease brightness"),
 
-    # Sound control 
+    # Sound control
     Key([], "XF86AudioMute", lazy.spawn("pamixer --toggle-mute"),
             desc="Mute audio"),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer --decrease 5"),
             desc="Decrease volume"),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer --increase 5"),
             desc="Increase volume"),
-    
+
+    # Move visually between groups
+    Key([mod, alt], "h", lazy.screen.prev_group(),
+        desc="Move to previous group in line"),
+    Key([mod, alt], "l", lazy.screen.next_group(),
+        desc="Move to next group in line"),
+    # Arrow keys do the same thing
+    Key([mod, alt], "Left", lazy.screen.prev_group(),
+        desc="Move to previous group in line"),
+    Key([mod, alt], "Right", lazy.screen.next_group(),
+        desc="Move to next group in line"),
 ]
 
 ##################################################################
 #                            GROUPS                              #
 ##################################################################
 
-groups = [Group(i, layout="columns") for i in "12345"]
+group_icons = ['', '', '', '', '', '', '', '', '阮']
+groups = [
+    Group(
+        name=str(i)+":"+icon,
+        layout="columns",
+    )
+    for i, icon in enumerate(group_icons, start=1)
+]
+
+#groups = [Group(i, layout="columns") for i in "123456789"]
 
 for i in groups:
     keys.extend([
-        # mod1 + letter of group = switch to group
-        Key([mod], i.name, lazy.group[i.name].toscreen(),
+        # mod1 + group's number = switch to group
+        Key([mod], i.name[0], lazy.group[i.name].toscreen(),
             desc="Switch to group {}".format(i.name)),
 
-        # mod1 + shift + letter of group = switch to & move focused window to group
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
+        # mod1 + shift + group's number = switch to & move focused window to group
+        Key([mod, "shift"], i.name[0], lazy.window.togroup(i.name, switch_group=True),
             desc="Switch to & move focused window to group {}".format(i.name)),
         ])
 
@@ -255,8 +277,9 @@ layouts = [
 
 # Default theme for widgets & extensions
 widget_defaults = dict(
-    font='Ubuntu Mono',
-    fontsize=16,
+    #font='Ubuntu Mono',
+    font='MesloLGS NF',
+    fontsize=14,
     padding=3,
     background=monokai["background"],
 )
@@ -286,7 +309,7 @@ def init_primary_widget_list():
         widget.Sep(
             background=colors["blue"],
             linewidth=0,
-            padding=10,
+            padding=5,
         ),
         widget.GroupBox(
             active="ffffff",
@@ -424,11 +447,19 @@ def init_primary_widget_list():
             foreground=monokai["green"],
             background=monokai["orange"],),
         #widget.BatteryIcon(),
-        widget.Battery(
-            format="  {percent:2.0%} ",
+        arcobattery.BatteryIcon(
+            padding=0,
+            scale=0.7,
+            y_poss=2,
+            theme_path=home+"/.config/qtile/battery_icons_horiz",
+            update_interval=5,
             background=monokai["green"],
-            foreground=colors["black"],
         ),
+        #widget.Battery(
+        #    format="  {percent:2.0%} ",
+        #    background=monokai["green"],
+        #    foreground=colors["black"],
+        #),
 ]
 
 def init_secondary_widget_list():
@@ -436,7 +467,7 @@ def init_secondary_widget_list():
         widget.Sep(
             background=colors["blue"],
             linewidth=0,
-            padding=10,
+            padding=5,
         ),
         widget.GroupBox(
             active="ffffff",
@@ -563,13 +594,25 @@ def init_secondary_widget_list():
             padding=0,
             foreground=monokai["green"],
             background=monokai["orange"],),
-        #widget.BatteryIcon(),
-        widget.Battery(
-            format="  {percent:2.0%} ",
+        arcobattery.BatteryIcon(
+            padding=0,
+            scale=0.7,
+            y_poss=2,
+            theme_path=home+"/.config/qtile/battery_icons_horiz",
+            update_interval=5,
             background=monokai["green"],
-            foreground=colors["black"],
         ),
+        #widget.Battery(
+        #    format="{percent:2.0%} ",
+        #    background=monokai["green"],
+        #    foreground=colors["black"],
+        #),
+        #arcobattery.Battery(
+        #    background=monokai["green"],
+        #    foreground=colors["black"],
+        #),
 ]
+
 
 ##################################################################
 #                           SCREENS                              #
