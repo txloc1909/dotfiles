@@ -455,11 +455,12 @@ def init_primary_widget_list():
             update_interval=5,
             background=monokai["green"],
         ),
-        #widget.Battery(
-        #    format="  {percent:2.0%} ",
-        #    background=monokai["green"],
-        #    foreground=colors["black"],
-        #),
+        widget.Battery(
+            #format="  {percent:2.0%} ",
+            format="{percent:2.0%} ",
+            background=monokai["green"],
+            foreground=colors["black"],
+        ),
 ]
 
 def init_secondary_widget_list():
@@ -593,7 +594,8 @@ def init_secondary_widget_list():
             fontsize=18,
             padding=0,
             foreground=monokai["green"],
-            background=monokai["orange"],),
+            background=monokai["orange"],
+        ),
         arcobattery.BatteryIcon(
             padding=0,
             scale=0.7,
@@ -602,11 +604,11 @@ def init_secondary_widget_list():
             update_interval=5,
             background=monokai["green"],
         ),
-        #widget.Battery(
-        #    format="{percent:2.0%} ",
-        #    background=monokai["green"],
-        #    foreground=colors["black"],
-        #),
+        widget.Battery(
+            format="{percent:2.0%} ",
+            background=monokai["green"],
+            foreground=colors["black"],
+        ),
         #arcobattery.Battery(
         #    background=monokai["green"],
         #    foreground=colors["black"],
