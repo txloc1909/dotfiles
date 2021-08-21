@@ -1,0 +1,19 @@
+$include /etc/inputrc
+
+
+set editing-mode vi
+set completion-ignore-case on
+set completion-prefix-display-length 3
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set visible-stats on
+
+$if mode=vi
+    set keymap vi-command
+    Control-l: clear-screen
+    Control-a: beginning-of-line
+
+    set keymap vi-insert
+    Control-l: clear-screen
+    Control-a: beginning-of-line
+$endif
