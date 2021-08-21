@@ -1,15 +1,11 @@
-" Plugins to add
-" Nerdtree
-" vim-fugitive
-" YouCompleteMe
-" ctrlp
-" themes:
-"   sonokai
 "
-" vim-airline
-" vim-airline-themes
-" indentpython
+" .vimrc
 "
+
+" First thing first,
+set nocompatible
+filetype plugin on
+syntax on
 
 call plug#begin('~/.vim/plugged')
 
@@ -46,15 +42,12 @@ call plug#end()
 
 " General settings
 
-    set nocp                " set no Vi compatible
     set number              " show line number
     set relativenumber      " relative number line
-    syntax enable           " enable syntax highlighting
     set showcmd             " show command in bottom bar
     "set cursorline          " highlight current line
     "set cursorcolumn        " highlight current column
     filetype indent on      " load filetype-specific indent file
-    filetype plugin on      " load filetype-specific plugin, if exists
     set lazyredraw          " redraw only when need to
     set showmatch           " highlight matching brackets
 
@@ -100,16 +93,15 @@ let g:airline_theme='powerlineish'
 "    exec(open(activate_this).read(), dict(__file__=activate_this))
 "EOF
 
+" Move visual line
+nnoremap j gj
+nnoremap k gk
+
 " Navigating splits
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-" Enable autocompletion
-set wildmenu
-set wildmode=longest,list,full
-set completeopt=menuone,longest
 
 " Access system clipboard, Ctrl+Alt+C and Ctrl+Alt+V to copy and paste
 set clipboard+=unnamedplus
@@ -124,3 +116,36 @@ autocmd BufWritePre *.[ch] %s/\%$/\r/e
 
 " Python-syntax plugin
 let g:python_highlight_all = 1
+
+" Enable autocompletion
+set wildmenu
+set wildmode=longest,list,full
+"set completeopt=menuone,longest
+
+" Minimalist-TabComplete-Plugin
+inoremap <expr> <Tab> TabComplete()
+fun! TabComplete()
+    if getline('.')[col('.') - 2] =~ '\K' || pumvisible()
+        return "\<C-P>"
+    else
+        return "\<Tab>"
+    endif
+endfun
+
+" Minimalist-AutoCompletePop-Plugin
+set completeopt=menu,menuone,noinsert
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+autocmd InsertCharPre * call AutoComplete()
+fun! AutoComplete()
+    if v:char =~ '\K'
+        \ && getline('.')[col('.') - 4] !~ '\K'
+        \ && getline('.')[col('.') - 3] =~ '\K'
+        \ && getline('.')[col('.') - 2] =~ '\K' " last char
+        \ && getline('.')[col('.') - 1] !~ '\K'
+
+        call feedkeys("\<C-P>", 'n')
+    end
+endfun
+
+" set linewrap in markdown and latex file
+autocmd BufRead,BufNewFile *.md,*.tex set wrap
