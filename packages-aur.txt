@@ -1,0 +1,14 @@
+auto-cpufreq
+brave-bin
+flat-remix
+flat-remix-gtk
+ibus-bamboo
+lightdm-settings
+lightdm-slick-greeter
+nerd-fonts-ubuntu-mono
+notion-app
+pfetch
+skypeforlinux-stable-bin
+spotify
+teams
+yay-git
