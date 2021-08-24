@@ -31,7 +31,7 @@ urxvtd -q -o -f &
 light-locker --lock-on-suspend --lock-on-lid &
 
 # start ibus daemon
-export GTK_IM_MODULE=ibus
-export QT_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
+#export GTK_IM_MODULE=ibus
+#export QT_IM_MODULE=ibus
+#export XMODIFIERS=@im=ibus
 ibus-daemon -drxR &
