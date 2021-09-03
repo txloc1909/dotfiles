@@ -7,3 +7,5 @@
 * URxvt (terminal emulator)
 * Picom (compositor)
 * Zathura (document viewer)
+* Git (version control)
+* Sxhkd (hotkeys daemon)
