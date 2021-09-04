@@ -242,3 +242,21 @@ URxvt.keysym.F11:   perl:fullscreen:switch
 !! white
 !*.color7:       #f8f8f2
 !*.color15:      #f9f8f5
+
+/* Kali dark */
+!*.color0:       #1f2229
+!*.color1:       #d41919
+!*.color2:       #e5bdab
+!*.color3:       #fea44c
+!*.color4:       #367bf0
+!*.color5:       #9755b3
+!*.color6:       #49aee6
+!*.color7:       #e6e6e6
+!*.color8:       #198388
+!*.color9:       #ec0101
+!*.color10:      #47d4b9
+!*.color11:      #ff8a18
+!*.color12:      #277fff
+!*.color13:      #962ac3
+!*.color14:      #05a1f7
+!*.color15:      #ffffff
