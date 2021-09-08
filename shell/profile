@@ -27,3 +27,13 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
 export GTK2_RC_FILES="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-2.0/gtkrc-2.0"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+export RXVT_SOCKET="${XDG_RUNTIME_DIR}/urxvtd"
+
+# if use LightDM, also modify this in /etc/lightdm/lightdm.conf:
+# [LightDM]
+# user-authority-in-system-dir=true
+export XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
+
+# FZF
+export FZF_DEFAULT_COMMAND="find ."
