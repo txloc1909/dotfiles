@@ -29,6 +29,7 @@ export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 export RXVT_SOCKET="${XDG_RUNTIME_DIR}/urxvtd"
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
 # if use LightDM, also modify this in /etc/lightdm/lightdm.conf:
 # [LightDM]
