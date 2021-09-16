@@ -156,7 +156,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 8.5
+  size: 9.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -181,12 +181,202 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Tomorrow Night)
-colors:
+
+# COLORSCHEMES
+schemes:
+  molokai: &molokai
+    primary:
+      background: '#1b1d1e'
+      foreground: '#f8f8f2'
+    normal:
+      black:   '#333333'
+      red:     '#C4265E'
+      green:   '#86B42B'
+      yellow:  '#B3B42B'
+      blue:    '#6A7EC8'
+      magenta: '#8C6BC8'
+      cyan:    '#56ADBC'
+      white:   '#E3E3DD'
+    bright:
+      black:   '#666666'
+      red:     '#F92672'
+      green:   '#A6E22E'
+      yellow:  '#E2E22E'
+      blue:    '#819AFF'
+      magenta: '#AE81FF'
+      cyan:    '#66D9EF'
+      white:   '#F8F8F2'
+
+  monokai: &monokai
+    primary:
+      background: '#272822'
+      foreground: '#f8f8f2'
+    normal:
+      black:   '#272822'
+      red:     '#F92672'
+      green:   '#A6E22E'
+      yellow:  '#F4BF75'
+      blue:    '#66D9EF'
+      magenta: '#AE81FF'
+      cyan:    '#A1EFE4'
+      white:   '#F8F8F2'
+    bright:
+      black:   '#75715E'
+      red:     '#F92672'
+      green:   '#A6E22E'
+      yellow:  '#F4BF75'
+      blue:    '#66D9EF'
+      magenta: '#AE81FF'
+      cyan:    '#A1EFE4'
+      white:   '#F9F8F5'
+
+  monokai-pro: &monokai-pro
+    primary:
+      background: '#2d2a2e'
+      foreground: '#fcfcfa'
+    normal:
+      black:   '#403E41'
+      red:     '#FF6188'
+      green:   '#A9DC76'
+      yellow:  '#FFD866'
+      blue:    '#FC9867'
+      magenta: '#AB9DF2'
+      cyan:    '#78DCE8'
+      white:   '#FCFCFA'
+    bright:
+      black:   '#727072'
+      red:     '#FF6188'
+      green:   '#A9DC76'
+      yellow:  '#FFD866'
+      blue:    '#FC9867'
+      magenta: '#AB9DF2'
+      cyan:    '#78DCE8'
+      white:   '#FCFCFA'
+
+  monokai-soda: &monokai-soda
+    primary:
+      background: '#1a1a1a'
+      foreground: '#c4c5b5'
+    normal:
+      black:   '#1a1a1a'
+      red:     '#f4005f'
+      green:   '#98e024'
+      yellow:  '#fa8419'
+      blue:    '#9d65ff'
+      magenta: '#f4005f'
+      cyan:    '#58d1eb'
+      white:   '#c4c5b5'
+    bright:
+      black:   '#625e4c'
+      red:     '#f4005f'
+      green:   '#98e024'
+      yellow:  '#e0d561'
+      blue:    '#9d65ff'
+      magenta: '#f4005f'
+      cyan:    '#58d1eb'
+      white:   '#f6f6ef'
+
+  ubuntu: &ubuntu
+    primary:
+      background: '#300a24'
+      foreground: '#eeeeec'
+    normal:
+      black:   '#2e3436'
+      red:     '#cc0000'
+      green:   '#4e9a06'
+      yellow:  '#c4a000'
+      blue:    '#3465a4'
+      magenta: '#75507b'
+      cyan:    '#06989a'
+      white:   '#d3d7cf'
+    bright:
+      black:   '#555753'
+      red:     '#ef2929'
+      green:   '#8ae234'
+      yellow:  '#fce94f'
+      blue:    '#729fcf'
+      magenta: '#ad7fa8'
+      cyan:    '#34e2e2'
+      white:   '#eeeeec'
+
+  gnome-dark: &gnome-dark
+    primary:
+      foreground: '#d0cfcc'
+      background: '#171421'
+      bright_foreground: '#ffffff'
+    normal:
+      black:   '#171421'
+      red:     '#c01c28'
+      green:   '#26a269'
+      yellow:  '#a2734c'
+      blue:    '#12488b'
+      magenta: '#a347ba'
+      cyan:    '#2aa1b3'
+      white:   '#d0cfcc'
+    bright:
+      black:   '#5e5c64'
+      red:     '#f66151'
+      green:   '#33d17a'
+      yellow:  '#e9ad0c'
+      blue:    '#2a7bde'
+      magenta: '#c061cb'
+      cyan:    '#33c7de'
+      white:   '#ffffff'
+
+  material: &material
+    primary:
+      background: '#263238'
+      foreground: '#eeffff'
+    normal:
+      black:   '#000000'  # Arbitrary
+      red:     '#e53935'
+      green:   '#91b859'
+      yellow:  '#ffb62c'
+      blue:    '#6182b8'
+      magenta: '#ff5370'  # Dark pink of the original material theme
+      cyan:    '#39adb5'
+      white:   '#a0a0a0'  # Arbitrary
+    bright:
+      black:   '#4e4e4e'  # Arbitrary
+      red:     '#ff5370'
+      green:   '#c3e88d'
+      yellow:  '#ffcb6b'
+      blue:    '#82aaff'
+      magenta: '#f07178'  # Pink of the original material theme
+      cyan:    '#89ddff'
+      white:   '#ffffff'  # Arbitrary
+
+  modified-solarize: &modified-solarize
+    primary:
+      background: '#23252e'
+      foreground: '#93a1a1'
+    cursor:
+      #text:   '#002b36'
+      cursor: '#93a1a1'
+    normal:
+      black:   '#002b36'
+      red:     '#dc322f'
+      green:   '#859900'
+      yellow:  '#b58900'
+      blue:    '#268bd2'
+      magenta: '#d33682'
+      cyan:    '#2aa198'
+      white:   '#93a1a1'
+    bright:
+      black:   '#657b83'
+      red:     '#dc322f'
+      green:   '#859900'
+      yellow:  '#b58900'
+      blue:    '#268bd2'
+      magenta: '#d33682'
+      cyan:    '#2aa198'
+      white:   '#fdf6e3'
+
+colors: *modified-solarize
   # Default colors
-  primary:
-    background: '#1d1f21'
-    foreground: '#c5c8c6'
+  #primary:
+    #background: '#1d1f21'
+    #foreground: '#c5c8c6'
 
     # Bright and dim foreground colors
     #
@@ -194,8 +384,8 @@ colors:
     # present. If the bright foreground color is not set, or
     # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
     # color will be used.
-    dim_foreground: '#828482'
-    bright_foreground: '#eaeaea'
+    #dim_foreground: '#828482'
+    #bright_foreground: '#eaeaea'
 
   # Cursor colors
   #
@@ -203,9 +393,11 @@ colors:
   #
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
-  cursor:
-    text: CellBackground
-    cursor: CellForeground
+  #cursor:
+    #text: CellBackground
+    #cursor: CellForeground
+    #text: '#1d1f21'
+    #cursor: '#ffffff'
 
   # Vi mode cursor colors
   #
@@ -213,26 +405,26 @@ colors:
   #
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
-  vi_mode_cursor:
-    text: CellBackground
-    cursor: CellForeground
+  #vi_mode_cursor:
+    #text: CellBackground
+    #cursor: CellForeground
 
   # Search colors
   #
   # Colors used for the search bar and match highlighting.
   #search:
-    # Allowed values are CellForeground/CellBackground, which reference the
-    # affected cell, or hexadecimal colors like #ff00ff.
+    ## Allowed values are CellForeground/CellBackground, which reference the
+    ## affected cell, or hexadecimal colors like #ff00ff.
     #matches:
-    #  foreground: '#000000'
-    #  background: '#ffffff'
+      #foreground: '#000000'
+      #background: '#ffffff'
     #focused_match:
-    #  foreground: '#ffffff'
-    #  background: '#000000'
+      #foreground: '#ffffff'
+      #background: '#000000'
 
     #bar:
-    #  background: '#c5c8c6'
-    #  foreground: '#1d1f21'
+      #background: '#c5c8c6'
+      #foreground: '#1d1f21'
 
   # Keyboard regex hints
   #hints:
@@ -269,44 +461,44 @@ colors:
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
   #selection:
-  #  text: CellBackground
-  #  background: CellForeground
+    #text: CellBackground
+    #background: CellForeground
 
   # Normal colors
-  normal:
-    black:   '#1d1f21'
-    red:     '#cc6666'
-    green:   '#b5bd68'
-    yellow:  '#f0c674'
-    blue:    '#81a2be'
-    magenta: '#b294bb'
-    cyan:    '#8abeb7'
-    white:   '#c5c8c6'
+  #normal:
+    #black:   '#1d1f21'
+    #red:     '#cc6666'
+    #green:   '#b5bd68'
+    #yellow:  '#f0c674'
+    #blue:    '#81a2be'
+    #magenta: '#b294bb'
+    #cyan:    '#8abeb7'
+    #white:   '#c5c8c6'
 
   # Bright colors
-  bright:
-    black:   '#666666'
-    red:     '#d54e53'
-    green:   '#b9ca4a'
-    yellow:  '#e7c547'
-    blue:    '#7aa6da'
-    magenta: '#c397d8'
-    cyan:    '#70c0b1'
-    white:   '#eaeaea'
+  #bright:
+    #black:   '#666666'
+    #red:     '#d54e53'
+    #green:   '#b9ca4a'
+    #yellow:  '#e7c547'
+    #blue:    '#7aa6da'
+    #magenta: '#c397d8'
+    #cyan:    '#70c0b1'
+    #white:   '#eaeaea'
 
   # Dim colors
   #
   # If the dim colors are not set, they will be calculated automatically based
   # on the `normal` colors.
-  dim:
-    black:   '#131415'
-    red:     '#864343'
-    green:   '#777c44'
-    yellow:  '#9e824c'
-    blue:    '#556a7d'
-    magenta: '#75617b'
-    cyan:    '#5b7d78'
-    white:   '#828482'
+  #dim:
+    #black:   '#131415'
+    #red:     '#864343'
+    #green:   '#777c44'
+    #yellow:  '#9e824c'
+    #blue:    '#556a7d'
+    #magenta: '#75617b'
+    #cyan:    '#5b7d78'
+    #white:   '#828482'
 
   # Indexed Colors
   #
@@ -323,7 +515,7 @@ colors:
   # Whether or not `window.opacity` applies to all cell backgrounds or only to
   # the default background. When set to `true` all cells will be transparent
   # regardless of their background color.
-  transparent_background_colors: true
+  #transparent_background_colors: true
 
 # Bell
 #
