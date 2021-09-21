@@ -62,8 +62,8 @@ call plug#end()
     set number              " show line number
     set relativenumber      " relative number line
     set showcmd             " show command in bottom bar
-    "set cursorline          " highlight current line
-    "set cursorcolumn        " highlight current column
+    set cursorline          " highlight current line
+    set cursorcolumn        " highlight current column
     filetype indent on      " load filetype-specific indent file
     set lazyredraw          " redraw only when need to
     set showmatch           " highlight matching brackets
