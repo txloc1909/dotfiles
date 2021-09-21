@@ -26,6 +26,7 @@ export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput se
 export HISTSIZE=10000
 export HISTFILESIZE=10000
 export HISTFILE="${XDG_CACHE_HOME:=$HOME/.cache}/bash_history"
+export LESSHISTFILE=-
 
 # shopt
 shopt -s histappend             # append to history file
