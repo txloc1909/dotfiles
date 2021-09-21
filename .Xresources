@@ -71,8 +71,8 @@ URxvt*iso14755_52:      False
 *.color15:      #fdf6e3
 
 ! Fonts
-URxvt*font:             xft:Source Code Pro for Powerline:size=9
-URxvt*imFont:           xft:Source Code Pro for Powerline:size=9
+URxvt*font:             xft:Source Code Pro for Powerline:size=10
+URxvt*imFont:           xft:Source Code Pro for Powerline:size=10
 
 URxvt*imLocale: en_US.UTF-8
 
