@@ -41,8 +41,9 @@ import arcobattery                      # battery widget from ArcoLinux
 
 mod = "mod4"                            # Super/Window key
 alt = "mod1"                            # Alt key
-terminal = "urxvtc"                     # use urxvt client
-run_launcher = "rofi -show run"
+# terminal = "urxvtc"                     # use urxvt client
+terminal = "alacritty"
+run_launcher = "rofi -modi run,drun -show drun"
 web_browser = "firefox"
 file_manager = "pcmanfm"
 home = os.path.expanduser("~")          # home directory
