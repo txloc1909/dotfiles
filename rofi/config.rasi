@@ -1,4 +1,4 @@
 configuration {
-        theme: "~/.config/rofi/themes/dt-center.rasi";
         modi: "run,drun";
 }
+@theme "themes/dt-center.rasi"
