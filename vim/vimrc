@@ -70,6 +70,7 @@ call plug#end()
 
     set tabstop=4           " number of visual spaces per tab
     set softtabstop=4       " number of space in tab when editing
+    set shiftwidth=4
     set smartindent
     set smarttab            " insert/delete n spaces for tab
     set autoindent
