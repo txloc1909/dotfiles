@@ -22,7 +22,7 @@ xrdb -merge ~/.Xresources &
 nitrogen --restore &
 
 # start the picom compositor
-picom &
+picom --experimental-backends &
 
 # start urxvt daemon
 urxvtd -q -o -f &
