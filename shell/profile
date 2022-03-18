@@ -15,7 +15,7 @@ fi
 # Common program
 export EDITOR="vim"
 export VISUAL="vim"
-export TERMINAL="urxvt"
+export TERMINAL="alacritty"
 export BROWSER="firefox"
 export PAGER="less"
 export READER="zathura"
