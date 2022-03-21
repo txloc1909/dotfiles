@@ -31,10 +31,12 @@ export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 export RXVT_SOCKET="${XDG_RUNTIME_DIR}/urxvtd"
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
-# if use LightDM, also modify this in /etc/lightdm/lightdm.conf:
-# [LightDM]
-# user-authority-in-system-dir=true
-export XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
+# ibus daemon
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT4_IM_MODULE=ibus
+export CLUTTER_IM_MODULE=ibus
 
 # FZF
 export FZF_DEFAULT_COMMAND="find ."
