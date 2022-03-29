@@ -44,6 +44,7 @@ alt = "mod1"                            # Alt key
 # terminal = "urxvtc"                     # use urxvt client
 terminal = "alacritty"
 run_launcher = "rofi -modi run,drun -show drun"
+#run_launcher = "dmenu_run"
 web_browser = "firefox"
 file_manager = "pcmanfm"
 home = os.path.expanduser("~")          # home directory
@@ -122,12 +123,12 @@ keys = [
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key([mod, "control"], "h",
-        lazy.layout.grow_left(),        # in COLUMNS layout
-        lazy.layout.shrink(),           # in MONADTALL layout
+        lazy.layout.grow_left().when(layout="columns"),        # in COLUMNS layout
+        lazy.layout.shrink().when(layout="monadtall"),           # in MONADTALL layout
         desc="Grow window to the left"),
     Key([mod, "control"], "l",
-        lazy.layout.grow_right(),
-        lazy.layout.grow(),
+        lazy.layout.grow_right().when(layout="columns"),
+        lazy.layout.grow().when(layout="monadtall"),
         desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(),
         desc="Grow window down"),
@@ -184,8 +185,8 @@ keys = [
     # Spawn programs
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "r", lazy.spawn(run_launcher), desc="Spawn the run launcher"),
-    Key([mod], "b", lazy.spawn(web_browser), desc="Spawn the web browser"),
-    Key([mod], "f", lazy.spawn(file_manager), desc="Spawn the file manager"),
+    Key([mod], "w", lazy.spawn(web_browser), desc="Spawn the web browser"),
+    Key([mod], "e", lazy.spawn(file_manager), desc="Spawn the file manager"),
 
     # Brightness control
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%"),
@@ -217,16 +218,16 @@ keys = [
 #                            GROUPS                              #
 ##################################################################
 
-group_icons = ['', '', '', '', '', '', '', '', '阮']
-groups = [
-    Group(
-        name=str(i)+":"+icon,
-        layout="monadtall",
-    )
-    for i, icon in enumerate(group_icons, start=1)
-]
+# group_icons = ['', '', '', '', '', '', '', '', '阮']
+# groups = [
+    # Group(
+        # name=str(i)+":"+icon,
+        # layout="monadtall",
+    # )
+    # for i, icon in enumerate(group_icons, start=1)
+# ]
 
-#groups = [Group(i, layout="columns") for i in "123456789"]
+groups = [Group(i, layout="columns") for i in "123456789"]
 
 for i in groups:
     keys.extend([
@@ -246,7 +247,7 @@ for i in groups:
 # Default theme for layouts
 layout_theme = {
     "border_width": 4,
-    "margin": 4,
+    "margin": 10,
     "border_focus": colors["green"],
     "border_normal": colors["black"],
 }
@@ -361,40 +362,11 @@ def init_primary_widget_list():
             padding=10,
             #for_current_screen=True,
         ),
-        #widget.Spacer(length=bar.STRETCH),
-        widget.TextBox(
-            text="",
-            fontsize=18,
-            foreground=colors["blue"],
-            padding=0,
-        ),
-        widget.Clock(
-            format=' %a %d/%m/%Y %H:%M',
-            background=colors["blue"],
-            foreground=colors["white"],
-        ),
-        widget.TextBox(
-            text="",
-            fontsize=18,
-            foreground=colors["blue"],
-            padding=0,
-        ),
-        widget.Spacer(length=bar.STRETCH),
-        widget.TextBox(
-            text="",
-            fontsize=18,
-            padding=0,
-            foreground=monokai["light orange"],
-        ),
-        widget.Systray(
-            background=monokai["light orange"],
-        ),
         widget.TextBox(
             text="",
             fontsize=18,
             padding=0,
             foreground=monokai["red"],
-            background=monokai["light orange"],
         ),
         widget.CPU(
             format="  {load_percent:2}% ",
@@ -462,6 +434,28 @@ def init_primary_widget_list():
             background=monokai["green"],
             foreground=colors["black"],
         ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            foreground=colors["blue"],
+            background=monokai["green"],
+            padding=0,
+        ),
+        widget.Clock(
+            format=' %a %d/%m/%Y %H:%M',
+            background=colors["blue"],
+            foreground=colors["white"],
+        ),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            padding=0,
+            foreground=monokai["light orange"],
+            background=colors["blue"],
+        ),
+        widget.Systray(
+            background=monokai["light orange"],
+        ),
 ]
 
 def init_secondary_widget_list():
@@ -520,25 +514,6 @@ def init_secondary_widget_list():
             padding=10,
             #for_current_screen=True,
         ),
-        #widget.Spacer(),
-        widget.TextBox(
-            text="",
-            fontsize=18,
-            foreground=colors["blue"],
-            padding=0,
-        ),
-        widget.Clock(
-            format=' %a %d/%m/%Y %H:%M',
-            background=colors["blue"],
-            foreground=colors["white"],
-        ),
-        widget.TextBox(
-            text="",
-            fontsize=18,
-            foreground=colors["blue"],
-            padding=0,
-        ),
-        widget.Spacer(),
         widget.TextBox(
             text="",
             fontsize=18,
@@ -610,10 +585,18 @@ def init_secondary_widget_list():
             background=monokai["green"],
             foreground=colors["black"],
         ),
-        #arcobattery.Battery(
-        #    background=monokai["green"],
-        #    foreground=colors["black"],
-        #),
+        widget.TextBox(
+            text="",
+            fontsize=18,
+            foreground=colors["blue"],
+            background=monokai["green"],
+            padding=0,
+        ),
+        widget.Clock(
+            format=' %a %d/%m/%Y %H:%M',
+            background=colors["blue"],
+            foreground=colors["white"],
+        ),
 ]
 
 
