@@ -8,11 +8,15 @@ super + Escape
     pkill -USR1 -x sxhkd
 
 
-### Launch applications
+## Launch applications
+
+# terminal
+super + Return
+    $TERMINAL
 
 # web browser (firefox)
 super + w
-    firefox
+    $BROWSER
 
 # file manager
 super + e
@@ -20,4 +24,8 @@ super + e
 
 # run launcher (rofi)
 super + r
-    rofi -show run
+    rofi -show drun -monitor -4 -show-icons -icons Flat-Remix-Blue-Dark -theme ~/.config/rofi/themes/dt-center.rasi
+
+## Audio
+XF86Audio{Play,Stop,Prev,Next}
+    playerctl {play-pause,stop,previous,next}
