@@ -1,0 +1,23 @@
+#!/bin/sh
+
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile"
+
+xrdb -merge ~/.Xresources
+
+remaps.sh
+dual-monitor.sh
+
+nm-applet &
+volumeicon &
+nitrogen --restore &
+picom --experimental-backends &
+urxvtd -q -o -f &
+unclutter &
+sxhkd &
+dunst &
+
+# gnome keyring daemon
+/usr/bin/gnome-keyring-daemon --start --components=ssh
+
+# ibus daemon
+ibus-daemon -drxR &
