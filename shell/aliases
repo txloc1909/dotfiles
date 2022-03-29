@@ -26,6 +26,20 @@ alias mkdir='mkdir -pv'
 
 alias ssn='sudo shutdown now'
 alias sr='sudo reboot'
+
+# FUNCTIONS
+
+# go to directories by fzf
+gt() {
+    cd $HOME && cd "$(find -type d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)" && echo "$PWD" && tree -C -L 1
+}
+
+# open document by fzf
+doc() {
+    filename="$(find $HOME -type f -name *.pdf | fzf)"
+    [ -z $filename ] || devour zathura "$filename"
+}
+
 ex () {
   if [ -f $1 ] ; then
     case $1 in
