@@ -1,5 +1,5 @@
 # ignore vim's plugins
-vim/plugged
+vim/.config/vim/plugged
 
 # python cache dir 
 *__pycache__*
