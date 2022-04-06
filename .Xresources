@@ -80,13 +80,6 @@ URxvt*imLocale: en_US.UTF-8
 URxvt.keysym.Control-0x2b:  font-size:increase
 URxvt.keysym.Control-0x2d:  font-size:decrease
 
-! Perl extension:
-URxvt*perl-lib: /home/loctx/dotfiles/perl
-URxvt*perl-ext: fullscreen
-
-! Toggle fullscreen
-URxvt.keysym.F11:   perl:fullscreen:switch
-
 !!! Some colorscheme from Luke Smith Xresources
 /* !! gruvbox: */
 /* *.color0: #1d2021 */
