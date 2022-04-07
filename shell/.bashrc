@@ -5,9 +5,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# If this is not a login shell, source profile to set environment variable
-[[ -o login ]] || [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile"
-
 ## Prompts
 
 # Basic prompt
