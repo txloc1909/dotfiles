@@ -3,10 +3,15 @@
 # Common shell aliases
 # Sourced in both .bashrc and .zshrc
 
-alias ls='ls --color=auto --group-directories-first'
-alias ll='ls -alFh'
-alias la='ls -A'
-alias l='ls -CF'
+if [ -x "$(command -v exa)" ]; then
+    alias ls='exa --icons --group-directories-first'
+    alias ll='exa -lahF --icons --group-directories-first'
+    alias la='exa -1a --icons --group-directories-first'
+else
+    alias ls='ls --color=auto --group-directories-first'
+    alias ll='ls -alFh'
+    alias la='ls -A'
+fi
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
