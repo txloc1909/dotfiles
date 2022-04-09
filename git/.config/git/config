@@ -1,3 +1,7 @@
 [user]
 	email = tranxuanloc19920@gmail.com
 	name = Tran Xuan Loc
+[init]
+	defaultBranch = main
+[core]
+	editor = vim
