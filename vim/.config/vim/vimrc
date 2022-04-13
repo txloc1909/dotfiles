@@ -24,7 +24,7 @@ set undodir=$XDG_CACHE_HOME/vim/undo     | call mkdir(&undodir,   'p')
 
 if !has('nvim') | set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
 
-let mapleader="\<Space>"
+let mapleader=" "
 
 call plug#begin()
 
@@ -89,8 +89,8 @@ set colorcolumn=80
 set encoding=utf-8
 
 set background=dark
-colorscheme molokai
-let g:molokai_original = 1
+colorscheme andromeda
+"let g:molokai_original=1
 
 set splitbelow
 set splitright
@@ -100,6 +100,9 @@ set t_Co=256
 
 " set theme for status line
 let g:airline_theme='powerlineish'
+
+" set nerdtree size
+let NERDTreeWinSize=20
 
 " python with virtualenv support
 "py3 << EOF
@@ -120,6 +123,7 @@ nnoremap <Leader>sv :source $MYVIMRC<CR>
 " Alias write and write-quit
 nnoremap <Leader>q :wq<CR>
 nnoremap <Leader>w :w<CR>
+nnoremap <Leader>eq :q!<CR>
 
 " Open splits
 nnoremap <Leader>u :split<CR>
@@ -140,6 +144,9 @@ nnoremap <C-l> <C-w>l
 
 " Make Y behavior consistent with others
 nnoremap Y y$
+
+"Toggle NERDTree
+nnoremap <Leader>n :NERDTreeToggle<CR>
 
 " Access system clipboard, Ctrl+Alt+C and Ctrl+Alt+V to copy and paste
 set clipboard+=unnamedplus
