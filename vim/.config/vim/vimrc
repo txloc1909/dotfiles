@@ -24,6 +24,8 @@ set undodir=$XDG_CACHE_HOME/vim/undo     | call mkdir(&undodir,   'p')
 
 if !has('nvim') | set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
 
+let mapleader="\<Space>"
+
 call plug#begin()
 
 " colorschemes
@@ -32,7 +34,6 @@ Plug 'tomasr/molokai'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'jnurmine/Zenburn'
-Plug 'arcticicestudio/nord-vim'
 Plug 'sjl/badwolf'
 
 " Fugitive, a git wrapper
@@ -58,42 +59,41 @@ call plug#end()
 
 
 " General settings
+set number              " show line number
+set relativenumber      " relative number line
+set showcmd             " show command in bottom bar
+set cursorline          " highlight current line
+set cursorcolumn        " highlight current column
+filetype indent on      " load filetype-specific indent file
+set lazyredraw          " redraw only when need to
+set showmatch           " highlight matching brackets
 
-    set number              " show line number
-    set relativenumber      " relative number line
-    set showcmd             " show command in bottom bar
-    set cursorline          " highlight current line
-    set cursorcolumn        " highlight current column
-    filetype indent on      " load filetype-specific indent file
-    set lazyredraw          " redraw only when need to
-    set showmatch           " highlight matching brackets
+set tabstop=4           " number of visual spaces per tab
+set softtabstop=4       " number of space in tab when editing
+set shiftwidth=4
+set smartindent
+set smarttab            " insert/delete n spaces for tab
+set autoindent
+set expandtab           " tabs are spaces
 
-    set tabstop=4           " number of visual spaces per tab
-    set softtabstop=4       " number of space in tab when editing
-    set shiftwidth=4
-    set smartindent
-    set smarttab            " insert/delete n spaces for tab
-    set autoindent
-    set expandtab           " tabs are spaces
+set incsearch           " search as characters are entered
+set nohlsearch          " not highlight matches in search
+set noerrorbells
 
-    set incsearch           " search as characters are entered
-    set nohlsearch          " not highlight matches in search
-    set noerrorbells
+set nowrap
+set scrolloff=8
 
-    set nowrap
-    set scrolloff=8
+set signcolumn=yes
+set colorcolumn=80
 
-    set signcolumn=yes
-    set colorcolumn=86
+set encoding=utf-8
 
-    set encoding=utf-8
+set background=dark
+colorscheme molokai
+let g:molokai_original = 1
 
-    set background=dark
-    colorscheme molokai
-    let g:molokai_original = 1
-
-    set splitbelow
-    set splitright
+set splitbelow
+set splitright
 
 set laststatus=2
 set t_Co=256
@@ -111,6 +111,23 @@ let g:airline_theme='powerlineish'
 "    exec(open(activate_this).read(), dict(__file__=activate_this))
 "EOF
 
+
+" Keybindings
+
+" Source .vimrc
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+
+" Alias write and write-quit
+nnoremap <Leader>q :wq<CR>
+nnoremap <Leader>w :w<CR>
+
+" Open splits
+nnoremap <Leader>u :split<CR>
+nnoremap <Leader>o :vsplit<CR>
+
+" Toggle between two most-recent buffers
+nnoremap <Leader><Tab> <C-^>
+
 " Move visual line
 nnoremap j gj
 nnoremap k gk
@@ -121,10 +138,13 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Make Y behavior consistent with others
+nnoremap Y y$
+
 " Access system clipboard, Ctrl+Alt+C and Ctrl+Alt+V to copy and paste
 set clipboard+=unnamedplus
 vnoremap <C-M-c> "+y
-map <C-M-v> "+P
+nnoremap <C-M-v> "+P
 
 " Automatically deletes all trailing whitespaces and newlines at end of file
 " on save
@@ -138,7 +158,7 @@ let g:python_highlight_all = 1
 " Enable autocompletion
 set wildmenu
 set wildmode=longest,list,full
-"set completeopt=menuone,longest
+set completeopt=menuone,longest
 
 " Minimalist-TabComplete-Plugin
 inoremap <expr> <Tab> TabComplete()
