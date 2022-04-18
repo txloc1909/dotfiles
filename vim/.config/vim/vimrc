@@ -81,7 +81,7 @@ set nohlsearch          " not highlight matches in search
 set noerrorbells
 
 set nowrap
-set scrolloff=8
+set scrolloff=999
 
 set signcolumn=yes
 set colorcolumn=80
@@ -101,8 +101,14 @@ set t_Co=256
 " set theme for status line
 let g:airline_theme='powerlineish'
 
+" Airline's smart tabline
+let g:airline#extensions#tabline#enabled = 1
+
 " set nerdtree size
-let NERDTreeWinSize=20
+let g:NERDTreeWinSize=20
+
+" show hidden file in nerdtree
+let g:NERDTreeShowHidden=1
 
 " python with virtualenv support
 "py3 << EOF
@@ -126,11 +132,12 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>eq :q!<CR>
 
 " Open splits
-nnoremap <Leader>u :split<CR>
-nnoremap <Leader>o :vsplit<CR>
+nnoremap <Leader><Leader>s :split<CR>
+nnoremap <Leader><Leader>v :vsplit<CR>
 
-" Toggle between two most-recent buffers
+" Buffer navigations
 nnoremap <Leader><Tab> <C-^>
+nnoremap <Tab> :bn<CR>
 
 " Move visual line
 nnoremap j gj
@@ -145,8 +152,15 @@ nnoremap <C-l> <C-w>l
 " Make Y behavior consistent with others
 nnoremap Y y$
 
-"Toggle NERDTree
-nnoremap <Leader>n :NERDTreeToggle<CR>
+" Move to begin or end of line easier
+nnoremap H ^
+nnoremap L $
+
+" Toggle NERDTree
+nnoremap <Leader><Leader>n :NERDTreeToggle<CR>
+
+" Auto center the screen when enter insert mode
+autocmd InsertEnter * norm zz
 
 " Access system clipboard, Ctrl+Alt+C and Ctrl+Alt+V to copy and paste
 set clipboard+=unnamedplus
