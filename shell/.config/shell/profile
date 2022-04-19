@@ -22,6 +22,8 @@ export VISUAL="vim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 export PAGER="less"
+[ -x "$(command -v bat)" ] && export PAGER="bat"
+[ -x "$(command -v batcat)" ] && export PAGER="batcat"      # Debian
 export READER="zathura"
 
 # Clean up with XDG
