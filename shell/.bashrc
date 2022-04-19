@@ -5,20 +5,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-## Prompts
-
-# Basic prompt
-#export PS1='[\u@\h \W]\$ '
-
-# Minimal prompt
-#export PS1=" \[\033[1;36m\]\w >\[\033[1;34m\]>\[\033[0m\] "
-
-# Two-line prompt
-#export PS1='\[\033[;32m\]┌──(\[\033[1;34m\]\u@\h\[\033[;32m\])-[\[\033[0;1m\]\w\[\033[;32m\]]\n\[\033[;32m\]└─\[\033[1;34m\]\$\[\033[0m\] '
-
-# Colorful prompt
-export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
-
 # Setting history
 export HISTSIZE=10000
 export HISTFILESIZE=10000
@@ -66,6 +52,21 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+## Prompts
+
+# Basic prompt
+#export PS1='[\u@\h \W]\$ '
+
+# Minimal prompt
+#export PS1=" \[\033[1;36m\]\w >\[\033[1;34m\]>\[\033[0m\] "
+
+# Two-line prompt
+#export PS1='\[\033[;32m\]┌──(\[\033[1;34m\]\u@\h\[\033[;32m\])-[\[\033[0;1m\]\w\[\033[;32m\]]\n\[\033[;32m\]└─\[\033[1;34m\]\$\[\033[0m\] '
+
+# Colorful prompt
+#export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
+export PS1="\033[1m\[\033[1;31m\][\[\033[01;33m\]\u\[\033[11;32m\]@\[\033[11;34m\]\h \[\033[1;35m\]\W\[\033[1;31m\]]\[\033[1;37m\]\$ \033[0m"
 
 # Flexin'
 if [[ -x "$(command -v pfetch)" ]]; then
