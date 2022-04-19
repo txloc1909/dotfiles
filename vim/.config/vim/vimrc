@@ -45,6 +45,9 @@ Plug 'scrooloose/nerdtree'
 " Fuzzy search
 Plug 'kien/ctrlp.vim'
 
+" Quick closing
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+
 " status bar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -127,9 +130,9 @@ let g:NERDTreeShowHidden=1
 nnoremap <Leader>sv :source $MYVIMRC<CR>
 
 " Alias write and write-quit
-nnoremap <Leader>q :wq<CR>
+nnoremap <Leader>q :w<CR>:Sayonara<CR>
 nnoremap <Leader>w :w<CR>
-nnoremap <Leader>eq :q!<CR>
+nnoremap <Leader>fq :q!<CR>
 
 " Open splits
 nnoremap <Leader><Leader>s :split<CR>
