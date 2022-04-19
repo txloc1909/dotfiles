@@ -20,11 +20,24 @@ shopt -s cmdhist
 shopt -s dirspell
 shopt -s direxpand
 
+# Git prompt options
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWUPSTREAM="auto"
+GIT_PS1_HIDE_IF_PWD_IGNORED=true
+GIT_PS1_SHOWCOLORHINTS=true
+
 # Bash completion
 if [ -f /usr/share/bash-completion/bash_completion ]; then
     source /usr/share/bash-completion/bash_completion
 elif [ -f /etc/bash_completion ]; then
     source /etc/bash_completion
+    if [ -d /etc/bash_completion.d ]; then
+        for f in /etc/bash_completion.d/*; do
+            source $f
+        done
+    fi
 fi
 
 # disable terminal flow control (ctrl+s and ctrl+q)
@@ -65,8 +78,8 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 #export PS1='\[\033[;32m\]┌──(\[\033[1;34m\]\u@\h\[\033[;32m\])-[\[\033[0;1m\]\w\[\033[;32m\]]\n\[\033[;32m\]└─\[\033[1;34m\]\$\[\033[0m\] '
 
 # Colorful prompt
-#export PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
-export PS1="\033[1m\[\033[1;31m\][\[\033[01;33m\]\u\[\033[11;32m\]@\[\033[11;34m\]\h \[\033[1;35m\]\W\[\033[1;31m\]]\[\033[1;37m\]\$ \033[0m"
+#export PS1='\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 3)\]$(__git_ps1)\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]'
+export PS1='\[\033[1m\]\[\033[1;31m\][\[\033[01;33m\]\u\[\033[11;32m\]@\[\033[11;34m\]\h \[\033[1;35m\]\W\[\033[1;31m\]]\[\033[01;33m\]$(__git_ps1)\[\033[1;37m\]\$ \[\033[0m\]'
 
 # Flexin'
 if [[ -x "$(command -v pfetch)" ]]; then
