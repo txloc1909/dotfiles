@@ -163,6 +163,14 @@ nnoremap L $
 " Toggle NERDTree
 nnoremap <Leader><Leader>n :NERDTreeToggle<CR>
 
+" Quick switch colorscheme
+" Normal
+nnoremap <Leader>cc :colorscheme andromeda<CR>
+" Light & high-contrast
+nnoremap <Leader>cb :colorscheme onehalflight<CR>
+" Dark & high-contrast
+nnoremap <Leader>cd :colorscheme badwolf<CR>
+
 " Auto center the screen when enter insert mode
 autocmd InsertEnter * norm zz
 
