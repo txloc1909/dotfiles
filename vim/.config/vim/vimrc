@@ -115,14 +115,16 @@ let g:NERDTreeWinSize=20
 let g:NERDTreeShowHidden=1
 
 " python with virtualenv support
-"py3 << EOF
-"import os
-"import sys
-"if 'VIRTUAL_ENV' in os.environ:
-"    env_base_dir = os.environ['VIRTUAL_ENV']
-"    activate_this = os.path.join(env_base_dir, 'bin/activate_this.py')
-"    exec(open(activate_this).read(), dict(__file__=activate_this))
-"EOF
+if has('python3')
+py3 << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+    env_base_dir = os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(env_base_dir, 'bin/activate_this.py')
+    exec(open(activate_this).read(), dict(__file__=activate_this))
+EOF
+endif
 
 " Cursor shape
 let &t_SI = "\e[6 q"
