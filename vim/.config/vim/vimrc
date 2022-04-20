@@ -59,6 +59,11 @@ Plug 'vim-python/python-syntax'
 " Horizontal movement
 Plug 'unblevable/quick-scope'
 
+Plug 'tpope/vim-surround'
+
+" Linting
+Plug 'dense-analysis/ale'
+
 call plug#end()
 
 
@@ -106,6 +111,9 @@ let g:airline_theme='powerlineish'
 " Airline's smart tabline
 let g:airline#extensions#tabline#enabled = 1
 
+" Airline with ALE
+let g:airline#extensions#ale#enabled = 1
+
 " set nerdtree size
 let g:NERDTreeWinSize=20
 
@@ -123,6 +131,20 @@ if 'VIRTUAL_ENV' in os.environ:
     exec(open(activate_this).read(), dict(__file__=activate_this))
 EOF
 endif
+
+" ALE settings
+" ALE fixing:
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['black'],
+\}
+let g:ale_fix_on_save = 1
+" ALE linting:
+let g:ale_linter = {
+\   'python': ['flake8', 'mypy'],
+\}
+let g:ale_linter_explicit = 1
+
 
 " Cursor shape
 let &t_SI = "\e[6 q"
