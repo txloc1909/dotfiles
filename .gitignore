@@ -1,5 +1,8 @@
 # ignore vim's plugins
 vim/.config/vim/plugged
 
-# python cache dir 
+# python cache dir
 *__pycache__*
+
+# .uuid file in fonts
+.uuid
