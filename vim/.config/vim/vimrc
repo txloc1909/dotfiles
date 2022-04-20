@@ -32,8 +32,6 @@ call plug#begin()
 Plug 'safv12/andromeda.vim'
 Plug 'tomasr/molokai'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'dracula/vim', {'as': 'dracula'}
-Plug 'jnurmine/Zenburn'
 Plug 'sjl/badwolf'
 
 " Fugitive, a git wrapper
