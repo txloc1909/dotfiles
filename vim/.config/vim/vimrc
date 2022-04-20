@@ -93,8 +93,6 @@ set colorcolumn=80
 set encoding=utf-8
 
 set background=dark
-"colorscheme andromeda          " set colorscheme after setting quickscope
-"let g:molokai_original=1
 
 set splitbelow
 set splitright
@@ -180,7 +178,7 @@ nnoremap <Leader><Leader>n :NERDTreeToggle<CR>
 
 " Quick switch colorscheme
 " Normal
-nnoremap <Leader>cc :colorscheme andromeda<CR>
+nnoremap <Leader>cc :colorscheme molokai<CR>
 " Light & high-contrast
 nnoremap <Leader>cb :colorscheme onehalflight<CR>
 " Dark & high-contrast
@@ -214,6 +212,7 @@ augroup qs_color
 augroup END
 
 colorscheme molokai
+let g:molokai_original=1
 
 " Enable autocompletion
 set wildmenu
