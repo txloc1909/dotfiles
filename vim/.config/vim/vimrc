@@ -132,13 +132,17 @@ let &t_EI = "\e[2 q"
 
 " Keybindings
 
-" Source .vimrc
+" Back to normal
+inoremap jk <Esc>
+
+" Quickly access .vimrc
+nnoremap <Leader>ev :edit $MYVIMRC<CR>
 nnoremap <Leader>sv :source $MYVIMRC<CR>
 
-" Alias write and write-quit
+" Write and quit
 nnoremap <Leader>q :w<CR>:Sayonara<CR>
+nnoremap <Leader><Leader>q :Sayonara<CR>
 nnoremap <Leader>w :w<CR>
-nnoremap <Leader>fq :q!<CR>
 
 " Open splits
 nnoremap <Leader><Leader>s :split<CR>
@@ -147,6 +151,12 @@ nnoremap <Leader><Leader>v :vsplit<CR>
 " Buffer navigations
 nnoremap <Leader><Tab> <C-^>
 nnoremap <Tab> :bn<CR>
+
+" Quick git
+nnoremap <Leader><Leader>g :Git<CR>
+
+" Fuzzy search
+nnoremap <Leader>p :CtrlP<CR>
 
 " Move visual line
 nnoremap j gj
