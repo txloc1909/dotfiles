@@ -41,7 +41,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 
 " Fuzzy search
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Quick closing
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
