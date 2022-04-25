@@ -149,6 +149,10 @@ let g:ale_linter = {
 \}
 let g:ale_linter_explicit = 1
 
+" Disable auto-detection of virtualenv,
+" so $VIRTUAL_ENV is always used
+let g:ale_virtualenv_dir_names = []
+let g:ale_python_flake8_options = '--max-line-length=88'
 
 " Cursor shape
 let &t_SI = "\e[6 q"
