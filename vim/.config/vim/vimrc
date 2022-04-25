@@ -35,8 +35,9 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'sjl/badwolf'
 Plug 'NLKNguyen/papercolor-theme'
 
-" Fugitive, a git wrapper
+" Git-related
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " Directory tree
 Plug 'scrooloose/nerdtree'
@@ -263,3 +264,13 @@ endfun
 
 " set linewrap in markdown and latex file
 autocmd BufRead,BufNewFile *.md,*.tex set wrap
+
+let g:gitgutter_map_keys = 0
+highlight GitGutterAdd guifg=#009900 ctermfg=Green
+highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
+highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
+
+augroup git_gutter
+    autocmd!
+    autocmd BufWritePost * :GitGutter
+augroup END
