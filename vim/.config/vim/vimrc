@@ -33,6 +33,7 @@ Plug 'safv12/andromeda.vim'
 Plug 'tomasr/molokai'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'sjl/badwolf'
+Plug 'NLKNguyen/papercolor-theme'
 
 " Fugitive, a git wrapper
 Plug 'tpope/vim-fugitive'
@@ -200,14 +201,6 @@ nnoremap L $
 " Toggle NERDTree
 nnoremap <Leader><Leader>n :NERDTreeToggle<CR>
 
-" Quick switch colorscheme
-" Normal
-nnoremap <Leader>cc :colorscheme molokai<CR>
-" Light & high-contrast
-nnoremap <Leader>cb :colorscheme onehalflight<CR>
-" Dark & high-contrast
-nnoremap <Leader>cd :colorscheme badwolf<CR>
-
 " Auto center the screen when enter insert mode
 autocmd InsertEnter * norm zz
 
@@ -235,8 +228,8 @@ augroup qs_color
     autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
 augroup END
 
-colorscheme molokai
-let g:molokai_original=1
+colorscheme PaperColor
+
 
 " Enable autocompletion
 set wildmenu
