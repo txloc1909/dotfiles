@@ -199,6 +199,12 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Resizing splits
+nnoremap <C-S-Left> :vertical resize -3<CR>
+nnoremap <C-S-Right> :vertical resize +3<CR>
+nnoremap <C-S-Up> :resize +3<CR>
+nnoremap <C-S-Down> :resize -3<CR>
+
 " Make Y behavior consistent with others
 nnoremap Y y$
 
