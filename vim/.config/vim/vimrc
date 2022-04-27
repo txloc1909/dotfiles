@@ -41,6 +41,9 @@ Plug 'dense-analysis/ale'
 Plug 'vim-python/python-syntax'
 Plug 'airblade/vim-gitgutter'
 
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -65,7 +68,7 @@ set smarttab expandtab
 set incsearch nohlsearch
 set noerrorbells
 set nowrap
-set scrolloff=999
+set scrolloff=8
 set signcolumn=yes
 set colorcolumn=80
 set encoding=utf-8
@@ -111,6 +114,33 @@ let g:ale_linter = {
 let g:ale_linter_explicit = 1
 let g:ale_virtualenv_dir_names = []
 let g:ale_python_flake8_options = '--max-line-length=88'
+
+let g:goyo_width = 88
+let g:goyo_linenr = 1
+function! s:goyo_enter()
+    if executable('tmux') && strlen($TMUX)
+        silent !tmux set status off
+        silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    endif
+    set noshowmode
+    set noshowcmd
+    set nocursorline nocursorcolumn
+    set scrolloff=999
+    Limelight
+endfunction
+function! s:goyo_leave()
+    if executable('tmux') && strlen($TMUX)
+        silent !tmux set status on
+        silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    endif
+    set showmode
+    set showcmd
+    set cursorline cursorcolumn
+    set scrolloff=8
+    Limelight!
+endfunction
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " Quickscope
 " Trigger a highlight in the appropriate direction when pressing these
@@ -204,8 +234,8 @@ vnoremap L $
 " Toggle NERDTree
 nnoremap <Leader><Leader>n :NERDTreeToggle<CR>
 
-" Auto center the screen when enter insert mode
-autocmd InsertEnter * norm zz
+" Toggle distraction-free writing mode
+nnoremap <Leader>z :Goyo<CR>
 
 " Access system clipboard, Ctrl+Alt+C and Ctrl+Alt+V to copy and paste
 set clipboard+=unnamedplus
@@ -250,7 +280,6 @@ fun! AutoComplete()
         \ && getline('.')[col('.') - 3] =~ '\K'
         \ && getline('.')[col('.') - 2] =~ '\K' " last char
         \ && getline('.')[col('.') - 1] !~ '\K'
-
         call feedkeys("\<C-P>", 'n')
     end
 endfun
