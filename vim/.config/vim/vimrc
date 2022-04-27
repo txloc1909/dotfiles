@@ -25,134 +25,109 @@ set undodir=$XDG_CACHE_HOME/vim/undo     | call mkdir(&undodir,   'p')
 if !has('nvim') | set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
 
 let mapleader=" "
+let maplocalleader=","
 
 call plug#begin()
-
-" colorschemes
 Plug 'safv12/andromeda.vim'
 Plug 'tomasr/molokai'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'sjl/badwolf'
 Plug 'NLKNguyen/papercolor-theme'
 
-" Git-related
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-
-" Directory tree
-Plug 'scrooloose/nerdtree'
-
-" Fuzzy search
-Plug 'ctrlpvim/ctrlp.vim'
-
-" Quick closing
-Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-
-" status bar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Code auto-comment
-Plug 'preservim/nerdcommenter'
-
-" Python syntax highlighting
-Plug 'vim-python/python-syntax'
-
-" Horizontal movement
-Plug 'unblevable/quick-scope'
-
-Plug 'tpope/vim-surround'
-
-" Linting
 Plug 'dense-analysis/ale'
+Plug 'vim-python/python-syntax'
+Plug 'airblade/vim-gitgutter'
 
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+Plug 'preservim/nerdcommenter'
+Plug 'unblevable/quick-scope'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 
 " General settings
-set number              " show line number
-set relativenumber      " relative number line
-set showcmd             " show command in bottom bar
-set cursorline          " highlight current line
-set cursorcolumn        " highlight current column
-filetype indent on      " load filetype-specific indent file
-set lazyredraw          " redraw only when need to
-set showmatch           " highlight matching brackets
-
-set tabstop=4           " number of visual spaces per tab
-set softtabstop=4       " number of space in tab when editing
+filetype indent on
+set showcmd
+set number relativenumber
+set cursorline cursorcolumn
+set lazyredraw
+set showmatch
+set tabstop=4 softtabstop=4
 set shiftwidth=4
-set smartindent
-set smarttab            " insert/delete n spaces for tab
-set autoindent
-set expandtab           " tabs are spaces
-
-set incsearch           " search as characters are entered
-set nohlsearch          " not highlight matches in search
+set smartindent autoindent
+set smarttab expandtab
+set incsearch nohlsearch
 set noerrorbells
-
 set nowrap
 set scrolloff=999
-
 set signcolumn=yes
 set colorcolumn=80
-
 set encoding=utf-8
-
-set background=dark
-
-set splitbelow
-set splitright
-
+set splitbelow splitright
+set hidden
+set confirm
 set laststatus=2
 set t_Co=256
+set timeout ttimeout
+set timeoutlen=300 ttimeoutlen=-1
 
-" set theme for status line
 let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
-let g:airline_left_sep=''          " powerline symbols
-
-" Airline's smart tabline
+let g:airline_left_sep=''
 let g:airline#extensions#tabline#enabled = 1
-
-" Airline with ALE
 let g:airline#extensions#ale#enabled = 1
 
-" set nerdtree size
 let g:NERDTreeWinSize=20
-
-" show hidden file in nerdtree
 let g:NERDTreeShowHidden=1
 
-" python with virtualenv support
-if has('python3')
-py3 << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-    env_base_dir = os.environ['VIRTUAL_ENV']
-    activate_this = os.path.join(env_base_dir, 'bin/activate_this.py')
-    exec(open(activate_this).read(), dict(__file__=activate_this))
-EOF
-endif
+let g:python_highlight_all = 1
 
-" ALE settings
-" ALE fixing:
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'python': ['black'],
 \}
 let g:ale_fix_on_save = 1
-" ALE linting:
 let g:ale_linter = {
 \   'python': ['flake8', 'mypy'],
 \}
 let g:ale_linter_explicit = 1
-
-" Disable auto-detection of virtualenv,
-" so $VIRTUAL_ENV is always used
 let g:ale_virtualenv_dir_names = []
 let g:ale_python_flake8_options = '--max-line-length=88'
+
+" Quickscope
+" Trigger a highlight in the appropriate direction when pressing these
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:qs_max_chars=120
+" Must set quickscope color BEFORE set colorscheme
+augroup qs_color
+    autocmd!
+    autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+    autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
+
+set background=dark
+colorscheme PaperColor
+
+let g:gitgutter_map_keys = 0
+highlight GitGutterAdd guifg=#009900 ctermfg=Green
+highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
+highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
+
+augroup git_gutter
+    autocmd!
+    autocmd BufWritePost * :GitGutter
+augroup END
+
+" Enable autocompletion
+set wildmenu
+set wildmode=longest,list,full
+set completeopt=menuone,longest
 
 " Cursor shape
 let &t_SI = "\e[6 q"
@@ -211,6 +186,8 @@ nnoremap Y y$
 " Move to begin or end of line easier
 nnoremap H ^
 nnoremap L $
+vnoremap H ^
+vnoremap L $
 
 " Toggle NERDTree
 nnoremap <Leader><Leader>n :NERDTreeToggle<CR>
@@ -229,26 +206,17 @@ autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * %s/\n\+\%$//e
 autocmd BufWritePre *.[ch] %s/\%$/\r/e
 
-" Python-syntax plugin
-let g:python_highlight_all = 1
-
-" Quickscope
-" Trigger a highlight in the appropriate direction when pressing these
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-let g:qs_max_chars=120
-augroup qs_color
-    autocmd!
-    autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-    autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-augroup END
-
-colorscheme PaperColor
-
-
-" Enable autocompletion
-set wildmenu
-set wildmode=longest,list,full
-set completeopt=menuone,longest
+" python with virtualenv support
+if has('python3')
+py3 << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+    env_base_dir = os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(env_base_dir, 'bin/activate_this.py')
+    exec(open(activate_this).read(), dict(__file__=activate_this))
+EOF
+endif
 
 " Minimalist-TabComplete-Plugin
 inoremap <expr> <Tab> TabComplete()
@@ -277,13 +245,3 @@ endfun
 
 " set linewrap in markdown and latex file
 autocmd BufRead,BufNewFile *.md,*.tex set wrap
-
-let g:gitgutter_map_keys = 0
-highlight GitGutterAdd guifg=#009900 ctermfg=Green
-highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
-highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
-
-augroup git_gutter
-    autocmd!
-    autocmd BufWritePost * :GitGutter
-augroup END
