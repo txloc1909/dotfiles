@@ -17,6 +17,7 @@ zstyle ':vcs_info:git:*' formats       '[%b%u%c]'
 zstyle ':vcs_info:git:*' actionformats '[%b|%a%u%c]'
 
 setopt autocd		# Automatically cd into typed directory.
+setopt correct correct_all
 stty stop undef		# Disable ctrl-s to freeze terminal.
 setopt interactive_comments
 
