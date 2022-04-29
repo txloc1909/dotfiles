@@ -7,9 +7,8 @@ autoload -Uz add-zsh-hook vcs_info
 setopt prompt_subst
 add-zsh-hook precmd vcs_info
 
-PROMPT="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%1~%{$fg[red]%}]%{$reset_color%}$%b "
-#RPROMPT='%(?.%F{green}√.%F{red}?%?)%f %*'
-RPROMPT='%F{yellow}${vcs_info_msg_0_} %(?.%F{green}√.%F{red}?%?)%f %*'
+PROMPT='%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%1~%{$fg[red]%}]%F{yellow}${vcs_info_msg_0_}%{$reset_color%}$%b '
+RPROMPT='%(?.%F{green}√.%F{red}?%?)%f %*'
 
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr ' *'
