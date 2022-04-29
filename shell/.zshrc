@@ -30,7 +30,7 @@ autoload -U compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'  # case-insensitive
 zmodload zsh/complist
-compinit
+compinit -d ~/.cache/zcompdump
 _comp_options+=(globdots)		# Include hidden files.
 
 # vi mode
