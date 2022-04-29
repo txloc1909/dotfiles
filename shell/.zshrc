@@ -1,8 +1,7 @@
-# Luke's config for the Zoomer Shell
+# .zshrc
 
 # Enable colors and change prompt:
-autoload -U colors && colors	# Load colors
-#PS1='%(?.%F{green}√.%F{red}?%?)%f %B%F{240}%1~%f%b %# '
+autoload -U colors && colors
 
 autoload -Uz add-zsh-hook vcs_info
 setopt prompt_subst
@@ -25,7 +24,7 @@ setopt interactive_comments
 # History in cache directory:
 HISTSIZE=10000000
 SAVEHIST=10000000
-HISTFILE=~/.cache/zsh/history
+HISTFILE=~/.cache/zsh_history
 
 # Basic auto/tab complete:
 autoload -U compinit
@@ -45,19 +44,6 @@ bindkey '^e' edit-command-line
 
 # Aliases
 [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases"
-
-# Env variables
-export EDITOR='vim'
-export TERMINAL='alacritty'
-export PAGER='less'
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
 
 # Python's virtualenv and virtualenvwrapper
 if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
