@@ -46,7 +46,8 @@ Plug 'junegunn/limelight.vim'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-fugitive'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'preservim/nerdcommenter'
 Plug 'unblevable/quick-scope'
@@ -100,6 +101,9 @@ let g:airline#extensions#ale#enabled = 1
 
 let g:NERDTreeWinSize=20
 let g:NERDTreeShowHidden=1
+
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+let g:fzf_buffers_jump = 1
 
 let g:python_highlight_all = 1
 
@@ -204,7 +208,7 @@ nnoremap <S-Tab> :bp<CR>
 nnoremap <Leader><Leader>g :Git<CR>
 
 " Fuzzy search
-nnoremap <Leader>p :CtrlP<CR>
+nnoremap <Leader>p :GFiles<CR>
 
 " Move visual line
 nnoremap j gj
