@@ -40,16 +40,7 @@ elif [ -f /etc/bash_completion ]; then
     fi
 fi
 
-# Git prompt script on Arch and Fedora
-if [ -f /usr/share/git/git-prompt.sh ]; then
-    source /usr/share/git/git-prompt.sh
-elif [ -f /usr/share/git/completion/git-prompt.sh ]; then
-    source /usr/share/git/completion/git-prompt.sh
-elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
-    source /usr/share/git-core/contrib/completion/git-prompt.sh
-elif [ -f /usr/share/doc/git/contrib/completion/git-prompt.sh ]; then
-    source /usr/share/doc/git/contrib/completion/git-prompt.sh
-fi
+[[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/git/git-prompt.sh" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/git/git-prompt.sh"
 
 # disable terminal flow control (ctrl+s and ctrl+q)
 stty -ixon
