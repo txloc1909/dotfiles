@@ -1,6 +1,5 @@
-! --------------------------------------------------------------
-! URxvrt standard Arco Linux theme
-! --------------------------------------------------------------
+! 100% scaling
+Xft.dpi:                96
 
 ! General settings
 URxvt*saveLines:        50000
@@ -80,7 +79,7 @@ URxvt*imLocale: en_US.UTF-8
 URxvt.keysym.Control-0x2b:  font-size:increase
 URxvt.keysym.Control-0x2d:  font-size:decrease
 
-!!! Some colorscheme from Luke Smith Xresources
+!!! Some colorscheme
 /* !! gruvbox: */
 /* *.color0: #1d2021 */
 /* *.color1: #cc241d */
