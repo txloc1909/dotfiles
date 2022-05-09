@@ -176,8 +176,12 @@ set wildmode=longest,list,full
 set completeopt=menuone,longest
 
 " Cursor shape
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
+let &t_SI = "\e[6 q"            " Beam
+let &t_EI = "\e[2 q"            " Block
+augroup reset_cursor_shape
+    autocmd!
+    autocmd VimEnter * normal! :startinsert :stopinsert
+augroup END
 
 " Keybindings
 
