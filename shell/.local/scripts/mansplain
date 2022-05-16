@@ -1,0 +1,3 @@
+#!/bin/sh
+# choose and display a man page in zathura
+man -k . | awk '{print $1}' | dmenu -p "Man: " -l 30 | xargs man -Tps | zathura -
