@@ -52,6 +52,7 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'preservim/nerdcommenter'
 Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 
