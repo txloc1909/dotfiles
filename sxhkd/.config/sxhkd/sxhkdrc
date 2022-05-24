@@ -20,7 +20,7 @@ super + w
 
 # file manager
 super + e
-    pcmanfm
+    nemo
 
 # run launcher (rofi)
 super + r

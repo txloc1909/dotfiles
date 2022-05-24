@@ -13,7 +13,8 @@ URxvt*urlButton:        1
 ! Appearance
 URxvt*geometry:         100x30
 URxvt*depth:            32
-!URxvt*transparent:      true
+*transparent:           true
+*alpha:                 0.95
 URxvt*shading:          80
 URxvt*underlineColor:   #4682B4
 URxvt*highlightColor:   #666666
