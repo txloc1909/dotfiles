@@ -1,0 +1,4 @@
+#!/bin/sh
+
+search_engine="https://google.com/search?q={}"
+zenity --entry --title="Web search" --width=640 --height=100 --text="Search the web:" | sed "s/ /+/g" | xargs -I {} ${BROWSER:-firefox} $search_engine
