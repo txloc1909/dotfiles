@@ -188,6 +188,7 @@ augroup END
 
 " Back to normal
 inoremap jk <Esc>
+cnoremap jk <Esc><CR>
 
 " Quickly access .vimrc
 nnoremap <Leader>ev :edit $MYVIMRC<CR>
@@ -206,8 +207,7 @@ nnoremap <Leader><Leader>v :vsplit<CR>
 
 " Buffer navigations
 nnoremap <Leader><Tab> <C-^>
-nnoremap <Tab> :bn<CR>
-nnoremap <S-Tab> :bp<CR>
+nnoremap <Leader>b :ls<CR>:b
 
 " Quick git
 nnoremap <Leader><Leader>g :Git<CR>
