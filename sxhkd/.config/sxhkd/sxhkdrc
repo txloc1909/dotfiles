@@ -22,10 +22,25 @@ super + w
 super + e
     nemo
 
-# run launcher (rofi)
+# run launcher (rofi & dmenu)
 super + r
-    rofi -show drun -monitor -4 -show-icons -icons Flat-Remix-Blue-Dark -theme ~/.config/rofi/themes/dt-center.rasi
+    rofi -show drun -show-icons -icons Flat-Remix-Blue-Dark
+
+super + d
+    dmenu_run
+
+# youtube PWA
+super + y
+    youtube
+
+# search the web
+super + g
+    searchweb
 
 ## Audio
 XF86Audio{Play,Stop,Prev,Next}
     playerctl {play-pause,stop,previous,next}
+
+## Brightness
+XF86MonBrightness{Up,Down}
+    brightnessctl set {+10%,10%-}
