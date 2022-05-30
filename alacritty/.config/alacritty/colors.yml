@@ -187,4 +187,4 @@ schemes:
       cyan:    '#2aa198'
       white:   '#fdf6e3'
 
-colors: *modified-solarize
+colors: *gnome-dark
