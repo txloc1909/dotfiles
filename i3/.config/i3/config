@@ -1,7 +1,7 @@
 set $mod Mod4
 set $alt Mod1
 
-font pango:Source Code Pro for Powerline 10
+font pango:Source Code Pro for Powerline 8
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
@@ -14,16 +14,22 @@ client.background       #ffffff
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id nitrogen --restore
+exec --no-startup-id dunst
+exec --no-startup-id picom
+exec --no-startup-id gnome-keyring-daemon --start
+exec --no-startup-id sxhkd
+
+#exec --no-startup-id $HOME/.config/polybar/launch-i3.sh
 
 floating_modifier $mod
 
-bindsym $mod+Return exec $TERMINAL
-bindsym $mod+w exec $BROWSER
-bindsym $mod+e exec nemo
-
-bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+r exec --no-startup-id rofi -show drun -show-icons -icons Flat-Remix-Blue-Dark
-
+# Already defined in sxhkd
+#bindsym $mod+Return exec $TERMINAL
+#bindsym $mod+w exec $BROWSER
+#bindsym $mod+e exec nemo
+#bindsym $mod+d exec --no-startup-id dmenu_run
+#bindsym $mod+r exec --no-startup-id rofi -show drun -show-icons -icons Flat-Remix-Blue-Dark
+#bindsym $mod+y exec youtube
 
 bindsym $mod+q kill
 
@@ -37,14 +43,19 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-bindsym $mod+u split horizontal
-bindsym $mod+i split vertical
+bindsym $mod+Ctrl+h resize shrink width 10 px or 10 ppt
+bindsym $mod+Ctrl+j resize grow height 10 px or 10 ppt
+bindsym $mod+Ctrl+k resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+l resize grow width 10 px or 10 ppt
+
+bindsym $mod+c split horizontal
+bindsym $mod+v split vertical
 
 bindsym $mod+f fullscreen toggle
 
-bindsym $mod+s layout stacking
+bindsym $mod+u layout stacking
 bindsym $mod+m layout tabbed
-bindsym $mod+t layout toggle split
+bindsym $mod+i layout toggle split
 
 bindsym $mod+Shift+space floating toggle
 
@@ -68,6 +79,8 @@ bindsym $alt+Tab workspace back_and_forth
 
 bindsym $mod+b bar mode toggle
 
+bindsym $mod+$alt+l exec i3lock-fancy
+
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -79,16 +92,19 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-workspace $ws1 output HDMI-1 eDP-1
-workspace $ws2 output HDMI-1 eDP-1
-workspace $ws3 output HDMI-1 eDP-1
-workspace $ws4 output HDMI-1 eDP-1
-workspace $ws5 output HDMI-1 eDP-1
-workspace $ws6 output HDMI-1 eDP-1
-workspace $ws7 output HDMI-1 eDP-1
-workspace $ws8 output HDMI-1 eDP-1
-workspace $ws9 output HDMI-1 eDP-1
-workspace $ws10 output eDP-1
+set $laptop_screen "eDP-1-1"
+set $external_screen "HDMI-1-1"
+
+workspace $ws1 output $external_screen $laptop_screen
+workspace $ws2 output $external_screen $laptop_screen
+workspace $ws3 output $external_screen $laptop_screen
+workspace $ws4 output $external_screen $laptop_screen
+workspace $ws5 output $external_screen $laptop_screen
+workspace $ws6 output $external_screen $laptop_screen
+workspace $ws7 output $external_screen $laptop_screen
+workspace $ws8 output $external_screen $laptop_screen
+workspace $ws9 output $external_screen $laptop_screen
+workspace $ws10 output $laptop_screen
 
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -116,21 +132,43 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym $mod+Ctrl+h resize shrink width 10 px or 10 ppt
-bindsym $mod+Ctrl+j resize grow height 10 px or 10 ppt
-bindsym $mod+Ctrl+k resize shrink height 10 px or 10 ppt
-bindsym $mod+Ctrl+l resize grow width 10 px or 10 ppt
-
+set $bumblebee_status_theme "onedark-powerline"
 
 bar {
-        position top
-        output HDMI-1
-        output eDP-1
-        tray_output primary
-        status_command slstatus -s
-        font pango:Source Code Pro for Powerline 10
-        workspace_min_width 22
-        modifier none
+    id bar-top
+    position top
+    output $external_screen
+    output primary
+    tray_output primary
+    status_command bumblebee-status \
+        -m todo uptime cpu memory network_traffic nic pasink battery date time \
+        -p time.format="%H:%M" date.format="%a, %b %d %Y" \
+        -p nic.format="{ssid}" nic.exclude="lo,enp4s0,wlp0s20f3" \
+        -p memory.format="{used} ({percent:05.02f}%)" \
+        -p todo.file="~/.local/todo" \
+        -t $bumblebee_status_theme
+    font pango:Source Code Pro for Powerline 10
+    workspace_min_width 22
+    modifier none
+}
+
+bar {
+    id bar-bot
+    workspace_buttons no
+    position bottom
+    output $laptop_screen
+    output nonprimary
+    tray_output none
+    status_command bumblebee-status \
+        -m spotify weather cpu2 kernel hostname dunst \
+        -p spotify.format="{artist} - {title}" spotify.hide=True \
+        -p spotify.layout="spotify.song" \
+        -p weather.location="Hanoi" weather.showminmax=True \
+        -p cpu2.layout="cpu2.maxfreq cpu2.coresload cpu2.temp" \
+        -p cpu2.temp_pattern="temp5_input" \
+        -t $bumblebee_status_theme
+    font pango:Source Code Pro for Powerline 10
+    modifier none
 }
 
 workspace_auto_back_and_forth yes
@@ -138,9 +176,10 @@ focus_follows_mouse no
 default_orientation auto
 workspace_layout default
 title_align left
-for_window [all] title_window_icon yes
-for_window [all] title_window_icon padding 3px
-hide_edge_borders none
+default_border normal 4
+default_floating_border none
+for_window [all] title_window_icon yes padding 3px
+hide_edge_borders smart
 mouse_warping none
 popup_during_fullscreen smart
-focus_wrapping yes
+focus_wrapping workspace
