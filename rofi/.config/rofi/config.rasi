@@ -1,5 +1,7 @@
 configuration {
         modi: "run,drun";
         matching: "fuzzy";
+        show-icons: true;
+        icon-theme: "Flat-Remix-Blue-Dark";
 }
 @theme "themes/dt-center.rasi"

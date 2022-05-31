@@ -24,7 +24,7 @@ super + e
 
 # run launcher (rofi & dmenu)
 super + r
-    rofi -show drun -show-icons -icons Flat-Remix-Blue-Dark
+    rofi -show drun
 
 super + d
     dmenu_run
