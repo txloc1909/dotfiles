@@ -69,12 +69,13 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 ## Prompts
+export PROMPT_DIRTRIM=2
 
 # Basic prompt
 #export PS1='[\u@\h \W]$(__git_ps1)\$ '
 
 # Minimal prompt
-export PS1=' \[\033[1;36m\]\w \[\033[1;33m\]$(__git_ps1 "(%s)") \[\033[1;36m\]>\[\033[1;34m\]>\[\033[0m\] '
+export PS1=' \[\033[1;36m\]\w \[\033[1;33m\]$(__git_ps1 "(%s)")\[\033[1;36m\]>\[\033[1;34m\]>\[\033[0m\] '
 
 # Two-line prompt
 #export PS1='\[\033[;32m\]┌──(\[\033[1;34m\]\u@\h\[\033[;32m\])-[\[\033[0;1m\]\w\[\033[;32m\]]\[\033[01;33m\]$(__git_ps1 " (%s)")\n\[\033[;32m\]└─\[\033[1;34m\]\$\[\033[0m\] '
