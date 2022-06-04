@@ -18,13 +18,14 @@ def init_widget_default():
 
 def primary_widgets():
     return [
+        widget.CurrentScreen(),
+        widget.Sep(),
         widget.GroupBox(),
         widget.Sep(),
         widget.CurrentLayoutIcon(scale=0.75),
         widget.CurrentLayout(),
         widget.Sep(),
         widget.WindowName(),
-        widget.CurrentScreen(),
         widget.Sep(),
         widget.CPU(format="CPU: {load_percent:2}%"),
         widget.Sep(),
@@ -32,26 +33,30 @@ def primary_widgets():
         widget.Sep(),
         widget.Net(interface=_WIFI_INTERFACE, format=" {down} ↓↑ {up} "),
         widget.Sep(),
-        widget.Wlan(interface=_WIFI_INTERFACE, format="{essid}"),
+        widget.Wlan(interface=_WIFI_INTERFACE, format=" {essid}"),
+        widget.Sep(),
+        widget.Volume(fmt="VOL: {}"),
         widget.Sep(),
         widget.Battery(format="BAT: {percent:2.0%}"),
         widget.Sep(),
-        widget.Clock(format="%Y-%m-%d %a %H:%M"),
+        widget.Clock(format="%a %e %b %Y %H:%M"),
         widget.Systray(),
     ]
 
 
 def secondary_widgets():
     return [
+        widget.CurrentScreen(),
+        widget.Sep(),
         widget.GroupBox(),
         widget.Sep(),
         widget.CurrentLayoutIcon(scale=0.75),
         widget.CurrentLayout(),
         widget.Sep(),
         widget.WindowName(),
-        widget.CurrentScreen(),
+        widget.Volume(fmt="VOL: {}"),
         widget.Sep(),
         widget.Battery(format="BAT: {percent:2.0%}"),
         widget.Sep(),
-        widget.Clock(format="%Y-%m-%d %a %H:%M"),
+        widget.Clock(format="%a %e %b %Y %H:%M"),
     ]
