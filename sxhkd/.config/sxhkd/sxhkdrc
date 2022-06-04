@@ -24,7 +24,7 @@ super + e
 
 # run launcher (rofi & dmenu)
 super + r
-    rofi -show drun
+    rofi -show drun -monitor -1
 
 super + d
     dmenu_run
