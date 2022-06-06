@@ -1,12 +1,26 @@
 from libqtile import layout
 from libqtile.config import Match
 
+layout_theme = {
+    "border_width": 4,
+    "margin": 4,
+    "border_focus": "a6e22e",
+    "border_normal": "444444",
+}
+
 
 def init_layouts():
     return [
-        layout.MonadTall(new_client_position="top", ratio=0.55),
-        layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-        layout.Max(),
+        layout.MonadTall(
+            new_client_position="top",
+            ratio=0.55,
+            **layout_theme,
+        ),
+        layout.Columns(
+            insert_position=1,
+            **layout_theme,
+        ),
+        layout.Max(**layout_theme),
     ]
 
 
