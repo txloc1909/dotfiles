@@ -1,6 +1,6 @@
 #!/bin/sh
 
-/usr/bin/gnome-keyring-daemon --start --components=ssh
+/usr/bin/gnome-keyring-daemon --start &
 remaps.sh
 nm-applet &
 volumeicon &
