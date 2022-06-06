@@ -30,7 +30,12 @@ def right_arrow():
 
 
 def current_screen():
-    return widget.CurrentScreen()
+    return widget.CurrentScreen(
+        active_text="",  # nf-fa-check_circle
+        inactive_text="",  # nf-fa-check_circle_off
+        fontsize=_FONT_SIZE + 2,
+        padding=5,
+    )
 
 
 def groupbox():
@@ -63,7 +68,7 @@ def ram():
 
 
 def net_speed():
-    return widget.Net(interface=_WIFI_INTERFACE, format="{down} ↓↑ {up}")
+    return widget.Net(interface=_WIFI_INTERFACE, format="{up} ↑↓ {down}")
 
 
 def wifi_ssid():
