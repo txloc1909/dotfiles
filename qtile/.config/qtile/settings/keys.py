@@ -5,6 +5,9 @@ from libqtile.config import Key
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
+from .functions import window_to_prev_group, window_to_next_group
+from .functions import window_to_prev_screen, window_to_next_screen
+
 mod = "mod4"
 alt = "mod1"
 terminal = os.environ.get("TERMINAL", guess_terminal())
@@ -38,10 +41,8 @@ def layout_keys():
             ((mod,), "k"): lazy.layout.up,
             ((mod,), "h"): lazy.layout.shrink_main,
             ((mod,), "l"): lazy.layout.grow_main,
-            ((mod,), "u"): lazy.layout.swap_left,
-            ((mod,), "i"): lazy.layout.swap_right,
-            ((mod,), "Left"): lazy.layout.left,
-            ((mod,), "Right"): lazy.layout.right,
+            ((mod,), "u"): lazy.layout.zoom,
+            ((mod,), "i"): lazy.layout.switch_col,
             ((mod, "shift"), "j"): lazy.layout.shuffle_down,
             ((mod, "shift"), "k"): lazy.layout.shuffle_up,
             ((mod, "shift"), "h"): lazy.layout.shrink,
@@ -99,12 +100,12 @@ def init_common_keys():
         Key([mod], "b", lazy.hide_show_bar()),
         Key([mod], "period", lazy.next_screen()),
         Key([mod], "comma", lazy.prev_screen()),
-        Key([mod, "shift"], "period", lazy.window.toscreen(1)),
-        Key([mod, "shift"], "comma", lazy.window.toscreen(0)),
+        Key([mod, "shift"], "period", lazy.function(window_to_prev_screen)),
+        Key([mod, "shift"], "comma", lazy.function(window_to_next_screen)),
         Key([mod], "t", lazy.group.setlayout("monadtall")),
         Key([mod], "m", lazy.group.setlayout("max")),
         Key([mod, "shift"], "t", lazy.group.setlayout("columns")),
-        # Key([mod, "control"], "Left", lazy.function(window_to_prev_group)),
-        # Key([mod, "control"], "Right", lazy.function(window_to_next_group)),
+        Key([mod, "control"], "Left", lazy.function(window_to_prev_group)),
+        Key([mod, "control"], "Right", lazy.function(window_to_next_group)),
         Key([mod, alt], "l", lazy.spawn("i3lock-fancy")),
     ]

@@ -1,6 +1,41 @@
 from libqtile import layout
 from libqtile.config import Match
 
+
+def cmd_zoom(self):
+    """dwm's zoom function"""
+    curr_win = self.clients.current_client
+    main_win = self.clients.focus_first()
+    if curr_win == main_win:
+        if self.align == self._left:
+            self.cmd_swap_right()
+        elif self.align == self._right:
+            self.cmd_swap_left()
+    else:
+        self.cmd_swap_main()
+
+
+def cmd_switch_col(self):
+    """dwm's switch_col function"""
+    curr_win = self.clients.current_client
+    main_win = self.clients.focus_first()
+    if curr_win == main_win:
+        if self.align == self._left:
+            self.cmd_right()
+        elif self.align == self._right:
+            self.cmd_left()
+    else:
+        if self.align == self._left:
+            self.cmd_left()
+        elif self.align == self._right:
+            self.cmd_right()
+
+
+# monkey patch
+layout.MonadTall.cmd_zoom = cmd_zoom
+layout.MonadTall.cmd_switch_col = cmd_switch_col
+
+
 layout_theme = {
     "border_width": 4,
     "margin": 4,
