@@ -121,6 +121,7 @@ def primary_widgets():
         *battery(),
         left_arrow(),
         datetime(),
+        left_arrow(),
         widget.Systray(),
     ]
 
