@@ -4,15 +4,17 @@ from libqtile.config import Match
 
 def cmd_zoom(self):
     """dwm's zoom function"""
-    curr_win = self.clients.current_client
-    main_win = self.clients.focus_first()
-    if curr_win == main_win:
-        if self.align == self._left:
-            self.cmd_swap_right()
-        elif self.align == self._right:
-            self.cmd_swap_left()
-    else:
-        self.cmd_swap_main()
+    i = self.clients.current_index
+    if i == 0:
+        i = 1
+        if len(self.clients) < 2:
+            return
+
+    win = self.clients[i]
+    self.clients.remove(win)
+    self.clients.append_head(win)
+    self.group.layout_all()
+    self.group.focus(self.clients.focus_first())
 
 
 def cmd_switch_col(self):
@@ -37,7 +39,7 @@ layout.MonadTall.cmd_switch_col = cmd_switch_col
 
 
 layout_theme = {
-    "border_width": 4,
+    "border_width": 2,
     "margin": 4,
     "border_focus": "a6e22e",
     "border_normal": "444444",
