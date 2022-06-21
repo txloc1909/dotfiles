@@ -2,7 +2,7 @@ from libqtile.config import Screen
 from libqtile import bar
 from Xlib import display as xdisplay
 
-from .widgets import primary_widgets, secondary_widgets
+from .widgets import primary_widgets, secondary_widgets, bottom_widgets
 
 _BAR_HEIGHT = 24
 
@@ -37,7 +37,12 @@ def init_bar(widgets):
 
 def init_screens():
     num_screens = get_n_monitors()
-    screens = [Screen(top=init_bar(widgets=primary_widgets()))]
+    screens = [
+        Screen(
+            top=init_bar(widgets=primary_widgets()),
+            bottom=init_bar(widgets=bottom_widgets()),
+        )
+    ]
     for _ in range(num_screens - 1):
         screens.append(Screen(top=init_bar(widgets=secondary_widgets())))
 

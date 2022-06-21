@@ -18,6 +18,7 @@ def init_widget_default():
         "font": _FONT,
         "fontsize": _FONT_SIZE,
         "padding": _WIDGET_PADDING,
+        "background": "222222",
     }
 
 
@@ -40,10 +41,17 @@ def current_screen():
 
 def groupbox():
     return widget.GroupBox(
+        foreground="ffffff",
         active="ffffff",
-        inactive="404040",
-        highlight_method="line",
-        urgent_alert_method="block",
+        inactive="444444",
+        this_current_screen_border="034685",
+        this_screen_border="034685",
+        other_current_screen_border="777777",
+        other_screen_border="777777",
+        block_highlight_text_color="ffffff",
+        highlight_method="block",
+        urgent_alert_method="border",
+        urgent_border="ff0000",
         disable_drag=True,
     )
 
@@ -98,6 +106,31 @@ def datetime():
     return widget.Clock(format=" %a %e %b %Y %H:%M")
 
 
+def window_count():
+    return widget.WindowCount(
+        text_format=" {num}",  # nf-fa-windows
+        show_zero=True,
+    )
+
+
+def task_list():
+    return widget.TaskList(
+        border="034685",
+        highlight_method="block",
+        fontsize=_FONT_SIZE - 4,
+        icon_size=_FONT_SIZE,
+        margin=2,
+        title_width_method="uniform",
+        max_title_width=300,
+    )
+
+
+def weather():
+    return widget.Wttr(
+        location={"20.972984,105.819441": "Home"},
+    )
+
+
 def primary_widgets():
     return [
         current_screen(),
@@ -106,13 +139,8 @@ def primary_widgets():
         right_arrow(),
         *current_layout(),
         right_arrow(),
-        window_title(),
-        left_arrow(),
-        cpu(),
-        left_arrow(),
-        ram(),
-        left_arrow(),
-        net_speed(),
+        # window_title(),
+        widget.Spacer(),
         left_arrow(),
         wifi_ssid(),
         left_arrow(),
@@ -134,6 +162,8 @@ def secondary_widgets():
         right_arrow(),
         *current_layout(),
         right_arrow(),
+        window_count(),
+        right_arrow(),
         window_title(),
         left_arrow(),
         wifi_ssid(),
@@ -143,4 +173,20 @@ def secondary_widgets():
         *battery(),
         left_arrow(),
         datetime(),
+    ]
+
+
+def bottom_widgets():
+    return [
+        window_count(),
+        right_arrow(),
+        task_list(),
+        left_arrow(),
+        weather(),
+        left_arrow(),
+        cpu(),
+        left_arrow(),
+        ram(),
+        left_arrow(),
+        net_speed(),
     ]
