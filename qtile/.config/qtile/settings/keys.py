@@ -89,10 +89,12 @@ def init_layout_keys():
 def init_common_keys():
     return [
         Key([mod], "f", lazy.window.toggle_fullscreen()),
-        Key([mod, "shift"], "space", lazy.layout.toggle_floating()),
+        Key([mod, "shift"], "space", lazy.window.toggle_floating()),
         Key([mod], "Tab", lazy.next_layout()),
-        Key([alt], "Tab", lazy.screen.toggle_group()),
-        Key([alt], "space", lazy.group.focus_back()),
+        # Key([alt], "Tab", lazy.screen.toggle_group()),
+        # Key([alt], "space", lazy.group.focus_back()),
+        Key([alt], "Tab", lazy.group.focus_back()),
+        Key([alt], "space", lazy.screen.toggle_group()),
         Key([mod], "q", lazy.window.kill()),
         Key([mod, "shift"], "c", lazy.reload_config()),
         Key([mod, "shift"], "r", lazy.restart()),
