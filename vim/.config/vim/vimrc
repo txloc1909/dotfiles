@@ -53,6 +53,9 @@ Plug 'preservim/nerdcommenter'
 Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
+
 call plug#end()
 
 
@@ -107,6 +110,12 @@ let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 let g:fzf_buffers_jump = 1
 
 let g:python_highlight_all = 1
+
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
+let g:mkdp_refresh_slow = 1
+let g:mkdp_browser = '/usr/bin/qutebrowser'
+let g:mkdp_theme = 'dark'
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
