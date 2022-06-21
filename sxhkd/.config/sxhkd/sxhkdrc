@@ -41,6 +41,12 @@ super + g
 XF86Audio{Play,Stop,Prev,Next}
     playerctl {play-pause,stop,previous,next}
 
+XF86Audio{RaiseVolume,LowerVolume}
+    amixer set Master 5%{+,-}
+
+XF86AudioMute
+    amixer -D pulse set Master toggle
+
 ## Brightness
 XF86MonBrightness{Up,Down}
     brightnessctl set {+10%,10%-}
