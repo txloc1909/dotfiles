@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cli="shell vim git wget"
+cli="shell vim git tmux wget"
 
 for program in $cli; do
     echo "Deploying $program"
