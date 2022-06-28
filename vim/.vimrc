@@ -7,23 +7,6 @@ set nocompatible
 filetype plugin on
 syntax on
 
-set runtimepath^=$XDG_CONFIG_HOME/vim
-set runtimepath+=$XDG_DATA_HOME/vim
-set runtimepath+=$XDG_CONFIG_HOME/vim/after
-
-set packpath^=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim
-set packpath+=$XDG_CONFIG_HOME/vim/after,$XDG_DATA_HOME/vim/after
-
-let g:netrw_home = $XDG_DATA_HOME."/vim"
-call mkdir($XDG_DATA_HOME."/vim/spell", 'p')
-set viewdir=$XDG_DATA_HOME/vim/view | call mkdir(&viewdir, 'p')
-
-set backupdir=$XDG_CACHE_HOME/vim/backup | call mkdir(&backupdir, 'p')
-set directory=$XDG_CACHE_HOME/vim/swap   | call mkdir(&directory, 'p')
-set undodir=$XDG_CACHE_HOME/vim/undo     | call mkdir(&undodir,   'p')
-
-if !has('nvim') | set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
-
 let mapleader=" "
 let maplocalleader=","
 
@@ -44,14 +27,13 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-Plug 'preservim/nerdcommenter'
 Plug 'unblevable/quick-scope'
-Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
@@ -216,13 +198,13 @@ nnoremap <Leader><Leader>v :vsplit<CR>
 
 " Buffer navigations
 nnoremap <Leader><Tab> <C-^>
-nnoremap <Leader>b :ls<CR>:b
 
 " Quick git
 nnoremap <Leader><Leader>g :Git<CR>
 
 " Fuzzy search
 nnoremap <Leader>p :GFiles<CR>
+nnoremap <Leader>b :Buffers<CR>
 
 " Move visual line
 nnoremap j gj
@@ -249,9 +231,6 @@ nnoremap L $
 vnoremap H ^
 vnoremap L $
 
-" Toggle NERDTree
-nnoremap <Leader><Leader>n :NERDTreeToggle<CR>
-
 " Toggle distraction-free writing mode
 nnoremap <Leader>z :Goyo<CR>
 
@@ -262,11 +241,14 @@ nnoremap <C-M-v> "+P
 
 " Automatically deletes all trailing whitespaces and newlines at end of file
 " on save, then reset cursor position
-autocmd BufWritePre * let currPos = getpos(".")
-autocmd BufWritePre * %s/\s\+$//e
-autocmd BufWritePre * %s/\n\+\%$//e
-autocmd BufWritePre *.[ch] %s/\%$/\r/e
-autocmd BufWritePre * cal cursor(currPos[1], currPos[2])
+augroup trailing_whitespaces_newlines
+    autocmd!
+    autocmd BufWritePre * let currPos = getpos(".")
+    autocmd BufWritePre * %s/\s\+$//e
+    autocmd BufWritePre * %s/\n\+\%$//e
+    autocmd BufWritePre *.[ch] %s/\%$/\r/e
+    autocmd BufWritePre * cal cursor(currPos[1], currPos[2])
+augroup END
 
 " python with virtualenv support
 if has('python3')
