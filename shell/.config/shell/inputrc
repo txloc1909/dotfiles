@@ -20,9 +20,9 @@ $endif
 $if mode=vi
     set keymap vi-command
     Control-l: clear-screen
-    Control-a: beginning-of-line
+    #Control-a: beginning-of-line
 
     set keymap vi-insert
     Control-l: clear-screen
-    Control-a: beginning-of-line
+    #Control-a: beginning-of-line
 $endif
