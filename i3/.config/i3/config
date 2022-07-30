@@ -76,8 +76,7 @@ bindsym $mod+Ctrl+comma move workspace to output left
 bindsym $mod+Ctrl+period move workspace to output right
 
 bindsym $alt+space workspace back_and_forth
-bindsym $alt+Tab workspace next_on_output
-bindsym $alt+Shift+Tab workspace prev_on_output
+bindsym $alt+Tab workspace back_and_forth
 
 bindsym $mod+b bar mode toggle
 
@@ -136,7 +135,8 @@ bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 assign [class="^firefox$"] → $ws1
 assign [class="^Zathura$"] → $ws1
-assign [class="Spotify" instance="spotify"] → $ws8
+assign [class="^notion-snap$" instance="^notion-snap$"] → $ws3
+for_window [class="^Spotify$" instance="^spotify$"] move container to workspace $ws8
 assign [class="^Brave-browser$" instance="^youtube.com$"] → $ws8
 assign [class="^Brave-browser$"] → $ws9
 assign [class="^Ferdi$" instance="^ferdi$"] → $ws9
