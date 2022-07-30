@@ -19,8 +19,6 @@ exec --no-startup-id picom
 exec --no-startup-id gnome-keyring-daemon --start
 exec --no-startup-id sxhkd
 
-#exec --no-startup-id $HOME/.config/polybar/launch-i3.sh
-
 floating_modifier $mod
 
 # Already defined in sxhkd
@@ -146,17 +144,15 @@ assign [class="^Ferdi$" instance="^ferdi$"] → $ws9
 set $bumblebee_status_theme "onedark-powerline"
 
 bar {
-    id bar-top
-    position top
+    id bar-primary
+    position bottom
     output $external_screen
     output primary
     tray_output primary
     status_command bumblebee-status \
-        -m todo uptime cpu memory network_traffic nic pasink battery date time \
+        -m uptime nic pasink battery date time \
         -p time.format="%H:%M" date.format="%a, %b %d %Y" \
-        -p nic.format="{ssid}" nic.exclude="lo,enp4s0,wlp0s20f3" \
-        -p memory.format="{used} ({percent:05.02f}%)" \
-        -p todo.file="~/.local/todo" \
+        -p nic.exclude="lo,enp4s0,virbr*" nic.format="{intf} {state} ({ssid})" \
         -t $bumblebee_status_theme
     font pango:Source Code Pro for Powerline 10
     workspace_min_width 22
@@ -164,19 +160,16 @@ bar {
 }
 
 bar {
-    id bar-bot
-    workspace_buttons no
+    id bar-secondary
+    workspace_buttons yes
     position bottom
-    output $laptop_screen
     output nonprimary
     tray_output none
     status_command bumblebee-status \
-        -m spotify weather cpu2 kernel hostname dunst \
+        -m spotify cpu memory network_traffic dunst \
         -p spotify.format="{artist} - {title}" spotify.hide=True \
         -p spotify.layout="spotify.song" \
-        -p weather.location="Hanoi" weather.showminmax=True \
-        -p cpu2.layout="cpu2.maxfreq cpu2.coresload cpu2.temp" \
-        -p cpu2.temp_pattern="temp5_input" \
+        -p memory.format="{used} ({percent:05.02f}%)" \
         -t $bumblebee_status_theme
     font pango:Source Code Pro for Powerline 10
     modifier none
