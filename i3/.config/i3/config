@@ -82,16 +82,16 @@ bindsym $mod+b bar mode toggle
 
 bindsym $mod+$alt+l exec i3lock-fancy
 
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws1 "1:Www"
+set $ws2 "2:Code"
+set $ws3 "3:Doc"
+set $ws4 "4:Plan"
+set $ws5 "5:File"
+set $ws6 "6:Exprm"
+set $ws7 "7:Comm"
+set $ws8 "8:Mus"
+set $ws9 "9:Ent"
+set $ws10 "10:Misc"
 
 set $laptop_screen "eDP-1-1"
 set $external_screen "HDMI-1-1"
@@ -134,28 +134,19 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 assign [class="^firefox$"] → $ws1
-assign [class="^Zathura$"] → $ws1
 assign [class="^notion-snap$" instance="^notion-snap$"] → $ws3
 for_window [class="^Spotify$" instance="^spotify$"] move container to workspace $ws8
 assign [class="^Brave-browser$" instance="^youtube.com$"] → $ws8
 assign [class="^Brave-browser$"] → $ws9
 assign [class="^Ferdi$" instance="^ferdi$"] → $ws9
 
-set $bumblebee_status_theme "onedark-powerline"
-
 bar {
     id bar-primary
+    workspace_buttons yes
     position bottom
-    output $external_screen
     output primary
-    tray_output primary
-    status_command bumblebee-status \
-        -m uptime nic pasink battery date time \
-        -p time.format="%H:%M" date.format="%a, %b %d %Y" \
-        -p nic.exclude="lo,enp4s0,virbr*" nic.format="{intf} {state} ({ssid})" \
-        -t $bumblebee_status_theme
+    status_command slstatus -s
     font pango:Source Code Pro for Powerline 10
-    workspace_min_width 22
     modifier none
 }
 
@@ -165,14 +156,9 @@ bar {
     position bottom
     output nonprimary
     tray_output none
-    status_command bumblebee-status \
-        -m spotify cpu memory network_traffic dunst \
-        -p spotify.format="{artist} - {title}" spotify.hide=True \
-        -p spotify.layout="spotify.song" \
-        -p memory.format="{used} ({percent:05.02f}%)" \
-        -t $bumblebee_status_theme
+    status_command slstatus -s
     font pango:Source Code Pro for Powerline 10
-    modifier none
+    modifier $mod
 }
 
 workspace_auto_back_and_forth no
