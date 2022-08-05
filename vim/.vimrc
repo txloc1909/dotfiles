@@ -203,7 +203,7 @@ nnoremap <Leader><Tab> <C-^>
 nnoremap <Leader><Leader>g :Git<CR>
 
 " Fuzzy search
-nnoremap <Leader>p :GFiles<CR>
+nnoremap <Leader>p :Files<CR>
 nnoremap <Leader>b :Buffers<CR>
 
 " Move visual line
@@ -233,6 +233,12 @@ vnoremap L $
 
 " Toggle distraction-free writing mode
 nnoremap <Leader>z :Goyo<CR>
+
+" Quick build
+nnoremap <silent> <F9> :!make<CR><CR>
+
+" Quick paragraph formatting
+nnoremap <Leader>; vipgq
 
 " Access system clipboard, Ctrl+Alt+C and Ctrl+Alt+V to copy and paste
 set clipboard+=unnamedplus
