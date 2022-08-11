@@ -72,7 +72,10 @@ def cpu():
 
 
 def ram():
-    return widget.Memory(format=" {MemUsed:2.3f}GB", measure_mem="G")
+    return widget.Memory(
+        format=" {MemUsed:2.3f}GB ({MemPercent:2.1f}%)",
+        measure_mem="G",
+    )
 
 
 def net_speed():
@@ -121,13 +124,10 @@ def task_list():
         icon_size=_FONT_SIZE,
         margin=2,
         title_width_method="uniform",
-        max_title_width=300,
-    )
-
-
-def weather():
-    return widget.Wttr(
-        location={"20.972984,105.819441": "Home"},
+        max_title_width=400,
+        txt_floating=" ",  # nf-fa-window_restore
+        txt_maximized=" ",  # nf-fa-arrows_alt
+        txt_minimized=" ",  # nf-fa-window_minimize
     )
 
 
@@ -181,8 +181,6 @@ def bottom_widgets():
         window_count(),
         right_arrow(),
         task_list(),
-        left_arrow(),
-        weather(),
         left_arrow(),
         cpu(),
         left_arrow(),
