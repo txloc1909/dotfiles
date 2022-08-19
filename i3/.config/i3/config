@@ -148,6 +148,11 @@ bar {
     status_command slstatus -s
     font pango:Source Code Pro for Powerline 10
     modifier none
+
+    colors {
+        background #222222
+        statusline #ffffff
+    }
 }
 
 bar {
@@ -159,6 +164,11 @@ bar {
     status_command slstatus -s
     font pango:Source Code Pro for Powerline 10
     modifier $mod
+
+    colors {
+        background #222222
+        statusline #ffffff
+    }
 }
 
 workspace_auto_back_and_forth no

@@ -14,13 +14,12 @@ super + Escape
 super + Return
     $TERMINAL
 
-# web browser (firefox)
+# web browser
 super + w
     $BROWSER
 
-# file manager
 super + e
-    nemo
+    brave-browser
 
 # run launcher (rofi & dmenu)
 super + r
@@ -50,3 +49,7 @@ XF86AudioMute
 ## Brightness
 XF86MonBrightness{Up,Down}
     brightnessctl set {+10%,10%-}
+
+## Quick todo list
+F12
+    todolist

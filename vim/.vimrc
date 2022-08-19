@@ -67,6 +67,8 @@ set t_Co=256
 set timeout ttimeout
 set timeoutlen=300 ttimeoutlen=-1
 
+let g:netrw_home=$XDG_CACHE_HOME.'/vim'
+
 let g:airline_powerline_fonts = 1
 let g:airline_theme='badwolf'
 let g:airline_left_sep = ''
@@ -84,9 +86,6 @@ let g:airline_symbols.maxlinenr = '☰ '
 let g:airline_symbols.dirty='⚡'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
-
-let g:NERDTreeWinSize=20
-let g:NERDTreeShowHidden=1
 
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 let g:fzf_buffers_jump = 1
@@ -235,7 +234,7 @@ vnoremap L $
 nnoremap <Leader>z :Goyo<CR>
 
 " Quick build
-nnoremap <silent> <F9> :!make<CR><CR>
+nnoremap <F9> :silent make\|redraw!\|cc<CR>
 
 " Quick paragraph formatting
 nnoremap <Leader>; vipgq

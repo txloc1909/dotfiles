@@ -5,6 +5,9 @@
 # Increase key speed via a rate change
 xset r rate 300 50
 
+# reset setxkbmap
+setxkbmap -option
+
 # Map capslock to super
 setxkbmap -option caps:super
 # But when it is pressed only once, treat is as escape

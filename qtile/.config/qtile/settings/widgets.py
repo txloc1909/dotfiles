@@ -53,6 +53,7 @@ def groupbox():
         urgent_alert_method="border",
         urgent_border="ff0000",
         disable_drag=True,
+        margin_x=10,
     )
 
 
