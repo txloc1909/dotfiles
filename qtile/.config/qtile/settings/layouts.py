@@ -2,7 +2,7 @@ from libqtile import layout
 from libqtile.config import Match
 
 
-def cmd_zoom(self):
+def _zoom(self):
     """dwm's zoom function"""
     i = self.clients.current_index
     if i == 0:
@@ -17,7 +17,7 @@ def cmd_zoom(self):
     self.group.focus(self.clients.focus_first())
 
 
-def cmd_switch_col(self):
+def _switch_col_tall(self):
     """dwm's switch_col function"""
     curr_win = self.clients.current_client
     main_win = self.clients.focus_first()
@@ -33,9 +33,18 @@ def cmd_switch_col(self):
             self.cmd_right()
 
 
+def _switch_col_columns(self):
+    """switch_col for columns layout with 2 cols"""
+    if self.current == 0:
+        self.cmd_right()
+    elif self.current == len(self.columns) - 1:
+        self.cmd_left()
+
+
 # monkey patch
-layout.MonadTall.cmd_zoom = cmd_zoom
-layout.MonadTall.cmd_switch_col = cmd_switch_col
+layout.MonadTall.cmd_zoom = _zoom
+layout.MonadTall.cmd_switch_col = _switch_col_tall
+layout.Columns.cmd_switch_col = _switch_col_columns
 
 
 layout_theme = {
