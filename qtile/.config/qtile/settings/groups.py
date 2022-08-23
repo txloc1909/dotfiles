@@ -1,7 +1,8 @@
 from libqtile.config import Group, Key, Match
 from libqtile.lazy import lazy
 
-from .keys import mod
+from .keys import mod, alt
+from .functions import swap_groups_between_two_screen
 
 
 _group_names = list("123456789")
@@ -42,9 +43,11 @@ def init_group_keys():
     for i in _group_names:
         keys.extend(
             [
+                Key([alt, "control"], i, lazy.group[i].toscreen()),
                 Key([mod], i, lazy.group[i].toscreen()),
                 Key([mod, "shift"], i, lazy.window.togroup(i, switch_group=True)),
             ]
         )
 
+    keys.append(Key([mod], "0", swap_groups_between_two_screen))
     return keys

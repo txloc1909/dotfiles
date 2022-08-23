@@ -1,5 +1,4 @@
 import psutil
-
 from libqtile.lazy import lazy
 
 
@@ -61,3 +60,14 @@ def toggle_layout(qtile, layout_name):
     else:
         qtile.current_group.cmd_setlayout(layout_name)
     qtile.current_group.layout.show(screen_rect)
+
+
+@lazy.function
+def swap_groups_between_two_screen(qtile):
+    """Swap two groups between two screens"""
+    if len(qtile.screens) != 2:
+        return
+
+    curr_screen_idx = qtile.current_screen.index
+    other_screen_idx = 1 - curr_screen_idx
+    qtile.screens[other_screen_idx].group.cmd_toscreen()
