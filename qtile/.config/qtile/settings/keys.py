@@ -13,6 +13,7 @@ mod = "mod4"
 alt = "mod1"
 terminal = os.environ.get("TERMINAL", guess_terminal())
 browser = os.environ.get("BROWSER", "firefox")
+sec_browser = "brave-browser"
 file_manager = "nemo"
 
 
@@ -21,7 +22,7 @@ def init_sxhkd_keys():
     return [
         Key([mod], "Return", lazy.spawn(terminal)),
         Key([mod], "w", lazy.spawn(browser)),
-        Key([mod], "e", lazy.spawn(file_manager)),
+        Key([mod], "e", lazy.spawn(sec_browser)),
         Key([mod], "r", lazy.spawn("rofi -show drun -monitor -1")),
         Key([mod], "d", lazy.spawn("dmenu_run")),
         Key([mod], "y", lazy.spawn("youtube")),
@@ -32,6 +33,7 @@ def init_sxhkd_keys():
         Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
         Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%")),
         Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
+        Key([], "F12", lazy.spawn("todolist")),
     ]
 
 
