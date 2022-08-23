@@ -7,6 +7,7 @@ from libqtile.utils import guess_terminal
 
 from .functions import window_to_prev_group, window_to_next_group
 from .functions import window_to_prev_screen, window_to_next_screen
+from .functions import toggle_layout
 
 mod = "mod4"
 alt = "mod1"
@@ -103,12 +104,15 @@ def init_common_keys():
         Key([mod], "b", lazy.hide_show_bar()),
         Key([mod], "period", lazy.next_screen()),
         Key([mod], "comma", lazy.prev_screen()),
-        Key([mod, "shift"], "period", lazy.function(window_to_prev_screen)),
-        Key([mod, "shift"], "comma", lazy.function(window_to_next_screen)),
-        Key([mod], "t", lazy.group.setlayout("monadtall")),
-        Key([mod], "m", lazy.group.setlayout("max")),
-        Key([mod], "c", lazy.group.setlayout("columns")),
-        Key([mod, "control"], "Left", lazy.function(window_to_prev_group)),
-        Key([mod, "control"], "Right", lazy.function(window_to_next_group)),
+        Key([mod, "shift"], "period", window_to_prev_screen),
+        Key([mod, "shift"], "comma", window_to_next_screen),
+        # Key([mod], "t", lazy.group.setlayout("monadtall")),
+        # Key([mod], "m", lazy.group.setlayout("max")),
+        # Key([mod], "c", lazy.group.setlayout("columns")),
+        Key([mod], "t", toggle_layout("monadtall")),
+        Key([mod], "m", toggle_layout("max")),
+        Key([mod], "c", toggle_layout("columns")),
+        Key([mod, "control"], "Left", window_to_prev_group),
+        Key([mod, "control"], "Right", window_to_next_group),
         Key([mod, alt], "l", lazy.spawn("i3lock-fancy")),
     ]
