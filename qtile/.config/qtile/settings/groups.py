@@ -1,4 +1,3 @@
-from libqtile import hook
 from libqtile.config import Group, Key, Match
 from libqtile.lazy import lazy
 
@@ -25,13 +24,6 @@ _default_layout = {
     "8": "max",
     "9": "max",
 }
-
-
-@hook.subscribe.client_name_updated
-def move_spotify(client):
-    """Move Spotify client to correct group since its wm_class setting is slow"""
-    if client.cmd_info().get("name") == "Spotify" and not client.get_wm_class():
-        client.cmd_togroup("8")
 
 
 def init_groups():

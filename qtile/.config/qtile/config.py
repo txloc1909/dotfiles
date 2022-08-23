@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from libqtile import hook
+from libqtile import hook, qtile
 
 from settings.keys import init_sxhkd_keys, init_common_keys, init_layout_keys
 from settings.groups import init_groups, init_group_keys
@@ -38,7 +38,7 @@ follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
 auto_fullscreen = True
-focus_on_window_activation = "smart"
+focus_on_window_activation = "urgent"
 reconfigure_screens = True
 auto_minimize = True
 wl_input_rules = None
@@ -48,6 +48,31 @@ wl_input_rules = None
 def start_once():
     startup_script = os.path.expanduser("~/.config/qtile/autostart.sh")
     subprocess.call([startup_script])
+
+
+@hook.subscribe.client_name_updated
+def move_spotify(client):
+    """Move Spotify client to correct group since its wm_class setting is slow"""
+    MUSIC_GROUP = "8"
+    if client.cmd_info().get("name") == "Spotify" and not client.get_wm_class():
+        client.cmd_togroup(MUSIC_GROUP)
+
+
+@hook.subscribe.client_new
+def fullscreen_off(client):
+    """Toggle fullscreen off in case there is any fullscreen window in group"""
+    try:
+        group = client.group
+    except AttributeError:
+        return
+
+    if not group:
+        assert qtile is not None, "this should never happen"
+        group = qtile.current_group
+
+    for win in group.windows:
+        if win.fullscreen:
+            win.toggle_fullscreen()
 
 
 wmname = "LG3D"
