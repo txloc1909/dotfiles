@@ -6,3 +6,6 @@ vim/.vim/plugged
 
 # .uuid file in fonts
 .uuid
+
+tags
+*.swp
