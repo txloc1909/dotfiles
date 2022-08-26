@@ -37,6 +37,8 @@ Plug 'unblevable/quick-scope'
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
+Plug 'vimwiki/vimwiki'
+Plug 'ludovicchabant/vim-gutentags'
 
 call plug#end()
 
@@ -66,24 +68,13 @@ set laststatus=2
 set t_Co=256
 set timeout ttimeout
 set timeoutlen=300 ttimeoutlen=-1
+set background=dark
+colorscheme badwolf
 
 let g:netrw_home=$XDG_CACHE_HOME.'/vim'
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme='badwolf'
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.branch = ''
-let g:airline_symbols.colnr = ' :'
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ' :'
-let g:airline_symbols.maxlinenr = '☰ '
-let g:airline_symbols.dirty='⚡'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 
@@ -138,18 +129,9 @@ autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " Quickscope
-" Trigger a highlight in the appropriate direction when pressing these
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_max_chars=120
-" Must set quickscope color BEFORE set colorscheme
-augroup qs_color
-    autocmd!
-    autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-    autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-augroup END
 
-set background=dark
-colorscheme badwolf
 
 let g:gitgutter_map_keys = 0
 highlight GitGutterAdd guifg=#009900 ctermfg=Green
@@ -160,6 +142,8 @@ augroup git_gutter
     autocmd!
     autocmd BufWritePost * :GitGutter
 augroup END
+
+let g:vimwiki_list = [{'path': '~/Documents/wiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 " Enable autocompletion
 set wildmenu
@@ -186,10 +170,8 @@ nnoremap <Leader>sv :source $MYVIMRC<CR>
 
 " Write and quit
 nnoremap <Leader>q :w<CR>:Sayonara<CR>
-nnoremap <Leader>Q :qa!<CR>
 nnoremap <Leader><Leader>q :Sayonara<CR>
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>s :update<CR>
+nnoremap <Leader>s :write<CR>
 
 " Open splits
 nnoremap <Leader><Leader>s :split<CR>
