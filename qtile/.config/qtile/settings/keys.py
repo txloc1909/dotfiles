@@ -8,6 +8,8 @@ from libqtile.utils import guess_terminal
 from .functions import window_to_prev_group, window_to_next_group
 from .functions import window_to_prev_screen, window_to_next_screen
 from .functions import toggle_layout
+from .functions import run_or_raise
+from .functions import find_win
 
 mod = "mod4"
 alt = "mod1"
@@ -95,11 +97,13 @@ def init_common_keys():
         Key([mod], "f", lazy.window.toggle_fullscreen()),
         Key([mod, "shift"], "space", lazy.window.toggle_floating()),
         Key([mod], "Tab", lazy.next_layout()),
-        # Key([alt], "Tab", lazy.screen.toggle_group()),
-        # Key([alt], "space", lazy.group.focus_back()),
         Key([alt], "Tab", lazy.group.focus_back()),
         Key([alt], "space", lazy.screen.toggle_group()),
         Key([mod], "q", lazy.window.kill()),
+        Key([alt, "control"], "j", lazy.layout.next()),
+        Key([alt, "control"], "k", lazy.layout.previous()),
+        Key([alt, "control"], "f", lazy.window.toggle_fullscreen()),
+        Key([alt, "control"], "m", lazy.window.toggle_maximize()),
         Key([mod, "shift"], "c", lazy.reload_config()),
         Key([mod, "shift"], "r", lazy.restart()),
         Key([mod, "shift"], "q", lazy.shutdown()),
@@ -108,13 +112,19 @@ def init_common_keys():
         Key([mod], "comma", lazy.prev_screen()),
         Key([mod, "shift"], "period", window_to_prev_screen),
         Key([mod, "shift"], "comma", window_to_next_screen),
-        # Key([mod], "t", lazy.group.setlayout("monadtall")),
-        # Key([mod], "m", lazy.group.setlayout("max")),
-        # Key([mod], "c", lazy.group.setlayout("columns")),
         Key([mod], "t", toggle_layout("monadtall")),
         Key([mod], "m", toggle_layout("max")),
         Key([mod], "c", toggle_layout("columns")),
         Key([mod, "control"], "Left", window_to_prev_group),
         Key([mod, "control"], "Right", window_to_next_group),
         Key([mod, alt], "l", lazy.spawn("i3lock-fancy")),
+        Key([alt, "control"], "u", run_or_raise("firefox")),
+        Key([alt, "control"], "i", run_or_raise("alacritty", wm_instance="local-tmux")),
+        Key(
+            [alt, "control"],
+            "o",
+            run_or_raise("brave-browser", wm_instance="brave-browser"),
+        ),
+        Key([alt, "control"], "n", run_or_raise("obsidian")),
+        Key([alt, "control"], "y", run_or_raise("youtube", wm_instance="youtube.com")),
     ]

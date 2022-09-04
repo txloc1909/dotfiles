@@ -1,5 +1,7 @@
 import psutil
 from libqtile.lazy import lazy
+from libqtile.backend.base import Window
+from libqtile.log_utils import logger
 
 
 def check_process_running(process_name):
@@ -71,3 +73,42 @@ def swap_groups_between_two_screen(qtile):
     curr_screen_idx = qtile.current_screen.index
     other_screen_idx = 1 - curr_screen_idx
     qtile.screens[other_screen_idx].group.cmd_toscreen()
+
+
+def match(window, wm_class, wm_instance):
+    instance, class_ = window.get_wm_class()
+    match_class = (class_ == wm_class) if wm_class else True
+    match_instance = (instance == wm_instance) if wm_instance else True
+    return match_class and match_instance
+
+
+def find_window(qtile, wm_class, wm_instance):
+    """Find existing window by WM_CLASS"""
+    for window in qtile.windows_map.values():
+        if not isinstance(window, Window):
+            continue
+        if match(window, wm_class, wm_instance):
+            return window
+    return None
+
+
+@lazy.function
+def run_or_raise(qtile, app, wm_class=None, wm_instance=None):
+    """Check if the app is already launched is already running, if so focus it"""
+
+    if not wm_class and not wm_instance:
+        wm_class = app
+
+    window = find_window(qtile, wm_class, wm_instance)
+
+    if not window:
+        qtile.cmd_spawn(app)
+    else:
+        window.group.cmd_toscreen()
+        qtile.current_group.focus(window)
+
+    if window == qtile.current_window:
+        try:
+            qtile.current_layout.cmd_swap_main()
+        except AttributeError:
+            return
