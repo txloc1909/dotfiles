@@ -8,7 +8,8 @@ _FONT = "Source Code Pro for Powerline"
 _FONT_SIZE = 14
 _WIDGET_PADDING = 3
 
-_WIFI_INTERFACE = "wlx14ebb6474923"
+_WIFI_INTERFACE = "wlp0s20f3"
+# _WIFI_INTERFACE = "wlx14ebb6474923"
 
 _BATTERY_ICON_DIR = os.path.expanduser("~/.config/qtile/battery_icons_horiz")
 

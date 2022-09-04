@@ -1,7 +1,6 @@
 #!/bin/sh
 
 /usr/bin/gnome-keyring-daemon --start &
-remaps.sh
 nm-applet &
 volumeicon &
 sxhkd &
