@@ -9,30 +9,51 @@ from .functions import window_to_prev_group, window_to_next_group
 from .functions import window_to_prev_screen, window_to_next_screen
 from .functions import toggle_layout
 from .functions import run_or_raise
-from .functions import find_win
 
 mod = "mod4"
 alt = "mod1"
 terminal = os.environ.get("TERMINAL", guess_terminal())
 browser = os.environ.get("BROWSER", "firefox")
 sec_browser = "brave-browser"
-file_manager = "nemo"
+local_tmux_cmd = "alacritty --class alacritty,local-tmux -e launch-local-tmux"
 
 
-def init_sxhkd_keys():
-    """WM-agnostic keybinds defined in sxhkd"""
+def init_spawning_keys():
     return [
+        Key(
+            [mod, "shift"],
+            "Return",
+            run_or_raise(local_tmux_cmd, wm_instance="local-tmux"),
+        ),
         Key([mod], "Return", lazy.spawn(terminal)),
-        Key([mod], "w", lazy.spawn(browser)),
-        Key([mod], "e", lazy.spawn(sec_browser)),
+        Key([mod], "s", lazy.spawn("rofi -show ssh")),
+        Key([mod], "w", run_or_raise(browser)),
+        Key([mod], "e", run_or_raise(sec_browser, wm_instance=sec_browser)),
+        Key([mod], "y", run_or_raise("youtube", wm_instance="youtube.com")),
         Key([mod], "r", lazy.spawn("rofi -show drun -monitor -1")),
         Key([mod], "d", lazy.spawn("dmenu_run")),
-        Key([mod], "y", lazy.spawn("youtube")),
         Key([mod], "g", lazy.spawn("searchweb")),
+        Key([mod, alt], "l", lazy.spawn("i3lock-fancy")),
+        Key([alt, "control"], "u", run_or_raise(browser)),
+        Key(
+            [alt, "control"],
+            "i",
+            run_or_raise(local_tmux_cmd, wm_instance="local-tmux"),
+        ),
+        Key(
+            [alt, "control"],
+            "e",
+            run_or_raise("brave-browser", wm_instance="brave-browser"),
+        ),
+        Key([alt, "control"], "n", run_or_raise("obsidian")),
+        Key([alt, "control"], "y", run_or_raise("youtube", wm_instance="youtube.com")),
         Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
         Key([], "XF86AudioStop", lazy.spawn("playerctl stop")),
         Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
         Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
+        Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer set Master 5%+")),
+        Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set Master 5%-")),
+        Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse set Master toggle")),
         Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%")),
         Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
         Key([], "F12", lazy.spawn("todolist")),
@@ -117,14 +138,4 @@ def init_common_keys():
         Key([mod], "c", toggle_layout("columns")),
         Key([mod, "control"], "Left", window_to_prev_group),
         Key([mod, "control"], "Right", window_to_next_group),
-        Key([mod, alt], "l", lazy.spawn("i3lock-fancy")),
-        Key([alt, "control"], "u", run_or_raise("firefox")),
-        Key([alt, "control"], "i", run_or_raise("alacritty", wm_instance="local-tmux")),
-        Key(
-            [alt, "control"],
-            "o",
-            run_or_raise("brave-browser", wm_instance="brave-browser"),
-        ),
-        Key([alt, "control"], "n", run_or_raise("obsidian")),
-        Key([alt, "control"], "y", run_or_raise("youtube", wm_instance="youtube.com")),
     ]

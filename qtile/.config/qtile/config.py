@@ -3,7 +3,7 @@ import subprocess
 
 from libqtile import hook, qtile
 
-from settings.keys import init_sxhkd_keys, init_common_keys, init_layout_keys
+from settings.keys import init_spawning_keys, init_common_keys, init_layout_keys
 from settings.groups import init_groups, init_group_keys
 from settings.widgets import init_widget_default
 from settings.screens import init_screens
@@ -15,8 +15,7 @@ from settings.functions import check_process_running
 keys = []
 keys.extend(init_common_keys())
 keys.extend(init_layout_keys())
-if not check_process_running("sxhkd"):
-    keys.extend(init_sxhkd_keys())
+keys.extend(init_spawning_keys())
 
 groups = init_groups()
 keys.extend(init_group_keys())
