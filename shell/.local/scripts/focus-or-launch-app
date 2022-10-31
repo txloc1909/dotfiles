@@ -1,0 +1,84 @@
+#!/bin/sh
+
+# focus or launch application
+# needs xprop(1), wmctrl(1) and a EWMH compliant window manager
+# this file is in public domain
+
+usestacking=0       # whether the window manager supports _NET_CLIENT_LIST_STACKING
+property="WM_NAME"  # property to check
+
+export DISPLAY
+
+usage() {
+	echo "usage: $(basename $0) [-cn] title [file] " >&2
+	exit 1
+}
+
+# remove the 0x preffix and leading zeroes from window ids
+normalize() {
+	sed 's/0x0*//g'
+}
+
+# readd the 0x preffix in window id
+unnormalize() {
+	sed 's/^/0x/'
+}
+
+# get active client
+getactive() {
+	xprop -root _NET_ACTIVE_WINDOW | sed 's/.*# //' | normalize
+}
+
+# get list of clients, with the active one as the last one
+getclients() {
+	active=$(getactive)
+
+	if [ "$usestacking" -eq 1 ]
+	then
+		xprop -root _NET_CLIENT_LIST_STACKING | sed 's/.*# //; s/, /\
+/g' | normalize | grep -v "${active:-\$^}"
+	else
+		xprop -root _NET_CLIENT_LIST | sed 's/.*# //; s/, /\
+/g' | normalize | grep -v "${active:-\$^}"
+	fi
+	echo "$active"
+}
+
+# append the window names to each window id
+getnames() {
+	for id in "$@"
+	do
+		printf "%s\t" $id
+		xprop -id $id $property | sed 's/.*"\(.*\)"$/\1/'
+	done
+}
+
+# checks if window manager supports _NET_CLIENT_LIST_STACKING
+checkstacking() {
+	xprop -root _NET_SUPPORTED | sed 's/.* = //; s/, /\
+> /g' | fgrep '_NET_CLIENT_LIST_STACKING' >/dev/null
+}
+
+while getopts 'cn' c
+do
+	case "$c" in
+	c)
+		property="WM_CLASS"
+		;;
+	n)
+		property="WM_NAME"
+		;;
+	*)
+		usage
+		;;
+	esac
+done
+shift $((OPTIND -1))
+
+[ $# -eq 0 -o $# -gt 2 ] && usage
+
+checkstacking && usestacking=1
+
+clients=$(getclients | unnormalize)
+
+wmctrl -ia $(getnames $clients | grep -i $1 | sed -n '1{s/	.*//; p;}') || "${2:-$1}"
