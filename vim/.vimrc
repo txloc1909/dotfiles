@@ -183,8 +183,7 @@ nnoremap <Leader>ev :edit $MYVIMRC<CR>
 nnoremap <Leader>sv :source $MYVIMRC<CR>
 
 " Write and quit
-nnoremap <Leader>q :w<CR>:Sayonara<CR>
-nnoremap <Leader><Leader>q :Sayonara<CR>
+nnoremap <Leader>q :Sayonara<CR>
 nnoremap <Leader>s :write<CR>
 
 " Open splits
@@ -204,6 +203,12 @@ nnoremap <Leader>b :Buffers<CR>
 " Move visual line
 nnoremap j gj
 nnoremap k gk
+
+" Scroll while staying at center
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap { {zz
+nnoremap } }zz
 
 " Navigating splits
 nnoremap <C-h> <C-w>h
