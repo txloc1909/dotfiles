@@ -16,6 +16,9 @@ fi
 [ -x "$(command -v bat)" ] && alias cat='bat'
 [ -x "$(command -v batcat)" ] && alias cat='batcat'     # Debian
 
+# Fix missing libgtk3-nocsd0 in distrobox containers
+[ -x "$(command -v distrobox)" ] && alias dbx='LD_PRELOAD="" distrobox'
+
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
