@@ -64,7 +64,6 @@ set t_Co=256
 set timeout ttimeout
 set timeoutlen=300 ttimeoutlen=-1
 set background=dark
-colorscheme badwolf
 
 let g:netrw_home=$XDG_CACHE_HOME.'/vim'
 
@@ -126,6 +125,15 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " Quickscope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_max_chars=120
+let g:qs_hi_priority=2
+
+augroup qs_colors
+    autocmd!
+    autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+    autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
+" set colorscheme after this augroup to achieve quickscope color
+colorscheme badwolf
 
 
 let g:gitgutter_map_keys = 0
