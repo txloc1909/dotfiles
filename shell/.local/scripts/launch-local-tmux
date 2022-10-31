@@ -1,0 +1,3 @@
+#!/bin/sh
+
+tmux attach -t local || tmux new-sess -s local
