@@ -13,6 +13,9 @@ fi
 if [ -d "$HOME/.local/scripts" ] ; then
     PATH="$HOME/.local/scripts:$PATH"
 fi
+if [ -d "/var/lib/flatpak/exports/bin" ] ; then
+    PATH="$PATH:/var/lib/flatpak/exports/bin"
+fi
 export PATH
 
 # Common program
