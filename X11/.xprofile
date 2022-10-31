@@ -4,11 +4,13 @@
 
 xrdb -merge ~/.Xresources
 
-if [ $XDG_SESSION_DESKTOP = "unity" ]; then
-    setxkbmap -option caps:escape
-else
-    remaps.sh
-fi
+# case $XDG_SESSION_DESKTOP in
+#     unity|xfce) remaps2.sh ;;
+#     dwm|qtile|i3) remaps.sh ;;
+#     *) setxkbmap -option caps:escape ;;
+# esac
+
+remaps2.sh
 
 [ $(xrandr | grep ' connected' | wc -l) -eq 2 ] && dual-monitor.sh
 
