@@ -7,14 +7,14 @@ autoload -Uz add-zsh-hook vcs_info
 setopt prompt_subst
 add-zsh-hook precmd vcs_info
 
-PROMPT='%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%1~%{$fg[red]%}]%F{yellow}${vcs_info_msg_0_}%{$reset_color%}$%b '
+PROMPT="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%F{yellow}${vcs_info_msg_0_}%{$reset_color%}$%b "
 RPROMPT='%(?.%F{green}√.%F{red}?%?)%f %*'
 
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr ' *'
 zstyle ':vcs_info:*' stagedstr ' +'
-zstyle ':vcs_info:git:*' formats       '[%b%u%c]'
-zstyle ':vcs_info:git:*' actionformats '[%b|%a%u%c]'
+zstyle ':vcs_info:git:*' formats       '(%b%u%c)'
+zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
 
 setopt autocd		# Automatically cd into typed directory.
 setopt correct correct_all
