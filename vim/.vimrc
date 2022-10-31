@@ -11,11 +11,7 @@ let mapleader=" "
 let maplocalleader=","
 
 call plug#begin()
-Plug 'safv12/andromeda.vim'
-Plug 'tomasr/molokai'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'sjl/badwolf'
-Plug 'NLKNguyen/papercolor-theme'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -38,7 +34,6 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
 Plug 'vimwiki/vimwiki'
-Plug 'ludovicchabant/vim-gutentags'
 
 call plug#end()
 
