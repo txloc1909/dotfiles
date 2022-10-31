@@ -20,9 +20,45 @@ $endif
 $if mode=vi
     set keymap vi-command
     Control-l: clear-screen
-    #Control-a: beginning-of-line
+    Control-a: beginning-of-line
+    Control-e: end-of-line
+    Control-f: forward-char
+    Control-b: backward-char
+    "\M-f": forward-word
+    "\M-b": backward-word
+    Control-d: delete-char
+    Control-t: transpose-chars
+    Control-k: kill-line
+    Control-u: unix-line-discard
+    Control-w: unix-word-rubout
+    Control-y: yank
+    Control-p: previous-history
+    Control-n: next-history
+    Control-r: reverse-search-history
+    Control-s: forward-search-history
+    Control-e: emacs-editing-mode
+    "\M-j": history-search-backward
+    "\M-k": history-search-forward
 
     set keymap vi-insert
     Control-l: clear-screen
-    #Control-a: beginning-of-line
+    Control-a: beginning-of-line
+    Control-e: end-of-line
+    Control-f: forward-char
+    Control-b: backward-char
+    "\M-f": forward-word
+    "\M-b": backward-word
+    Control-d: delete-char
+    Control-t: transpose-chars
+    Control-k: kill-line
+    Control-u: unix-line-discard
+    Control-w: unix-word-rubout
+    Control-y: yank
+    Control-p: previous-history
+    Control-n: next-history
+    Control-r: reverse-search-history
+    Control-s: forward-search-history
+    Control-e: emacs-editing-mode
+    "\M-j": history-search-backward
+    "\M-k": history-search-forward
 $endif
