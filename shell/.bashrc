@@ -51,14 +51,6 @@ set -o vi
 # Aliases
 [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases"
 
-# Python's virtualenv and virtualenvwrapper
-if [[ -f $HOME/.local/bin/virtualenvwrapper.sh ]]; then
-    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-    export WORKON_HOME="${XDG_DATA_HOME}/virtualenvs"
-    export VIRTUALENVWRAPPER_VIRTUALENV=$HOME/.local/bin/virtualenv
-    source $HOME/.local/bin/virtualenvwrapper.sh
-fi
-
 # Colored man pages
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
