@@ -84,7 +84,21 @@ export PROMPT_DIRTRIM=2
 #export PS1='\[\033[;32m\]┌──(\[\033[1;34m\]\u@\h\[\033[;32m\])-[\[\033[0;1m\]\w\[\033[;32m\]]\[\033[01;33m\]$(__git_ps1 " (%s)")\n\[\033[;32m\]└─\[\033[1;34m\]\$\[\033[0m\] '
 
 # Colorful prompt
-export PS1='\[\033[1m\]\[\033[1;31m\][\[\033[01;33m\]\u\[\033[11;32m\]@\[\033[11;34m\]\h \[\033[1;35m\]\W\[\033[1;31m\]]\[\033[01;33m\]$(__git_ps1)\[\033[1;37m\]\$ \[\033[0m\]'
+#export PS1='\[\033[1m\]\[\033[1;31m\][\[\033[01;33m\]\u\[\033[11;32m\]@\[\033[11;34m\]\h \[\033[1;35m\]\W\[\033[1;31m\]]\[\033[01;33m\]$(__git_ps1)\[\033[1;37m\]\$ \[\033[0m\]'
+
+# Minimal prompt, after removing __git_ps1
+# PS1=' \[\033[1;36m\]\w \[\033[1;36m\]>\[\033[1;34m\]>\[\033[0m\] '
+
+# Still Minimal prompt, but split
+pre_prompt=' \[\033[1;36m\]\w \[\033[0m\]'
+post_prompt='\[\033[1;36m\]>\[\033[1;34m\]>\[\033[0m\] '
+
+# use git prompt when possible
+if [[ "$(declare -F __git_ps1)" ]]; then
+    export PROMPT_COMMAND='__git_ps1 "$pre_prompt" "$post_prompt"'
+else
+    export PS1="${pre_prompt}${post_prompt}"
+fi
 
 # Flexin'
 if [[ -x "$(command -v pfetch)" ]]; then
