@@ -45,9 +45,6 @@ fi
 # disable terminal flow control (ctrl+s and ctrl+q)
 stty -ixon
 
-# enable vi mode
-set -o vi
-
 # Aliases
 [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases"
 
