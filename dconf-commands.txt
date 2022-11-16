@@ -1,0 +1,10 @@
+# set ibus-bamboo as default input engine
+env DCONF_PROFILE=ibus dconf write /desktop/ibus/general/preload-engines "['BambooUs', 'Bamboo']" && gsettings set org.gnome.desktop.input-sources "[('xkb', 'us'), ('ibus', 'Bamboo')]"
+
+# map capslock to ctrl
+gsettings set org.gnome.desktop.input-sources xkb-options "['caps:ctrl_modifier']"
+
+# disable gnome-software update & notification
+gsettings set org.gnome.software allow-updates false
+gsettings set org.gnome.software download-updates false
+gsettings set org.gnome.software download-updates-notify false
