@@ -1,0 +1,9 @@
+com.brave.Browser
+com.discordapp.Discord
+com.skype.Client
+com.slack.Slack
+com.spotify.Client
+org.ferdium.Ferdium
+org.mozilla.Thunderbird
+org.mozilla.firefox
+org.onlyoffice.desktopeditors
