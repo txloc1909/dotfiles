@@ -18,6 +18,8 @@ fi
 
 [ -x "$(command -v distrobox)" ] && alias dbx='distrobox'
 
+[ $TERM == 'xterm-kitty' ] && alias ssh='kitty +kitten ssh'
+
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
