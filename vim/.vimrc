@@ -91,7 +91,7 @@ let g:python_highlight_all = 1
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
 let g:mkdp_refresh_slow = 1
-let g:mkdp_browser = '/usr/bin/qutebrowser'
+let g:mkdp_browser = 'qutebrowser'
 let g:mkdp_theme = 'dark'
 
 let g:ale_fixers = {

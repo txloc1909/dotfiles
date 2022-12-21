@@ -61,14 +61,6 @@ preexec() { echo -ne '\e[5 q' ; } # use beam shape cursor for each new prompt
 # Aliases
 [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliases"
 
-# Python's virtualenv and virtualenvwrapper
-if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
-    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-    export WORKON_HOME=$HOME/.virtualenvs
-    export VIRTUALENVWRAPPER_VIRTUALENV=$HOME/.local/bin/virtualenv
-    source $HOME/.local/bin/virtualenvwrapper.sh
-fi
-
 # Colored man pages
 man() {
     LESS_TERMCAP_md=$'\e[01;31m' \
