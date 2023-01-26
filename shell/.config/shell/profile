@@ -36,7 +36,7 @@ then
     export BAT_PAGER="less"
     export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
 fi
-export READER="zathura"
+[ -x "$(command -v zathura)" ] && export READER="zathura"
 
 # Clean up with XDG
 export XDG_CONFIG_HOME="${HOME}/.config"
