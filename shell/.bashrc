@@ -95,3 +95,6 @@ if [[ -x "$(command -v pfetch)" ]]; then
 elif [[ -x "$(command -v neofetch)" ]]; then
     neofetch
 fi
+
+# back to $HOME if inside a distrobox container
+[[ -f /run/.containerenv || -f /.dockerenv ]] && cd $HOME
