@@ -61,30 +61,30 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 export PROMPT_DIRTRIM=2
 
 # Basic prompt
-#export PS1='[\u@\h \W]$(__git_ps1)\$ '
+# pre_prompt='[\u@\h \W]'
+# post_prompt='\$ '
 
 # Minimal prompt
-#export PS1=' \[\033[1;36m\]\w \[\033[1;33m\]$(__git_ps1 "(%s)")\[\033[1;36m\]>\[\033[1;34m\]>\[\033[0m\] '
+# pre_prompt=' \[\033[1;36m\]\w \[\033[0m\]'
+# post_prompt='\[\033[1;36m\]>\[\033[1;34m\]>\[\033[0m\] '
 
-# Classic Debian/Ubuntu prompt
-#export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;33m\]$(__git_ps1)\[\033[1;37m\]\[\033[00m\]\$ '
+# Classic Ubuntu/Debian prompt
+# pre_prompt='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[0m\]'
+# post_prompt='\[\033[1;37m\]\[\033[00m\]\$ '
 
 # Two-line prompt
-#export PS1='\[\033[;32m\]┌──(\[\033[1;34m\]\u@\h\[\033[;32m\])-[\[\033[0;1m\]\w\[\033[;32m\]]\[\033[01;33m\]$(__git_ps1 " (%s)")\n\[\033[;32m\]└─\[\033[1;34m\]\$\[\033[0m\] '
+# pre_prompt='\[\033[;32m\]┌──(\[\033[1;34m\]\u@\h\[\033[;32m\])-[\[\033[0;1m\]\w\[\033[;32m\]]\[\033[0m\]'
+# post_prompt='\n\[\033[;32m\]└─\[\033[1;34m\]\$\[\033[0m\] '
 
 # Colorful prompt
-#export PS1='\[\033[1m\]\[\033[1;31m\][\[\033[01;33m\]\u\[\033[11;32m\]@\[\033[11;34m\]\h \[\033[1;35m\]\W\[\033[1;31m\]]\[\033[01;33m\]$(__git_ps1)\[\033[1;37m\]\$ \[\033[0m\]'
-
-# Minimal prompt, after removing __git_ps1
-# PS1=' \[\033[1;36m\]\w \[\033[1;36m\]>\[\033[1;34m\]>\[\033[0m\] '
-
-# Still Minimal prompt, but split
-pre_prompt=' \[\033[1;36m\]\w \[\033[0m\]'
-post_prompt='\[\033[1;36m\]>\[\033[1;34m\]>\[\033[0m\] '
+pre_prompt='\[\033[1m\]\[\033[1;31m\][\[\033[01;33m\]\u\[\033[11;32m\]@\[\033[11;34m\]\h \[\033[1;35m\]\W\[\033[1;31m\]]\[\033[0m\]'
+post_prompt='\[\033[1;37m\]\$ \[\033[0m\]'
 
 # use git prompt when possible
 if [[ "$(declare -F __git_ps1)" ]]; then
-    export PROMPT_COMMAND='__git_ps1 "$pre_prompt" "$post_prompt"'
+    # by using PROMPT_COMMAND, tools that manipulating PS1 such as `venv` and `conda` won't work
+    # export PROMPT_COMMAND='__git_ps1 "$pre_prompt" "$post_prompt"'
+    export PS1="${pre_prompt}\$(__git_ps1)${post_prompt}"
 else
     export PS1="${pre_prompt}${post_prompt}"
 fi
