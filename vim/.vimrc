@@ -35,6 +35,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install()  }, 'for': ['markdown', 'vim-plug'] }
 Plug 'vimwiki/vimwiki'
 
+Plug 'fladson/vim-kitty'
+
 call plug#end()
 
 
