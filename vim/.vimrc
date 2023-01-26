@@ -7,17 +7,6 @@ set nocompatible
 filetype plugin on
 syntax on
 
-let g:netrw_home = $XDG_DATA_HOME."/vim"
-call mkdir($XDG_DATA_HOME."/vim/spell", 'p')
-
-set backupdir=$XDG_STATE_HOME/vim/backup | call mkdir(&backupdir, 'p')
-set directory=$XDG_STATE_HOME/vim/swap   | call mkdir(&directory, 'p')
-set undodir=$XDG_STATE_HOME/vim/undo     | call mkdir(&undodir,   'p')
-set viewdir=$XDG_STATE_HOME/vim/view     | call mkdir(&viewdir,   'p')
-
-if !has('nvim') | set viminfofile=$XDG_STATE_HOME/vim/viminfo | endif
-
-
 let mapleader=" "
 let maplocalleader=","
 
@@ -164,14 +153,6 @@ set wildmenu
 set wildmode=longest,list,full
 set completeopt=menuone,longest
 
-" Cursor shape
-let &t_SI = "\e[6 q"            " Beam
-let &t_EI = "\e[2 q"            " Block
-augroup reset_cursor_shape
-    autocmd!
-    autocmd VimEnter * normal! :startinsert :stopinsert
-augroup END
-
 " Keybindings
 
 " Back to normal
@@ -244,63 +225,3 @@ nnoremap <Leader>; vipgq
 set clipboard+=unnamedplus
 vnoremap <C-M-c> "+y
 nnoremap <C-M-v> "+P
-
-" Automatically deletes all trailing whitespaces and newlines at end of file
-" on save, then reset cursor position
-augroup trailing_whitespaces_newlines
-    autocmd!
-    autocmd BufWritePre * let currPos = getpos(".")
-    autocmd BufWritePre * %s/\s\+$//e
-    autocmd BufWritePre * %s/\n\+\%$//e
-    autocmd BufWritePre *.[ch] %s/\%$/\r/e
-    autocmd BufWritePre * cal cursor(currPos[1], currPos[2])
-augroup END
-
-" Minimalist-TabComplete-Plugin
-inoremap <expr> <Tab> TabComplete()
-fun! TabComplete()
-    if getline('.')[col('.') - 2] =~ '\K' || pumvisible()
-        return "\<C-P>"
-    else
-        return "\<Tab>"
-    endif
-endfun
-
-" Minimalist-AutoCompletePop-Plugin
-set completeopt=menu,menuone,noinsert
-inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
-autocmd InsertCharPre * call AutoComplete()
-fun! AutoComplete()
-    if v:char =~ '\K'
-        \ && getline('.')[col('.') - 4] !~ '\K'
-        \ && getline('.')[col('.') - 3] =~ '\K'
-        \ && getline('.')[col('.') - 2] =~ '\K' " last char
-        \ && getline('.')[col('.') - 1] !~ '\K'
-        call feedkeys("\<C-P>", 'n')
-    end
-endfun
-
-" function! IBusOff()
-"   " Lưu engine hiện tại
-"   let g:ibus_prev_engine = system('ibus engine')
-"   " Chuyển sang engine tiếng Anh
-"   execute 'silent !ibus engine BambooUs'
-" endfunction
-" function! IBusOn()
-"   let l:current_engine = system('ibus engine')
-"   " nếu engine được set trong normal mode thì
-"   " lúc vào insert mode duùn luôn engine đó
-"   if l:current_engine !~? 'BambooUs'
-"     let g:ibus_prev_engine = l:current_engine
-"   endif
-"   " Khôi phục lại engine
-"   execute 'silent !' . 'ibus engine ' . g:ibus_prev_engine
-" endfunction
-" augroup IBusHandler
-"     autocmd!
-"     autocmd CmdLineEnter [/?] call IBusOn()
-"     autocmd CmdLineLeave [/?] call IBusOff()
-"     autocmd InsertEnter * call IBusOn()
-"     autocmd InsertLeave * call IBusOff()
-" augroup END
-" call IBusOff()
