@@ -20,14 +20,6 @@ shopt -s cmdhist
 shopt -s dirspell
 shopt -s direxpand
 
-# Git prompt options
-GIT_PS1_SHOWDIRTYSTATE=true
-GIT_PS1_SHOWSTASHSTATE=true
-GIT_PS1_SHOWUNTRACKEDFILES=true
-GIT_PS1_SHOWUPSTREAM="auto"
-GIT_PS1_HIDE_IF_PWD_IGNORED=true
-GIT_PS1_SHOWCOLORHINTS=true
-
 # Bash completion
 if [ -f /usr/share/bash-completion/bash_completion ]; then
     source /usr/share/bash-completion/bash_completion
@@ -39,8 +31,6 @@ elif [ -f /etc/bash_completion ]; then
         done
     fi
 fi
-
-[[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/git/git-prompt.sh" ]] && source "${XDG_CONFIG_HOME:-$HOME/.config}/git/git-prompt.sh"
 
 # disable terminal flow control (ctrl+s and ctrl+q)
 stty -ixon
@@ -57,37 +47,9 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-## Prompts
-export PROMPT_DIRTRIM=2
-
-# Basic prompt
-# pre_prompt='[\u@\h \W]'
-# post_prompt='\$ '
-
-# Minimal prompt
-# pre_prompt=' \[\033[1;36m\]\w \[\033[0m\]'
-# post_prompt='\[\033[1;36m\]>\[\033[1;34m\]>\[\033[0m\] '
-
-# Classic Ubuntu/Debian prompt
-# pre_prompt='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[0m\]'
-# post_prompt='\[\033[1;37m\]\[\033[00m\]\$ '
-
-# Two-line prompt
-# pre_prompt='\[\033[;32m\]┌──(\[\033[1;34m\]\u@\h\[\033[;32m\])-[\[\033[0;1m\]\w\[\033[;32m\]]\[\033[0m\]'
-# post_prompt='\n\[\033[;32m\]└─\[\033[1;34m\]\$\[\033[0m\] '
-
-# Colorful prompt
-pre_prompt='\[\033[1m\]\[\033[1;31m\][\[\033[01;33m\]\u\[\033[11;32m\]@\[\033[11;34m\]\h \[\033[1;35m\]\W\[\033[1;31m\]]\[\033[0m\]'
-post_prompt='\[\033[1;37m\]\$ \[\033[0m\]'
-
-# use git prompt when possible
-if [[ "$(declare -F __git_ps1)" ]]; then
-    # by using PROMPT_COMMAND, tools that manipulating PS1 such as `venv` and `conda` won't work
-    # export PROMPT_COMMAND='__git_ps1 "$pre_prompt" "$post_prompt"'
-    export PS1="${pre_prompt}\$(__git_ps1)${post_prompt}"
-else
-    export PS1="${pre_prompt}${post_prompt}"
-fi
+# Default prompt
+export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[0m\]\[\033[1;37m\]\[\033[00m\]\$ '
+[[ -f $XDG_CONFIG_HOME/shell/bash_prompt ]] && source $XDG_CONFIG_HOME/shell/bash_prompt
 
 # Flexin'
 if [[ -x "$(command -v pfetch)" ]]; then
