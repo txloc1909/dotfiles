@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# This is just a simple wrapper around 'command -v' to avoid
+# spamming '>/dev/null' throughout this function. This also guards
+# against aliases and functions.
+has() {
+    _cmd=$(command -v "$1") 2>/dev/null || return 1
+    [ -x "$_cmd" ] || return 1
+}
+
+# Detect current OS
+get_os() {
+    if has lsb_release; then
+        distro=$(lsb_release -sd)
+    elif [[ -f /etc/os-release ]]; then
+        while IFS='=' read -r key val; do
+            case $key in
+                (PRETTY_NAME)
+                    distro=$val
+                ;;
+            esac
+        done < /etc/os-release
+    else
+        # Special cases for (independent) distributions which
+        # don't follow any os-release/lsb standards whatsoever.
+        has crux && distro=$(crux)
+        has guix && distro='Guix System'
+    fi
+
+    # 'os-release' and 'lsb_release' sometimes add quotes
+    # around the distribution name, strip them.
+    distro=${distro##[\"\']}
+    distro=${distro%%[\"\']}
+
+    echo $distro
+}
+
+
