@@ -39,6 +39,7 @@ return require('packer').startup(function(use)
 	use { 'mbbill/undotree' }
 
 	use { 'tpope/vim-fugitive' }
+	use { 'tpope/vim-commentary' }
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
@@ -62,4 +63,6 @@ return require('packer').startup(function(use)
 			{'rafamadriz/friendly-snippets'}, -- Optional
 		}
 	}
+
+	use { 'mhinz/vim-sayonara' }
 end)
