@@ -81,4 +81,11 @@ return require('packer').startup(function(use)
 			require('nvim-surround').setup({})
 		end,
 	}
+
+	use {
+		'mhinz/vim-signify',
+		config = function()
+			vim.g.signify_disable_by_default = false
+		end,
+	}
 end)
