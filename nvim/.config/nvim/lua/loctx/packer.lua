@@ -65,4 +65,13 @@ return require('packer').startup(function(use)
 	}
 
 	use { 'mhinz/vim-sayonara' }
+	use {
+		'windwp/nvim-autopairs',
+		config = function()
+			require('nvim-autopairs').setup({
+				enable_check_bracket_line = false,
+				map_cr = true,
+			})
+		end,
+	}
 end)
