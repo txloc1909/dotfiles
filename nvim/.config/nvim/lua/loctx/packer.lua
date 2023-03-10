@@ -23,10 +23,11 @@ return require('packer').startup(function(use)
 	}
 
 	use {
-		'sjl/badwolf',
+		'NLKNguyen/papercolor-theme',
 		config = function()
-			vim.cmd('colorscheme badwolf')
-		end
+			vim.cmd("set background=dark")
+			vim.cmd("colorscheme PaperColor")
+		end,
 	}
 
 	use {
