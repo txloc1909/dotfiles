@@ -41,6 +41,7 @@ return require('packer').startup(function(use)
 
 	use { 'tpope/vim-fugitive' }
 	use { 'tpope/vim-commentary' }
+	use { 'tpope/vim-rsi' }
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
@@ -87,6 +88,14 @@ return require('packer').startup(function(use)
 		'mhinz/vim-signify',
 		config = function()
 			vim.g.signify_disable_by_default = false
+		end,
+	}
+
+	use {
+		'shortcuts/no-neck-pain.nvim',
+		tag = '*',
+		config = function()
+			require('no-neck-pain').setup({ width = 120, })
 		end,
 	}
 end)
