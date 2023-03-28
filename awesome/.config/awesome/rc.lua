@@ -11,6 +11,7 @@ RC.vars = require("main.variables")
 require("main.error_handling")
 
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.wallpaper = RC.vars.wallpaper
 
 terminal   = RC.vars.terminal
 editor     = RC.vars.editor
@@ -48,7 +49,15 @@ RC.globalkeys = binding.bindtotags(RC.globalkeys)
 root.buttons(binding.globalbuttons())
 root.keys(RC.globalkeys)
 
+awful.layout.layouts = RC.layouts
 awful.rules.rules = main.rules(binding.clientkeys(), binding.clientbuttons())
 
 require("awful.autofocus") 	-- automatically focus window when switching tags
 require("main.signals")
+
+awful.spawn.with_shell("setxkbmap -option caps:ctrl_modifier")
+-- awful.spawn.once("picom")
+awful.spawn.with_shell("ibus-daemon -drx")
+awful.spawn.once("nm-applet")
+awful.spawn.with_shell("pgrep volumeicon > /dev/null || volumeicon")
+--awful.spawn.once("unclutter") -- already autostart

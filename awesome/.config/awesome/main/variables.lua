@@ -4,7 +4,7 @@ local _M = {
 	terminal = "kitty",
 	modkey = "Mod1",
 	editor = "vim",
-	wallpaper = "/usr/share/awesome/themes/default/background.png"
+	wallpaper = "~/.local/share/backgrounds/wallpaper.png"
 }
 
 return _M

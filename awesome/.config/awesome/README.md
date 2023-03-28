@@ -17,10 +17,11 @@ On Ubuntu/Debian, install `awesome` and `awesome-extra`
 - To break down default `rc.lua` to different modules: [article](https://epsi-rns.github.io/desktop/2019/06/15/awesome-overview.html)
 
 TODO
+[ ] Design tags: names, keys, rules
+[ ] Multi-monitor workflow
+[ ] Set window title bar when floating, and turn off when tiling
 [x] Assign normal executable name for flatpak apps
 [x] Find out why new `$PATH`s are not appended
 	- Need `~/.profile`
-[ ] How to autostart programs (background processes/daemons) at logins
-[ ] Design tags: names, keys, rules
+[x] How to autostart programs (background processes/daemons) at logins
 [x] How to autostart ibus-daemon
-[ ] Multi-monitor workflow
