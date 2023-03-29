@@ -11,12 +11,7 @@ RC.vars = require("main.variables")
 require("main.error_handling")
 
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.wallpaper = RC.vars.wallpaper
-
-terminal   = RC.vars.terminal
-editor     = RC.vars.editor
-editor_cmd = terminal .. " -e " .. editor
-modkey 	   = RC.vars.modkey
+beautiful.border_width = 3
 
 local main = {
 	layouts = require("main.layouts"),
@@ -56,7 +51,7 @@ require("awful.autofocus") 	-- automatically focus window when switching tags
 require("main.signals")
 
 awful.spawn.with_shell("setxkbmap -option caps:ctrl_modifier")
--- awful.spawn.once("picom")
+awful.spawn.once("picom")
 awful.spawn.with_shell("ibus-daemon -drx")
 awful.spawn.once("nm-applet")
 awful.spawn.with_shell("pgrep volumeicon > /dev/null || volumeicon")
