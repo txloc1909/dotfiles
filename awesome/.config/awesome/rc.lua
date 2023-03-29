@@ -60,4 +60,5 @@ awful.spawn.with_shell("setxkbmap -option caps:ctrl_modifier")
 awful.spawn.with_shell("ibus-daemon -drx")
 awful.spawn.once("nm-applet")
 awful.spawn.with_shell("pgrep volumeicon > /dev/null || volumeicon")
+awful.spawn.with_shell("feh --bg-scale " .. RC.vars.wallpaper)
 --awful.spawn.once("unclutter") -- already autostart
