@@ -20,6 +20,15 @@ client.connect_signal("manage", function (c)
     end
 end)
 
+-- Show titlebar when client is floating
+client.connect_signal("property::floating", function(c)
+    if c.floating then
+	awful.titlebar.show(c)
+    else
+	awful.titlebar.hide(c)
+    end
+end)
+
 -- Enable sloppy focus, so that focus follows mouse.
 -- client.connect_signal("mouse::enter", function(c)
 --     c:emit_signal("request::activate", "mouse_enter", {raise = false})
