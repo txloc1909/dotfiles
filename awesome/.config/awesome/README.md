@@ -20,7 +20,9 @@ On Ubuntu/Debian, install `awesome` and `awesome-extra`
 TODO
 [ ] Design tags: names, keys, rules
 [ ] Multi-monitor workflow
-[ ] Set window title bar when floating, and turn off when tiling
+[x] Set window title bar when floating, and turn off when tiling
+    [ ] Currently, switching to floating layout does not toggle titlebar
+        for all windows affected by the floating layout
 [x] Assign normal executable name for flatpak apps
 [x] Find out why new `$PATH`s are not appended
 	- Need `~/.profile`
