@@ -9,6 +9,7 @@
 
 ## Dependencies
 On Ubuntu/Debian, install `awesome` and `awesome-extra`
+`feh` for setting wallpaper
 
 ### Lua packages
 - `tyrannical`: for tag management
