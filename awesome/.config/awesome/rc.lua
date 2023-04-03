@@ -51,7 +51,7 @@ require("awful.autofocus") 	-- automatically focus window when switching tags
 require("main.signals")
 
 awful.spawn.with_shell("setxkbmap -option caps:ctrl_modifier")
-awful.spawn.once("picom")
+awful.spawn.once("picom --experimental-backends")
 awful.spawn.with_shell("ibus-daemon -drx")
 awful.spawn.once("nm-applet")
 awful.spawn.with_shell("pgrep volumeicon > /dev/null || volumeicon")
