@@ -1,5 +1,6 @@
 local gears = require("gears")
 local awful = require("awful")
+local naughty = require("naughty")
 
 -- local my_tags = require("main.tags")
 local my_tags = RC.tags
@@ -17,6 +18,11 @@ function _M.get (globalkeys)
 					local tag = awful.tag.find_by_name(screen, my_tag.name)
 					if tag then
 					      tag:view_only()
+					else
+					      naughty.notify({
+						      title = "Error: View tag only",
+						      text = "Tag " .. my_tag.name .. " not found",
+					      })
 					end
 				  end,
 				  {description = "view tag #"..my_tag.name, group = "tag"}),
@@ -27,6 +33,11 @@ function _M.get (globalkeys)
 					local tag = awful.tag.find_by_name(screen, my_tag.name)
 					if tag then
 					   awful.tag.viewtoggle(tag)
+					else
+					      naughty.notify({
+						      title = "Error: Toggle tag display",
+						      text = "Tag " .. my_tag.name .. " not found",
+					      })
 					end
 				  end,
 				  {description = "toggle tag #" .. my_tag.name, group = "tag"}),
@@ -38,6 +49,11 @@ function _M.get (globalkeys)
 					     local tag = awful.tag.find_by_name(screen, my_tag.name)
 					     if tag then
 						 client.focus:move_to_tag(tag)
+					     else
+				        	 naughty.notify({
+						      title = "Error: Move client to tag",
+						      text = "Tag " .. my_tag.name .. " not found",
+						 })
 					     end
 					end
 				  end,
@@ -50,6 +66,11 @@ function _M.get (globalkeys)
 					  local tag = awful.tag.find_by_name(screen, my_tag.name)
 					  if tag then
 					      client.focus:toggle_tag(tag)
+					  else
+				             naughty.notify({
+					         title = "Error: Toggle tag on client",
+					         text = "Tag " .. my_tag.name .. " not found",
+					     })
 					  end
 				      end
 				  end,

@@ -59,6 +59,7 @@ local my_tags = {
 		key = "n",
 		opt = {
 			layout = tile,
+			volatile = true,
 		}
 	},
 }
