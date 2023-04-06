@@ -7,35 +7,36 @@ local max = awful.layout.suit.max
 local _M = {}
 
 local default_tag_opt = {
+	gap = 2,
 	master_width_factor = 0.55,
 	layout = tile,
 }
 
 local my_tags = {
 	{
-		name = "U",
+		name = "Work",
 		key = "u",
 		opt = { }
 	},
 	{
-		name = "I",
+		name = "Term",
 		key = "i",
 		opt = { }
 	},
 	{
-		name = "O",
+		name = "Personal",
 		key = "o",
 		opt = { }
 	},
 	{
-		name = "(W)eb",
+		name = "Browse",
 		key = "w",
 		opt = {
-			layout = max,
+			layout = tile,
 		}
 	},
 	{
-		name = "(E)nt",
+		name = "Chat",
 		key = "e",
 		opt = {
 			layout = tile,
@@ -43,25 +44,19 @@ local my_tags = {
 		}
 	},
 	{
-		name = "(Y)outube",
+		name = "Vid",
 		key = "y",
 		opt = {
 			layout = max
 		}
 	},
 	{
-		name = "(M)ess",
+		name = "Misc",
 		key = "m",
-		opt = { }
-	},
-	{
-		name = "(N)ote",
-		key = "n",
 		opt = {
-			layout = tile,
-			volatile = true,
+			layout = max
 		}
-	},
+	}
 }
 
 function _M.get ()
