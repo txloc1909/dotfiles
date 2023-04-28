@@ -27,3 +27,5 @@ symlink_to_path md.obsidian.Obsidian    obsidian
 symlink_to_path org.ferdium.Ferdium     ferdium
 symlink_to_path org.mozilla.Thunderbird thunderbird
 symlink_to_path org.mozilla.firefox     firefox
+symlink_to_path org.chromium.Chromium   chromium
+symlink_to_path com.sindresorhus.Caprine caprine
