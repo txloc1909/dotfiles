@@ -5,6 +5,7 @@ local menubar = require("menubar")
 
 local modkey = RC.vars.modkey
 local terminal = RC.vars.terminal
+local dmenu = RC.vars.dmenu
 
 local _M = {}
 
@@ -56,6 +57,8 @@ function _M.get ()
 		-- Standard program
 		awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
 			  {description = "open a terminal", group = "launcher"}),
+		awful.key({ modkey,           }, "r", function () awful.spawn(dmenu) end,
+			  {description = "open a dmenu", group = "launcher"}),
 		awful.key({ modkey, "Control" }, "r", awesome.restart,
 			  {description = "reload awesome", group = "awesome"}),
 		-- awful.key({ modkey, "Shift"   }, "q", awesome.quit,
