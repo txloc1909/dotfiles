@@ -49,15 +49,58 @@ function _M.get (clientkeys, clientbuttons)
 		    }
 		  }, properties = { floating = true }},
 
-		-- Add titlebars to normal clients and dialogs
 		{ rule_any = {type = { "normal", "dialog" }
-		  -- }, properties = { titlebars_enabled = true }
 		  }, properties = { titlebars_enabled = false }
 		},
+		{
+			rule = { instance = "youtube.com" },
+			properties = { floating = false, tag = "Vid", }
+		},
+		{
+			rule = { class = "mpv" },
+			properties = { floating = false, tag = "Vid", }
+		},
+		{
+			rule_any = { class = { "kitty", "Gnome-terminal" } },
+			properties = { tag = "Term" }
+		},
+		{
+			rule_any = {
+				instance = {
+					"notion.so",
+					"chromium-browser",
+					"slack",
+				},
+			},
+			properties = { floating = false, tag = "Work" }
+		},
+		{
+			rule_any = {
+				instance = {
+					"reddit.com",
+					"facebook.com",
+				},
+			},
+			except = { instance = "Brave-browser"},
+			properties = { floating = false, tag = "Browse"}
+		},
+		{
+			rule = { class = "firefox" },
+			properties = {
+				floating = false,
+				maximized = false,
+				tag = "Browse"
+			}
+		},
+		{
+			rule = { instance = "brave-browser" },
+			properties = { tags = { "Personal", "Browse" } }
+		},
+		{
+			rule_any = { class = { "discord", "Caprine", "Skype", "Ferdium"} },
+			properties = { tag = "Chat" }
+		}
 
-		-- Set Firefox to always map on the tag named "2" on screen 1.
-		-- { rule = { class = "Firefox" },
-		--   properties = { screen = 1, tag = "2" } },
 	}
 	return rules
 end

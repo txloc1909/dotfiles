@@ -16,10 +16,13 @@ M.awesome = {
 	{ "manual", terminal .. " -e man awesome" },
 	{ "edit config", editor_cmd .. " " .. awesome.conffile },
 	{ "restart", awesome.restart },
-	{ "quit", function() awesome.quit() end },
+	{ "quit", function()
+		awful.spawn.with_shell("killall xss-lock; gnome-session-quit --logout --no-prompt")
+		awesome.quit()
+	end },
 }
 
-function _M.get () 
+function _M.get ()
 	local menu_items = {
 		{ "awesome", M.awesome, beautiful.awesome_subicon },
 		{ "open terminal", terminal },
