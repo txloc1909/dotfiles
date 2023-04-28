@@ -7,6 +7,7 @@ local max = awful.layout.suit.max
 local _M = {}
 
 local default_tag_opt = {
+	selected = false,
 	gap = 2,
 	master_width_factor = 0.55,
 	layout = tile,
