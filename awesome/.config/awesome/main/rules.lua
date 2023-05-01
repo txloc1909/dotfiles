@@ -69,11 +69,15 @@ function _M.get (clientkeys, clientbuttons)
 				instance = {
 					"notion.so",
 					"chromium-browser",
-					"slack",
+                                        "workterm",
 				},
 			},
 			properties = { floating = false, tag = "Work" }
 		},
+                {
+                    rule = { class = "Slack" },
+                    properties = { tags = { "Work", "Chat" } },
+                },
 		{
 			rule_any = {
 				instance = {
