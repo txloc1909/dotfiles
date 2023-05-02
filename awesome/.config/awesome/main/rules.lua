@@ -52,56 +52,58 @@ function _M.get (clientkeys, clientbuttons)
 		{ rule_any = {type = { "normal", "dialog" }
 		  }, properties = { titlebars_enabled = false }
 		},
-
-		-- {
-		-- 	rule = { instance = "youtube.com" },
-		-- 	properties = { floating = false, tag = "Vid", }
-		-- },
-		-- {
-		-- 	rule = { class = "mpv" },
-		-- 	properties = { floating = false, tag = "Vid", }
-		-- },
-		-- {
-		-- 	rule_any = { class = { "kitty", "Gnome-terminal" } },
-		-- 	properties = { tag = "Term" }
-		-- },
-		-- {
-		-- 	rule_any = {
-		-- 		instance = {
-		-- 			"notion.so",
-		-- 			"chromium-browser",
-		-- 			"slack",
-		-- 		},
-		-- 	},
-		-- 	properties = { floating = false, tag = "Work" }
-		-- },
-		-- {
-		-- 	rule_any = {
-		-- 		instance = {
-		-- 			"reddit.com",
-		-- 			"facebook.com",
-		-- 		},
-		-- 	},
-		-- 	except = { instance = "Brave-browser"},
-		-- 	properties = { floating = false, tag = "Browse"}
-		-- },
-		-- {
-		-- 	rule = { class = "firefox" },
-		-- 	properties = {
-		-- 		floating = false,
-		-- 		maximized = false,
-		-- 		tag = "Browse"
-		-- 	}
-		-- },
-		-- {
-		-- 	rule = { instance = "brave-browser" },
-		-- 	properties = { tags = { "Personal", "Browse" } }
-		-- },
-		-- {
-		-- 	rule_any = { class = { "discord", "Caprine", "Skype", "Ferdium"} },
-		-- 	properties = { tag = "Chat" }
-		-- }
-
+		{
+			rule = { instance = "youtube.com" },
+			properties = { floating = false, tag = "Vid", }
+		},
+		{
+			rule = { class = "mpv" },
+			properties = { floating = false, tag = "Vid", }
+		},
+		{
+			rule_any = { class = { "kitty", "Gnome-terminal" } },
+			properties = { tag = "Term" }
+		},
+		{
+			rule_any = {
+				instance = {
+					"notion.so",
+					"chromium-browser",
+                                        "workterm",
+				},
+			},
+			properties = { floating = false, tag = "Work" }
+		},
+                {
+                    rule = { class = "Slack" },
+                    properties = { tags = { "Work", "Chat" } },
+                },
+		{
+			rule_any = {
+				instance = {
+					"reddit.com",
+					"facebook.com",
+				},
+			},
+			except = { instance = "Brave-browser"},
+			properties = { floating = false, tag = "Browse"}
+		},
+		{
+			rule = { class = "firefox" },
+			properties = {
+				floating = false,
+				maximized = false,
+				tag = "Browse"
+			}
+		},
+		{
+			rule = { instance = "brave-browser" },
+			properties = { tags = { "Personal", "Browse" } }
+		},
+		{
+			rule_any = { class = { "discord", "Caprine", "Skype", "Ferdium"} },
+			properties = { tag = "Chat" }
+		}
 	}
 	return rules
 end
