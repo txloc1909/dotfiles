@@ -1,9 +1,5 @@
 local awful = require("awful")
-local gears = require("gears")
 local tyrannical = require("tyrannical")
-
-local tile = awful.layout.suit.tile
-local max = awful.layout.suit.max
 
 local _M = {}
 
@@ -11,7 +7,7 @@ local default_tag_opt = {
 	selected = false,
 	gap = 2,
 	master_width_factor = 0.55,
-	layout = tile,
+	layout = awful.layout.suit.tile,
 }
 
 local my_tags = {
@@ -21,10 +17,12 @@ local my_tags = {
                 init            = true,
                 exclusive       = false,
                 layout          = awful.layout.suit.tile,
-                -- exec_once       = "org.chromium.Chromium",
+                main_client     = "org.chromium.Chromium",
                 selected        = false,
-                class           = { "Chromium-browser" },
+                screen          = {1, 2},
+                class           = { "Chromium-browser", "Slack" },
                 instance        = { "notion.so", "slack", "kitty-workterm" },
+                gap = 2,
 	},
 	{
 		name            = "Term",
@@ -32,20 +30,23 @@ local my_tags = {
                 init            = true,
                 exclusive       = true,
                 layout          = awful.layout.suit.tile,
-                -- exec_once       = "kitty",
+                main_client     = "kitty",
                 selected        = false,
+                screen          = {1, 2},
                 class           = { "kitty", "Gnome-terminal", "kgx", "alacritty" },
-                instance        = { "kitty-workterm" },
+                gap = 2,
 	},
 	{
 		name            = "Personal",
 		key             = "o",
                 init            = true,
                 exclusive       = true,
-                -- exec_once       = "com.brave.Browser",
+                main_client     = "com.brave.Browser",
                 layout          = awful.layout.suit.tile,
                 selected        = false,
+                screen          = {1, 2},
                 instance        = { "brave-browser" },
+                gap = 2,
 	},
 	{
 		name            = "Browse",
@@ -54,27 +55,32 @@ local my_tags = {
                 exclusive       = true,
                 layout          = awful.layout.suit.tile,
                 selected        = false,
+                screen          = {1, 2},
                 instance        = { "facebook.com", "reddit.com", "brave-browser"},
                 class           = { "firefox", "qutebrowser", "Vivaldi-stable" },
+                gap = 2,
 	},
 	{
 		name            = "Chat",
 		key             = "e",
                 init            = true,
                 exclusive       = true,
-                -- exec_once       = "org.ferdium.Ferdium",
+                main_client     = "com.sindresorhus.Caprine",
                 layout          = awful.layout.suit.tile,
                 selected        = false,
+                screen          = {1, 2},
                 class           = { "discord", "Caprine", "Skype", "Ferdium" },
+                gap = 2,
 	},
 	{
 		name            = "Vid",
 		key             = "y",
                 init            = true,
                 exclusive       = true,
-                -- exec_once       = "flatpak run com.brave.Browser --app=https://youtube.com",
+                main_client     = "youtube",
                 layout          = awful.layout.suit.max,
                 selected        = false,
+                screen          = {1, 2},
                 class           = { "mpv", "Totem" },
                 instance        = { "youtube.com" },
 	},
@@ -83,7 +89,9 @@ local my_tags = {
 		key             = "m",
                 fallback        = true,
                 selected        = false,
+                screen          = {1, 2},
                 layout          = awful.layout.suit.max,
+                gap = 2,
 	}
 }
 

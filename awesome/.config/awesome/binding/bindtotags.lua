@@ -17,12 +17,16 @@ function _M.get (globalkeys)
 					local screen = awful.screen.focused()
 					local tag = awful.tag.find_by_name(screen, my_tag.name)
 					if tag then
-					      tag:view_only()
+					    tag:view_only()
+                                            -- run-or-raise
+                                            if #tag:clients() == 0 and tag.main_client then
+                                                awful.spawn.single_instance(tag.main_client)
+                                            end
 					else
-					      naughty.notify({
-						      title = "Error: View tag only",
-						      text = "Tag " .. my_tag.name .. " not found",
-					      })
+					    naughty.notify({
+					            title = "Error: View tag only",
+					            text = "Tag " .. my_tag.name .. " not found",
+					    })
 					end
 				  end,
 				  {description = "view tag #"..my_tag.name, group = "tag"}),
