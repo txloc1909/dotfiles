@@ -57,7 +57,7 @@ function _M.get ()
 		-- Standard program
 		awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
 			  {description = "open a terminal", group = "launcher"}),
-		awful.key({ modkey,           }, "r", function () awful.spawn(dmenu) end,
+		awful.key({ modkey,           }, "space", function () awful.spawn(dmenu) end,
 			  {description = "open a dmenu", group = "launcher"}),
 		awful.key({ modkey, "Control" }, "r", awesome.restart,
 			  {description = "reload awesome", group = "awesome"}),
@@ -113,7 +113,7 @@ function _M.get ()
 			  end,
 			  {description = "lua execute prompt", group = "awesome"}),
 		-- Menubar
-		awful.key({ modkey }, "space", function() menubar.show() end,
+		awful.key({ modkey }, "p", function() menubar.show() end,
 			  {description = "show the menubar", group = "launcher"}),
 
 		-- Hide/show bar
