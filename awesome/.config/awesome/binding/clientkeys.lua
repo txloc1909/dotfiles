@@ -19,8 +19,17 @@ function _M.get ()
 			  {description = "close", group = "client"}),
 		awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
 			  {description = "toggle floating", group = "client"}),
-		awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
-			  {description = "move to master", group = "client"}),
+		awful.key({ modkey, "Control" }, "Return",
+                        function (c)
+                            local master = awful.client.getmaster()
+                            if c ~= master then
+                                c:swap(awful.client.getmaster())
+                            else
+                                awful.client.swap.byidx(1)
+                                awful.client.focus.byidx(-1)
+                            end
+                        end,
+			  {description = "move to master (equivalent to dwm's zoom)", group = "client"}),
 		-- awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
 		-- 	  {description = "move to screen", group = "client"}),
 		awful.key({ modkey, "Shift"   }, "period",  function (c) c:move_to_screen(c.screen.index+1) end,
