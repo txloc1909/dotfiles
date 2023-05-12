@@ -22,10 +22,10 @@ export PATH
 [ -f $HOME/.config/shell/functions ] && . $HOME/.config/shell/functions
 
 # Common program
-export EDITOR="vim"
-export VISUAL="vim"
-export TERMINAL="alacritty"
-export BROWSER="firefox"
+export EDITOR="nvim"
+export VISUAL="nvim"
+export TERMINAL="kitty"
+export BROWSER="brave-browser"
 export PAGER="less"
 if has bat
 then
