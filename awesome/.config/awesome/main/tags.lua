@@ -3,13 +3,6 @@ local tyrannical = require("tyrannical")
 
 local _M = {}
 
-local default_tag_opt = {
-	selected = false,
-	gap = 2,
-	master_width_factor = 0.55,
-	layout = awful.layout.suit.tile,
-}
-
 local my_tags = {
 	{
 		name            = "Work",
@@ -88,7 +81,7 @@ local my_tags = {
 		name            = "Misc",
 		key             = "m",
                 fallback        = true,
-                selected        = false,
+                selected        = true,
                 screen          = {1, 2},
                 layout          = awful.layout.suit.max,
                 gap = 2,
