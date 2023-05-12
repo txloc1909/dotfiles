@@ -52,6 +52,10 @@ function _M.get (clientkeys, clientbuttons)
 		{ rule_any = {type = { "normal", "dialog" }
 		  }, properties = { titlebars_enabled = false }
 		},
+                {
+                    rule = { class = "Brave-browser" },
+                    properties = { floating = false }
+                }
 	}
 	return rules
 end
