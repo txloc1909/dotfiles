@@ -3,9 +3,10 @@ local awful = require("awful")
 local wibox = require("wibox")
 
 local deco = {
-	wallpaper = require("deco.wallpaper"),
-	taglist   = require("deco.taglist"),
-	tasklist  = require("deco.tasklist")
+	wallpaper       = require("deco.wallpaper"),
+	taglist         = require("deco.taglist"),
+	tasklist        = require("deco.tasklist"),
+        battery_widget  = require("deco.battery_widget"),
 }
 
 local taglist_buttons = deco.taglist()
@@ -50,7 +51,7 @@ awful.screen.connect_for_each_screen(function(s)
     mytextclock.format = "%a %e %B %Y %H:%M"
 
     -- Keyboard map indicator and switcher
-    local mykeyboardlayout = awful.widget.keyboardlayout()
+    -- local mykeyboardlayout = awful.widget.keyboardlayout()
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -59,15 +60,15 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             RC.launcher,
             s.mytaglist,
+            s.mylayoutbox,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
-            mykeyboardlayout,
+            deco.battery_widget { adapter = "BAT0", ac = "AC" },
             mytextclock,
-            s.mylayoutbox,
         },
     }
 end)
