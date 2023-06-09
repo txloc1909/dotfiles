@@ -51,6 +51,15 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[0m\]\[\033[1;37m\]\[\033[00m\]\$ '
 [[ -f $XDG_CONFIG_HOME/shell/bash_prompt ]] && source $XDG_CONFIG_HOME/shell/bash_prompt
 
+# Integrate distroboxes with host
+command_not_found_handle() {
+    if [ ! -e /run/.containerenv ] && [ ! -e /.dockerenv ]; then
+        exit 127
+    fi
+
+    distrobox-host-exec "${@}"
+}
+
 # Flexin'
 if [[ -x "$(command -v pfetch)" ]]; then
     pfetch
