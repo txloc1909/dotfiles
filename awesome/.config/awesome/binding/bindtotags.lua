@@ -38,7 +38,7 @@ function _M.get (globalkeys)
 					if tag then
 					    awful.tag.viewtoggle(tag)
                                             -- run-or-raise
-                                            if #tag:clients() == 0 and tag.main_client then
+                                            if #tag:clients() == 0 and tag.selected and tag.main_client then
                                                 awful.spawn.single_instance(tag.main_client)
                                             end
 					else
