@@ -41,15 +41,6 @@ function _M.get ()
 		awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
 			  {description = "focus the previous screen", group = "screen"}),
 
-		-- awful.key({ modkey,           }, "Tab",
-		--     function ()
-		-- 	awful.client.focus.history.previous()
-		-- 	if client.focus then
-		-- 	    client.focus:raise()
-		-- 	end
-		--     end,
-		--     {description = "go back", group = "client"}),
-
 		-- Standard program
 		awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
 			  {description = "open a terminal", group = "launcher"}),
@@ -79,7 +70,7 @@ function _M.get ()
 		awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
 			  {description = "decrease the number of columns", group = "layout"}),
 
-		awful.key({ modkey,           }, "Escape", function () awful.layout.inc( 1) 		  end,
+		awful.key({ modkey,           }, "grave", function () awful.layout.inc( 1) 		  end,
 			  {description = "select next", group = "layout"}),
 
 		awful.key({ modkey, "Control" }, "n",
