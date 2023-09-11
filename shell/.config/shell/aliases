@@ -3,10 +3,10 @@
 # Common shell aliases
 # Sourced in both .bashrc and .zshrc
 
-if [ -x "$(command -v exa)" ]; then
-    alias ls='exa --icons --group-directories-first'
-    alias ll='exa -lahF --icons --group-directories-first'
-    alias la='exa -1a --icons --group-directories-first'
+if [ -x "$(command -v eza)" ]; then
+    alias ls='eza --icons --group-directories-first'
+    alias ll='eza -lahF --icons --group-directories-first'
+    alias la='eza -1a --icons --group-directories-first'
 else
     alias ls='ls --color=auto --group-directories-first'
     alias ll='ls -alFh'
