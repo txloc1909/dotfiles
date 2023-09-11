@@ -11,9 +11,10 @@ if status is-interactive
         alias la='ls -A'
     end
 
-
-    setenv PYENV_ROOT "$HOME/.pyenv"
-    setenv PATH "$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH"
-    pyenv rehash
-    pyenv init - | source
+    if test -d $HOME/.pyenv
+        setenv PYENV_ROOT "$HOME/.pyenv"
+        setenv PATH "$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH"
+        pyenv rehash
+        pyenv init - | source
+    end
 end
