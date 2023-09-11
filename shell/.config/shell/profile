@@ -31,13 +31,13 @@ if has bat
 then
     export PAGER="bat"
     export BAT_PAGER="less"
-    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+    export MANPAGER="sh -c 'bat -l man -p'"
 fi
 if has batcat
 then
     export PAGER="batcat"
     export BAT_PAGER="less"
-    export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+    export MANPAGER="sh -c 'batcat -l man -p'"
 fi
 has zathura && export READER="zathura"
 
