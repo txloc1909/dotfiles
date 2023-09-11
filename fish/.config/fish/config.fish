@@ -17,4 +17,11 @@ if status is-interactive
         pyenv rehash
         pyenv init - | source
     end
+
+    if type -q bat
+        setenv PAGER bat
+        setenv BAT_PAGER less
+        setenv MANROFFOPT "-c"
+        setenv MANPAGER "sh -c 'col -bx | bat -l man -p'"
+    end
 end
