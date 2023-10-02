@@ -44,24 +44,24 @@ MY_HOSTNAME="ThinkPad-E15-Gen-4"
 if [[ $HOSTNAME =~ $MY_HOSTNAME ]]; then
     # currently on my personal machine
     if [[ $HOSTNAME == $MY_HOSTNAME ]]; then
-	# match exactly -> not in a distrobox container
-	pre_prompt=$_minimal_pre
-	post_prompt=$_minimal_post
+        # match exactly -> not in a distrobox container
+        pre_prompt=$_minimal_pre
+        post_prompt=$_minimal_post
     else
-	# differentiate distrobox by prompt
-	os=$(get_os 2>/dev/null)
-	if [[ $os =~ "Ubuntu" || $os =~ "Debian" ]]; then
-	    pre_prompt=$_debian_pre
-	    post_prompt=$_debian_post
-	elif [[ $os =~ "Arch Linux" || $os =~ "Fedora" ]]; then
-	    pre_prompt=$_colorful_pre
-	    post_prompt=$_colorful_post
-	else 
-	    pre_prompt=$_2line_pre
-	    post_prompt=$_2line_post
-	fi
+        # differentiate distrobox by prompt
+        os=$(get_os 2>/dev/null)
+        if [[ $os =~ "Ubuntu" || $os =~ "Debian" ]]; then
+            pre_prompt=$_debian_pre
+            post_prompt=$_debian_post
+        elif [[ $os =~ "Arch Linux" || $os =~ "Fedora" ]]; then
+            pre_prompt=$_colorful_pre
+            post_prompt=$_colorful_post
+        else
+            pre_prompt=$_basic_pre
+            post_prompt=$_basic_post
+        fi
     fi
-else 
+else
     # not on my personal machine -> default to the Debian prompt
     pre_prompt=$_debian_pre
     post_prompt=$_debian_post
