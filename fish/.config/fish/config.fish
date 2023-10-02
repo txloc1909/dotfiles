@@ -25,3 +25,13 @@ if status is-interactive
         setenv MANPAGER "sh -c 'col -bx | bat -l man -p'"
     end
 end
+
+# opam configuration
+if type -q opam
+    source $HOME/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+end
+
+# doom emacs
+if test -d $HOME/.emacs.d
+    setenv PATH "$HOME/.emacs.d/bin:$PATH"
+end
