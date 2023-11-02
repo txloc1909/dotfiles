@@ -30,6 +30,16 @@ require('lazy').setup({
   -- Readline keybindings in insert mode and command line mode
   'tpope/vim-rsi',
 
+  -- Surround text objects
+  {
+    'kylechui/nvim-surround',
+    version = '*',
+    event = "VeryLazy",
+    config = function()
+      require('nvim-surround').setup {}
+    end
+  },
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
