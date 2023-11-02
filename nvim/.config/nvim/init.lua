@@ -176,9 +176,6 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 }, {})
 
--- Toggle fugitive window
-vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
-
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
