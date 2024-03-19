@@ -23,7 +23,16 @@ return {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     opts = {},
-  }
+  },
+
+  -- Context
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    opts = {
+      enable = true,
+      min_window_height = 24,
+    },
+  },
 
 }
 
