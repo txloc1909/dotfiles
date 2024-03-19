@@ -2,9 +2,6 @@ return {
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- Readline keybindings in insert mode and command line mode
-  'tpope/vim-rsi',
-
   -- Surround text objects
   {
     'kylechui/nvim-surround',
@@ -18,6 +15,15 @@ return {
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
+  -- Readline keybindings in insert mode and command line mode
+  'tpope/vim-rsi',
+
+  -- Autopair
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {},
+  }
 
 }
 
