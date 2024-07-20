@@ -60,6 +60,9 @@ command_not_found_handle() {
     distrobox-host-exec "${@}"
 }
 
+# Put machine-specific things in ~/.bashrc.local
+[[ -f $HOME/.bashrc.local ]] && source $HOME/.bashrc.local
+
 # Flexin'
 if [[ -x "$(command -v pfetch)" ]]; then
     pfetch
