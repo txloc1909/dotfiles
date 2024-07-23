@@ -70,6 +70,11 @@ has ag && export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
+# Tmux plugin manager
+if [ -d "$HOME/.tmux/plugins/tpm" ] ; then 
+    export TMUX_PLUGIN_MANAGER_PATH=$HOME/.tmux/plugins/
+fi
+
 # Various programming tools
 
 # conda
