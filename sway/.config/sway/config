@@ -22,6 +22,7 @@ set $term kitty
 set $menu wofi --show drun,run | xargs swaymsg exec --
 set $launcher rofi -show combi -modes combi -combi-modes \"window,drun,run\"
 
+exec_always i3-focus-last server
 exec --no-startup-id nm-applet
 
 ### Output configuration
@@ -196,7 +197,7 @@ bindsym Mod1+F11 fullscreen
 # bindsym Mod1+o for_window [app_id="Brave-browser"] focus
 # bindsym Mod1+i for_window [class="kitty", instance="kitty"] focus
 
-bindsym Mod1+Tab workspace back_and_forth
+bindsym Mod1+Tab exec i3-focus-last
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
