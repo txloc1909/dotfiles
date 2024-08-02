@@ -25,6 +25,7 @@ set $launcher rofi -show combi -modes combi -combi-modes \"window,drun,run\"
 exec_always i3-focus-last server
 
 exec --no-startup-id fcitx5 -d
+exec --no-startup-id gnome-keyring-daemon --start
 exec --no-startup-id nm-applet
 
 ### Output configuration
