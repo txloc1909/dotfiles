@@ -199,9 +199,11 @@ bindsym Mod1+F4 kill
 bindsym Mod1+F11 fullscreen
 
 # Brave runs on xwayland - Currently doesnt work
-# bindsym Mod1+o for_window [class="Brave-browser", instance="brave-browser"] focus
-# bindsym Mod1+o for_window [app_id="Brave-browser"] focus
-# bindsym Mod1+i for_window [class="kitty", instance="kitty"] focus
+bindsym Mod1+o exec ~/.config/sway/run-or-raise Brave-browser brave
+bindsym Mod1+i exec ~/.config/sway/run-or-raise kitty kitty
+bindsym Mod1+w exec ~/.config/sway/run-or-raise org.mozilla.firefox firefox
+bindsym Mod1+m exec ~/.config/sway/run-or-raise Slack slack
+bindsym Mod1+u exec ~/.config/sway/run-or-raise Chromium-browser chromium
 
 bindsym Mod1+Tab exec i3-focus-last
 
