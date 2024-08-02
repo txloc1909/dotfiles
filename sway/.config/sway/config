@@ -23,6 +23,8 @@ set $menu wofi --show drun,run | xargs swaymsg exec --
 set $launcher rofi -show combi -modes combi -combi-modes \"window,drun,run\"
 
 exec_always i3-focus-last server
+
+exec --no-startup-id fcitx5 -d
 exec --no-startup-id nm-applet
 
 ### Output configuration
@@ -167,10 +169,10 @@ input type:keyboard xkb_options "caps:ctrl_modifier"
     bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    # bindsym $mod+Shift+space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    # bindsym $mod+space focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
