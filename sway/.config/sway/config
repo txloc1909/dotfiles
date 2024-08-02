@@ -161,6 +161,9 @@ input type:keyboard xkb_options "caps:ctrl_modifier"
     bindsym $mod+b splith
     bindsym $mod+v splitv
 
+    bindsym $mod+u layout toggle splitv stacking
+    bindsym $mod+i layout toggle splith tabbed
+
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
@@ -216,6 +219,7 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 
 focus_follows_mouse no
 focus_on_window_activation focus
+workspace_layout tabbed
 workspace_auto_back_and_forth yes
 smart_borders on
 
