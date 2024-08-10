@@ -3,5 +3,7 @@ configuration {
         matching: "fuzzy";
         show-icons: true;
         icon-theme: "Yaru-dark";
+        terminal: "kitty";
+        ssh-client: "kitty +kitten ssh";
 }
 @theme "themes/dt-center.rasi"

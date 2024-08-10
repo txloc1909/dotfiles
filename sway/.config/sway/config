@@ -21,6 +21,7 @@ set $term kitty
 # set $menu dmenu_path | wmenu | xargs swaymsg exec --
 set $menu wofi --show drun,run | xargs swaymsg exec --
 set $launcher rofi -show combi -modes combi -combi-modes \"window,drun,run\"
+set $ssh_menu rofi -show ssh -mode ssh
 
 exec_always i3-focus-last server
 
@@ -198,6 +199,7 @@ input type:keyboard xkb_options "caps:ctrl_modifier"
     bindsym $mod+minus scratchpad show
 
 bindsym Mod1+space exec $launcher
+bindsym Mod1+Ctrl+Return exec $ssh_menu
 
 bindsym Mod1+F4 kill
 bindsym Mod1+F11 fullscreen
