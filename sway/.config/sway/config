@@ -157,6 +157,16 @@ input type:keyboard xkb_options "caps:ctrl_modifier"
     bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+
+bindsym $mod+Comma focus output left
+bindsym $mod+Period focus output right
+
+bindsym $mod+Shift+Comma move container to output left
+bindsym $mod+Shift+Period move container to output right
+
+bindsym $mod+Ctrl+Comma move workspace to output left
+bindsym $mod+Ctrl+Period move workspace to output right
+
 #
 # Layout stuff:
 #
@@ -185,6 +195,7 @@ input type:keyboard xkb_options "caps:ctrl_modifier"
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
+    bindsym $mod+z focus child
 #
 # Scratchpad:
 #
@@ -211,6 +222,10 @@ bindsym Mod1+w exec ~/.config/sway/run-or-raise org.mozilla.firefox firefox
 bindsym Mod1+m exec ~/.config/sway/run-or-raise Slack slack
 bindsym Mod1+u exec ~/.config/sway/run-or-raise Chromium-browser chromium
 
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Prior workspace prev
+bindsym $mod+Next workspace next
+
 bindsym Mod1+Tab exec i3-focus-last
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -225,11 +240,13 @@ bindgesture swipe:left workspace next
 # show which window is on xwayland
 for_window [shell="xwayland"] title_format "[XWayland] %title"
 
+focus_wrapping workspace
 focus_follows_mouse no
 focus_on_window_activation focus
 workspace_layout tabbed
 workspace_auto_back_and_forth yes
 smart_borders on
+hide_edge_borders --i3 smart
 
 #
 # Resizing containers:
