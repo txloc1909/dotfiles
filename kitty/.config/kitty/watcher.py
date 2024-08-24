@@ -14,6 +14,9 @@ def on_resize(boss: Boss, window: Window, data: Dict[str, Any]) -> None:
     with open(LOG_FILE, "a") as f:
         f.write(f"{window.id}:{columns},{lines}\n")
     
+    assert window.screen.columns == columns
+    assert window.screen.lines == lines
+
     new_layout = None
     if columns < 120:
         new_layout = "vertical"
