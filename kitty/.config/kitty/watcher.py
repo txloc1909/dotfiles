@@ -13,3 +13,14 @@ def on_resize(boss: Boss, window: Window, data: Dict[str, Any]) -> None:
 
     with open(LOG_FILE, "a") as f:
         f.write(f"{window.id}:{columns},{lines}\n")
+    
+    new_layout = None
+    if columns < 120:
+        new_layout = "vertical"
+    elif columns < 120 and lines < 54:
+        new_layout = "stack"
+
+    tab = window.tabref()
+    
+    with open(LOG_FILE, "a") as f:
+        f.write(f"{window.id}:{new_layout},{tab}\n")
