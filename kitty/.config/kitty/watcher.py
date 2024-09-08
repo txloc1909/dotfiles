@@ -2,28 +2,40 @@ from typing import Any, Dict
 
 from kitty.boss import Boss
 from kitty.window import Window 
+from kitty.fast_data_types import viewport_for_window
 
-LOG_FILE = "/home/loctx/kitty.log"
+
+def _is_too_small(cols, lines):
+    return cols < 110 and lines < 30
+
+
+def _is_too_narrow(cols):
+    return cols < 120
+
+
+def _get_layout_name_only(layout):
+    return layout.split(":")[0]
 
 
 def on_resize(boss: Boss, window: Window, data: Dict[str, Any]) -> None:
-    new_geometry = data.get("new_geometry")
-    columns = new_geometry.xnum
-    lines = new_geometry.ynum
+    _, _, vp_w, vp_h, cell_w, cell_h = viewport_for_window(window.os_window_id)
+    columns, lines = vp_w // cell_w, vp_h // cell_h
 
-    with open(LOG_FILE, "a") as f:
-        f.write(f"{window.id}:{columns},{lines}\n")
-    
-    assert window.screen.columns == columns
-    assert window.screen.lines == lines
-
-    new_layout = None
-    if columns < 120:
-        new_layout = "vertical"
-    elif columns < 120 and lines < 54:
+    if _is_too_small(columns, lines):
         new_layout = "stack"
-
-    tab = window.tabref()
+    elif _is_too_narrow(columns):
+        new_layout = "vertical"
+    else:
+        new_layout = "tall:bias=55"
     
-    with open(LOG_FILE, "a") as f:
-        f.write(f"{window.id}:{new_layout},{tab}\n")
+    tab = window.tabref()
+    if not tab:
+        return 
+
+    curr_layout = tab.current_layout.name
+    if _get_layout_name_only(new_layout) != _get_layout_name_only(curr_layout):
+        tab.goto_layout(new_layout)
+
+    # # Debug
+    # with open("~/.cache/kitty.log", "a") as f:
+    #     f.write(f"{window.os_window_id}: {columns}, {lines}; {curr_layout=} -> {new_layout=}\n")
