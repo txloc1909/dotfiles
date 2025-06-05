@@ -42,6 +42,8 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
 output eDP-1 resolution 1920x1080@60.003Hz position 0,0
 output "Dell Inc. DELL E2318H" resolution 1920x1080@60Hz position 1920,0
+# output "Samsum Electric Company SAMSUNG" resolution 3840x2160@60Hz position 1920,0
+output "Samsum Electric Company SAMSUNG" resolution 1920x1080@60Hz position 1920,0
 
 ### Idle configuration
 #
@@ -54,6 +56,8 @@ exec swayidle -w \
 
 for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
+
+for_window [app_id="org.mozilla.firefox" title="Picture-in-Picture"] floating enable, sticky enable
 
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -294,3 +298,10 @@ bar {
 }
 
 include /etc/sway/config.d/*
+
+# TODO:
+# Login shell for env vars -> systemd-environmentd
+# Screenshot: partial screenshot and immediately on clipboard
+# Screen sharing -> just works on web browsers
+# Automatically screen detection: kanshi or shikane
+# Try nwg shell
